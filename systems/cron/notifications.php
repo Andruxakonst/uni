@@ -1,6 +1,12 @@
 <?php
 defined('unisitecms') or exit();
 
+$getChatMessages = $Admin->getAllMessagesSupport(true);
+
+if($getChatMessages){
+    notifications("chat_message", []);
+}
+
 $getOrderAd = getAll("select * from uni_services_order INNER JOIN `uni_services_ads` ON `uni_services_ads`.services_ads_uid = `uni_services_order`.services_order_id_service where services_order_time_validity < now() and services_order_status=1");
 
 if( count($getOrderAd) ){
@@ -57,8 +63,6 @@ if(count($getMessage)){
    }
 
 }
-
-
 
 $getComments = getAll("select * from uni_ads_comments where ads_comments_notification=0 and ads_comments_id_parent!=0");
 

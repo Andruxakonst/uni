@@ -185,11 +185,18 @@ $(document).ready(function() {
 
     $(document).on('change','select[name=type_filter]', function () {
       if($( this ).val()){
+
          if($( this ).val() == "input"){
             $(".filter-slider-hint").show();
+            $(".box-value-filters").show(); 
+         }else if($( this ).val() == "input_text"){
+            $(".box-value-filters").hide();   
+            $(".filter-slider-hint").hide();        
          }else{
-            $(".filter-slider-hint").hide();           
+            $(".filter-slider-hint").hide(); 
+            $(".box-value-filters").show();
          }
+
       }   
     });  
 

@@ -34,19 +34,21 @@ if(empty($name)){$error[] = "Укажите название фильтра!"; }
 if(!$_POST["id_cat"] || !is_array($_POST["id_cat"])){ $error[] = "Выберите категорию!";  }
 
 
-foreach ($_POST["value_filter"] as $action => $array) {
-   foreach ($array as $id => $value) {
+if($type_filter != 'input_text'){
+   foreach ($_POST["value_filter"] as $action => $array) {
+      foreach ($array as $id => $value) {
 
-      if(trim($value)) $value_filter[] =  trim($value);
-      
+         if(trim($value)) $value_filter[] =  trim($value);
+         
+      }
    }
-}
 
-if(!$value_filter){ $error[] = "Добавьте значения фильтра!"; }
+   if(!$value_filter){ $error[] = "Добавьте значения фильтра!"; }
+}
 
 if (count($error) == 0) {
 
-   	$insert = insert("INSERT INTO uni_ads_filters(ads_filters_name,ads_filters_alias,ads_filters_visible,ads_filters_type,ads_filters_position,ads_filters_required)VALUES(?,?,?,?,?,?)", array($name,$alias,$visible,$type_filter,$Filters->filterPosition(),intval($_POST["required"]))); 
+    $insert = insert("INSERT INTO uni_ads_filters(ads_filters_name,ads_filters_alias,ads_filters_visible,ads_filters_type,ads_filters_position,ads_filters_required)VALUES(?,?,?,?,?,?)", array($name,$alias,$visible,$type_filter,$Filters->filterPosition(),intval($_POST["required"]))); 
 
     if($_POST["id_cat"] && is_array($_POST["id_cat"])){
        
@@ -58,7 +60,7 @@ if (count($error) == 0) {
 
     $sort = 1;
 
-    if($_POST["value_filter"]){
+    if($_POST["value_filter"] && $type_filter != 'input_text'){
        foreach ($_POST["value_filter"] as $action => $array) {
          foreach ($array as $id => $value) {
 

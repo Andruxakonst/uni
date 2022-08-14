@@ -17,7 +17,7 @@ $ULang = new ULang();
 
 $Profile->checkAuth();
 
-verify_auth(['user-avatar','user_edit_pass','profile_user_locked','balance_payment','user_edit','user_edit_email','user_edit_phone_send','user_edit_phone_save','user_edit_notifications','user_edit_score','add_review_user','delete_ads_subscriptions','period_ads_subscriptions','delete_shop_subscriptions','order_send_message','order_update_message','activate_services_tariff','delete_services_tariff','autorenewal_services_tariff','scheduler_ad_delete','statistics_load_info_user']);
+verify_auth(['user-avatar','user_edit_pass','profile_user_locked','balance_payment','user_edit','user_edit_email','user_edit_phone_send','user_edit_phone_save','user_edit_notifications','user_edit_score','add_review_user','delete_ads_subscriptions','period_ads_subscriptions','delete_shop_subscriptions','order_send_message','order_update_message','activate_services_tariff','delete_services_tariff','autorenewal_services_tariff','scheduler_ad_delete','statistics_load_info_user','user_edit_score_booking']);
 
 if(isAjax() == true){
 
@@ -27,6 +27,8 @@ if(isAjax() == true){
 
       $user_login = clear($_POST["user_login"]);
       $user_pass = $_POST["user_pass"];
+
+      $save_auth = (int)$_POST["save_auth"];
 
       if($settings["authorization_method"] == 1){
 
@@ -106,6 +108,12 @@ if(isAjax() == true){
                  if (password_verify($user_pass.$config["private_hash"], $getUser->clients_pass)) {  
                     
                       $_SESSION['profile']['id'] = $getUser->clients_id;
+
+                      if($save_auth){
+                         $token = hash('sha256', $_SESSION['profile']['id'].uniqid());
+                         setcookie("tokenAuth", $token, time() + 2592000);
+                         update('update uni_clients set clients_cookie_token=? where clients_id=?',[$token,$getUser->clients_id]);
+                      }
 
                       echo json_encode( array( "status"=>true, "location" => _link( "user/".$getUser["clients_id_hash"] ) ) );
                     
@@ -507,7 +515,8 @@ if(isAjax() == true){
                 
                 insert("INSERT INTO uni_favorites(favorites_id_ad,favorites_from_id_user,favorites_to_id_user,favorites_date)VALUES(?,?,?,?)", [$id_ad,$_SESSION['profile']['id'],$findAd['ads_id_user'],date('Y-m-d H:i:s')]);
                 $_SESSION['profile']["favorite"][$id_ad] = $id_ad;
-                $Profile->sendChat( array("id_ad" => $id_ad, "action" => 1, "user_from" => intval($_SESSION["profile"]["id"]), "user_to" => $findAd["ads_id_user"] ) );
+
+                $Profile->sendChat( array("id_ad" => $id_ad, "action" => 1, "user_from" => $_SESSION["profile"]["id"], "user_to" => $findAd["ads_id_user"]) );
 
                 $Main->addActionStatistics(['ad_id'=>$id_ad,'from_user_id'=>$_SESSION['profile']['id'],'to_user_id'=>$findAd["ads_id_user"]],"favorite");
 
@@ -523,11 +532,11 @@ if(isAjax() == true){
 
      $id_user = (int)$_POST["id"];
 
-     $getLocked = findOne("uni_chat_locked", "chat_locked_user_id = ? and chat_locked_user_id_locked = ?", array(intval($_SESSION['profile']['id']),$id_user));
+     $getLocked = findOne("uni_chat_locked", "chat_locked_user_id = ? and chat_locked_user_id_locked = ?", array($_SESSION['profile']['id'],$id_user));
      if($getLocked){
         update("DELETE FROM uni_chat_locked WHERE chat_locked_id=?", array($getLocked->chat_locked_id));
      }else{
-        insert("INSERT INTO uni_chat_locked(chat_locked_user_id,chat_locked_user_id_locked)VALUES('".intval($_SESSION['profile']['id'])."','".$id_user."')");
+        insert("INSERT INTO uni_chat_locked(chat_locked_user_id,chat_locked_user_id_locked)VALUES('".$_SESSION['profile']['id']."','".$id_user."')");
      }
 
      echo json_encode( array( "status"=> true ) );
@@ -746,6 +755,15 @@ if(isAjax() == true){
 
     if($_POST["user_score"]) $user_score = encrypt($_POST["user_score"]);
     update("update uni_clients set clients_score=?,clients_score_type=? where clients_id=?", [$user_score,$user_score_type,$_SESSION["profile"]["id"]]);
+    echo json_encode( ["status"=>true] );
+
+  }
+
+  if($_POST["action"] == "user_edit_score_booking"){
+    
+    if($_POST["user_score_booking"]) $user_score = encrypt($_POST["user_score_booking"]);
+
+    update("update uni_clients set clients_score_booking=? where clients_id=?", [$user_score,$_SESSION["profile"]["id"]]);
     echo json_encode( ["status"=>true] );
 
   }

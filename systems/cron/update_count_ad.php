@@ -21,6 +21,7 @@ if(count($getAds)){
                  $ads['geo'][$cat_value][$ad_value['ads_region_id']] += 1;
                  $ads['geo'][$cat_value][$ad_value['ads_city_id']] += 1;
                  $ads['user'][$cat_value][$ad_value['ads_id_user']] += 1;
+                 $ads['category'][$cat_value] += 1;
 
               }
 

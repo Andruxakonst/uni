@@ -302,23 +302,7 @@ if($_POST["action"] == "shops_load"){
            <div class="col-lg-12" >
            <div class="catalog-no-results" >
               <div class="catalog-no-results-box" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="160" height="104" viewBox="0 0 160 104">
-                        <g fill="none" fill-rule="evenodd">
-                            <path d="M0 0H772V1024H0z" transform="translate(-306 -320)"/>
-                            <g transform="translate(-306 -320) translate(306 320)">
-                                <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                <g transform="translate(88)">
-                                    <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                    <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                </g>
-                                <g fill="#858585">
-                                    <path d="M20 0c11.046 0 20 8.954 20 20s-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0zm0 6C12.268 6 6 12.268 6 20s6.268 14 14 14 14-6.268 14-14S27.732 6 20 6z" transform="translate(53 26)"/>
-                                    <path d="M28.257 32.5L32.5 28.257 49.471 45.228 45.228 49.471z" transform="translate(53 26)"/>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
+                  <img src="'.$settings["path_tpl_image"].'/person-shrugging_1f937.png" />
                   <h5>'.$ULang->t("Ничего не найдено").'</h5>
               </div>
            </div>
@@ -412,23 +396,7 @@ if($_POST["action"] == "shops_load"){
            <div class="catalog-no-results" >
 
               <div class="catalog-no-results-box" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="160" height="104" viewBox="0 0 160 104">
-                        <g fill="none" fill-rule="evenodd">
-                            <path d="M0 0H772V1024H0z" transform="translate(-306 -320)"/>
-                            <g transform="translate(-306 -320) translate(306 320)">
-                                <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                <g transform="translate(88)">
-                                    <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                    <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                </g>
-                                <g fill="#858585">
-                                    <path d="M20 0c11.046 0 20 8.954 20 20s-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0zm0 6C12.268 6 6 12.268 6 20s6.268 14 14 14 14-6.268 14-14S27.732 6 20 6z" transform="translate(53 26)"/>
-                                    <path d="M28.257 32.5L32.5 28.257 49.471 45.228 45.228 49.471z" transform="translate(53 26)"/>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
+                  <img src="'.$settings["path_tpl_image"].'/person-shrugging_1f937.png" />
                   <h5>'.$ULang->t("Ничего не найдено").'</h5>
                   <p>'.$ULang->t("Увы, мы не нашли то, что вы искали. Смягчите условия поиска и попробуйте еще раз.").'</p>
                </div>

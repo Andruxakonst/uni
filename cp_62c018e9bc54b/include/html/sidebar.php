@@ -4,17 +4,27 @@
       <ul class="list-unstyled">
         
          <?php if($_SESSION["cp_control_statistics"]){ ?>
-         <li><a <?php if($_GET["route"] == "index"){ echo 'class="active"'; } ?> href="?route=index" ><i class="la la-area-chart"></i> <span>Статистика</span></a></li>
+         <li><a <?php if($_GET["route"] == "index"){ echo 'class="active"'; } ?> href="?route=index" ><i class="la la-area-chart"></i><span>Статистика</span></a></li>
          <?php } ?>
 
          <?php if($_SESSION["cp_control_orders"]){ ?>
-         <li><a <?php if($_GET["route"] == "orders"){ echo 'class="active"'; } ?> href="?route=orders" ><i class="la la-money"></i> <span>Продажи</span></a></li>
+         <li><a <?php if($_GET["route"] == "orders"){ echo 'class="active"'; } ?> href="?route=orders" ><i class="la la-money"></i><span>Продажи</span></a></li>
          <?php } ?>
 
-         <?php if($_SESSION["cp_control_secure"]){ ?>
-         <li><a <?php if($_GET["route"] == "secure"){ echo 'class="active"'; } ?> href="?route=secure" ><i class="la la-shield"></i> <span> Безопасные сделки </span> <?php if($getSecure){ ?> <span class="label-count" ><?php echo $getSecure; ?></span> <?php } ?> </a></li>
+         <?php if($_SESSION["cp_control_transactions"]){ ?>
+         <li>
+            <a href="#dropdown7" <?php if(in_array( $_GET["route"], array("secure","booking") )){ ?> aria-expanded="true" <?php }else{ ?> aria-expanded="false" <?php } ?> data-toggle="collapse" ><i class="la la-shield"></i> <span>Сделки</span></a>
+            <ul id="dropdown7" class="collapse list-unstyled pt-0 <?php if(in_array( $_GET["route"], array("secure","booking") )){ ?> show <?php } ?>" >
+               <li><a <?php if($_GET["route"] == "secure"){ echo 'class="active"'; } ?> href="?route=secure">Безопасные сделки</a></li>
+               <li><a <?php if($_GET["route"] == "booking"){ echo 'class="active"'; } ?> href="?route=booking">Оплата бронирования/аренды</a></li>
+            </ul>
+         </li>
          <?php } ?>
-         
+
+         <?php if($_SESSION["cp_control_chat"]){ ?>
+         <li><a <?php if($_GET["route"] == "chat"){ echo 'class="active"'; } ?> href="?route=chat" ><i class="la la-comments"></i><span>Чат</span> <?php if($getNewChatMessages){ ?> <span class="label-count" ><?php echo $getNewChatMessages; ?></span> <?php } ?></a></li>
+         <?php } ?>
+
          <?php 
          if($_SESSION["cp_control_board"]){ 
          ?>
@@ -25,7 +35,7 @@
                <li><a <?php if($_GET["route"] == "category_board"){ echo 'class="active"'; } ?> href="?route=category_board">Категории</a></li>
                <li><a <?php if($_GET["route"] == "filters"){ echo 'class="active"'; } ?> href="?route=filters">Фильтры</a></li>
                <li><a <?php if($_GET["route"] == "services_ad"){ echo 'class="active"'; } ?> href="?route=services_ad">Тарифы и услуги</a></li>
-               <li><a <?php if($_GET["route"] == "complaints"){ echo 'class="active"'; } ?> href="?route=complaints">Обращения</a></li>
+               <li><a <?php if($_GET["route"] == "complaints"){ echo 'class="active"'; } ?> href="?route=complaints">Жалобы</a></li>
             </ul>
          </li>
          <?php 

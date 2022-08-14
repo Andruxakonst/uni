@@ -23,10 +23,10 @@ if(isAjax() == true){
 
      $ids = iteratingArray($_POST["id"], "int");
 
-     $getAds = getAll( "select * from uni_ads where ads_id IN(".implode(",", $ids).")" );
+     $getAds = $Ads->getAll(["query"=>"ads_id IN(".implode(",", $ids).")"]);
 
-     if( count($getAds) ){
-         foreach ($getAds as $value) {
+     if($getAds['count']){
+         foreach ($getAds['all'] as $value) {
 
               $time = date("Y-m-d H:i:s");
 

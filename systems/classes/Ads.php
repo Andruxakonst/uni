@@ -53,7 +53,7 @@ class Ads{
 
       $Elastic = new Elastic();
 
-      if(!$array["output"]) $array["output"] = $settings["catalog_out_content"];
+        if(!$array["output"]) $array["output"] = $settings["catalog_out_content"];
       
         if($array["param_search"] && $config["elasticsearch"]["status"]){
 
@@ -188,7 +188,7 @@ class Ads{
       }   
    }
 
-   function getCountView($id = 0, $date = ""){
+   function getCountView($id, $date = ""){
       $date = $date ? "and date(ads_views_date) = '$date'" : "";
       return (int)getOne("select count(*) as total from uni_ads_views where ads_views_id_ad=? $date", [$id])["total"];
    }
@@ -251,6 +251,16 @@ class Ads{
             if(empty($array["title"])){ $error["title"] = $ULang->t("Пожалуйста, укажите заголовок объявления"); }
         }
         
+        if($extra["categories"]["category_board_id"][$array["c_id"]]["category_board_measures_price"]){
+            if($extra["categories"]["category_board_id"][$array["c_id"]]["category_board_rules"]["measure_booking"]){
+                if($array["booking"]){
+                    if(empty($array["measure"])){ $error["measure"] = $ULang->t("Пожалуйста, выберите вариант измерения"); }
+                }
+            }else{
+                if(empty($array["measure"])){ $error["measure"] = $ULang->t("Пожалуйста, выберите вариант измерения"); }
+            }
+        }
+
         if( $settings["ad_create_always_image"] ){
             if(count($_POST["gallery"]) == 0){
               $error["gallery"] = $ULang->t("Загрузите хотя бы одну фотографию");
@@ -283,12 +293,6 @@ class Ads{
           }
         }
 
-        if( $extra["categories"]["category_board_id"][$array["c_id"]]["category_board_variant_price"] == 1 ){
-            if( !$_POST["price"] ){
-                 $error["price"] = $ULang->t("Пожалуйста, укажите зарплату");
-            }
-        }
-        
         if( $array["action"] == "ad-create" ){
 
             if( $settings["ad_create_phone"] ){
@@ -1779,7 +1783,7 @@ class Ads{
 
             }
 
-            if(!$data["ad"]["ads_auction"]){
+            if(!$data["ad"]["ads_auction"] && !$data["ad"]["ads_booking"]){
 
             if($data["ad"]["category_board_marketplace"] && $data["ad"]["ads_price"] && !$data["ad"]["ads_price_free"] && $settings["functionality"]['marketplace']){
 
@@ -1828,6 +1832,46 @@ class Ads{
                 }
             }
 
+            }
+
+            if($data["ad"]["ads_booking"] && $settings["functionality"]['booking'] && $data["ad"]["category_board_booking"] && ($data["ad"]["ads_price_measure"] == 'day' || $data["ad"]["ads_price_measure"] == 'daynight' || $data["ad"]["ads_price_measure"] == 'hour')){
+
+                ?>
+
+                <div <?php echo $Main->modalAuth( ["attr"=>'class="btn-custom btn-color-blue open-modal ad-booking-init mb5 width100" data-id-ad="'.$data["ad"]["ads_id"].'" data-id-modal="modal-booking"', "class"=>"btn-custom btn-color-blue width100 mb5"] ); ?>  >
+                  <div>
+
+                  <?php 
+                  if($data["ad"]["category_board_booking_variant"] == 0){
+                      ?>
+                      <span class="btn-custom-title" ><?php echo $ULang->t("Забронировать"); ?></span>
+                      <?php
+                      if($data["ad"]["ads_booking_prepayment_percent"]){ 
+                          ?>
+                            <span class="btn-custom-subtitle1" ><?php echo $ULang->t("Предоплата"); ?> <?php echo $data["ad"]["ads_booking_prepayment_percent"]; ?>%</span>  
+                          <?php 
+                      }else{ 
+                          ?>
+                            <span class="btn-custom-subtitle1" ><?php echo $ULang->t("Без предоплаты"); ?></span>
+                          <?php 
+                      } 
+                  }else{
+                      ?>
+                      <span class="btn-custom-title" ><?php echo $ULang->t("Арендовать"); ?></span>
+                      <?php
+                      if(!$data["ad"]["ads_booking_available_unlimitedly"]){ 
+                          if($this->adCountActiveRent($data["ad"]["ads_id"]) >= $data["ad"]["ads_booking_available"]){
+                              ?>
+                                <span class="btn-custom-subtitle1" >Не доступно для аренды</span>  
+                              <?php 
+                          }
+                      }
+                  }
+                  ?>    
+                  </div>
+                </div>
+
+                <?php
             }
 
             if($data["ad"]["clients_phone"]){ 
@@ -2517,10 +2561,10 @@ class Ads{
     }
     
     if( $param["data"]["ads_price_old"] ){
-      $html = '<span class="'.$param["class_price"].'" >' . $Main->price($param["data"]["ads_price"], $param["data"]["ads_currency"], $param["abbreviation_million"]) . '</span>';
+      $html = '<span class="'.$param["class_price"].'" >' . $Main->adPrefixPrice($Main->price($param["data"]["ads_price"], $param["data"]["ads_currency"], $param["abbreviation_million"]),$param["data"]) . '</span>';
       $html .= '<span class="'.$param["class_price_old"].'" >' . $Main->price($param["data"]["ads_price_old"], $param["data"]["ads_currency"], $param["abbreviation_million"]) . '</span>';
     }elseif( $param["data"]["ads_price"] ){
-      $html = '<span class="'.$param["class_price"].'" >'.$Main->price($param["data"]["ads_price"], $param["data"]["ads_currency"], $param["abbreviation_million"]).'</span>';
+      $html = '<span class="'.$param["class_price"].'" >'.$Main->adPrefixPrice($Main->price($param["data"]["ads_price"], $param["data"]["ads_currency"], $param["abbreviation_million"]),$param["data"]).'</span>';
     }else{
 
        if( $param["data"]["ads_price_free"] ){
@@ -2553,8 +2597,8 @@ class Ads{
           '.$Main->price($param["data"]["ads_price_old"], $param["data"]["ads_currency"]).'
         </div>      
         <div class="board-view-price price-currency" >
-          '.$Main->price($param["data"]["ads_price"],$param["data"]["ads_currency"]).'
-          '.$Main->adOutCurrency($param["data"]["ads_price"], $param["data"]["ads_currency"]).'
+          '.$Main->adPrefixPrice($Main->price($param["data"]["ads_price"],$param["data"]["ads_currency"]),$param["data"]).'
+          '.$Main->adOutCurrency($param["data"]["ads_price"],$param["data"]["ads_currency"],$param["data"]).'
         </div>
       ';
 
@@ -2562,8 +2606,8 @@ class Ads{
 
       return '
         <div class="board-view-price price-currency" >
-          '.$Main->price($param["data"]["ads_price"],$param["data"]["ads_currency"]).'
-          '.$Main->adOutCurrency($param["data"]["ads_price"], $param["data"]["ads_currency"]).'
+          '.$Main->adPrefixPrice($Main->price($param["data"]["ads_price"],$param["data"]["ads_currency"]),$param["data"]).'
+          '.$Main->adOutCurrency($param["data"]["ads_price"],$param["data"]["ads_currency"],$param["data"]).'
         </div>
       ';
 
@@ -2605,25 +2649,15 @@ class Ads{
       $html .= '<div class="item-auction" data-tippy-placement="top" title="'.$ULang->t("Аукцион").'" > <i class="las la-gavel"></i> </div>';
     } 
     
+    if($value["ads_booking"]){
+        if($value["category_board_booking_variant"] == 0){
+            $html .= '<div class="item-booking" data-tippy-placement="top" title="'.$ULang->t("Онлайн-бронирование").'" > <i class="las la-hourglass"></i> </div>';
+        }elseif($value["category_board_booking_variant"] == 1){
+            $html .= '<div class="item-booking" data-tippy-placement="top" title="'.$ULang->t("Онлайн-аренда").'" > <i class="las la-hourglass"></i> </div>';
+        }
+    }
+
     return $html;
-
-  }
-
-  function variantPrice( $key = 0 ){
-
-    $ULang = new ULang();
-
-       if( $key == 1 ){
-          return $ULang->t('Зарплата');
-       }elseif( $key == 2 ){
-          return $ULang->t('Стоимость услуги');
-       }elseif( $key == 3 ){
-          return $ULang->t('Арендная плата в месяц');
-       }elseif( $key == 4 ){
-          return $ULang->t('Арендная плата за сутки');
-       }else{
-          return $ULang->t('Цена');
-       }    
 
   }
 
@@ -2908,6 +2942,9 @@ class Ads{
 
   }
 
+  function adCountActiveRent($id_ad){
+      return (int)getOne("select count(*) as total from uni_ads_booking where ads_booking_id_ad=? and ads_booking_date_end >= ?", [$id_ad,date('Y-m-d H:i:s')])['total'];
+  }
 
 
       

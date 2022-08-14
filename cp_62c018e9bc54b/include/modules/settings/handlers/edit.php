@@ -38,6 +38,12 @@ if(isAjax() == true){
       $notification_method_new_buy = "";
    }
 
+   if(isset($_POST["notification_method_new_chat_message"])){
+      $notification_method_new_chat_message = implode(",",$_POST["notification_method_new_chat_message"]);
+   }else{
+      $notification_method_new_chat_message = "";
+   }
+
    if( intval($_POST["variant_send_mail"]) == 1 ){
     
        $_POST["smtp_host"] = "";
@@ -169,6 +175,7 @@ if(isAjax() == true){
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["catalog_city_distance"]),'catalog_city_distance'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["ads_comments"]),'ads_comments'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["assets_vendors"]),'assets_vendors'));
+   update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["banner_markup"]),'banner_markup'));
 
    update("UPDATE uni_settings SET value=? WHERE name=?", array(json_encode($_POST["bonus"]),'bonus_program'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["ad_view_phone"]),'ad_view_phone'));
@@ -193,6 +200,7 @@ if(isAjax() == true){
    update("UPDATE uni_settings SET value=? WHERE name=?", array($notification_method_new_ads,'notification_method_new_ads'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array($notification_method_new_user,'notification_method_new_user'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array($notification_method_new_buy,'notification_method_new_buy'));
+   update("UPDATE uni_settings SET value=? WHERE name=?", array($notification_method_new_chat_message,'notification_method_new_chat_message'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(clear($_POST["email_alert"]),'email_alert'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(clear($_POST["phone_alert"]),'phone_alert'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["access_site"]),'access_site'));
@@ -248,12 +256,17 @@ if(isAjax() == true){
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["sitemap_cities"]),'sitemap_cities'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["sitemap_category"]),'sitemap_category'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["sitemap_shops"]),'sitemap_shops'));
+   update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["sitemap_ads"]),'sitemap_ads'));
+
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["ads_sorting_variant"]),'ads_sorting_variant'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(clear($_POST["secure_payment_service_name"]),'secure_payment_service_name'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(clear($_POST["pwa_name"]),'pwa_name'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(clear($_POST["pwa_short_name"]),'pwa_short_name'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array( mb_substr(clear($_POST["pwa_desc"]), 0, 255, "UTF-8") ,'pwa_desc'));
    update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["pwa_status"]),'pwa_status'));
+
+   update("UPDATE uni_settings SET value=? WHERE name=?", array(clear($_POST["booking_payment_service_name"]),'booking_payment_service_name'));
+   update("UPDATE uni_settings SET value=? WHERE name=?", array(intval($_POST["booking_prepayment_percent_service"]),'booking_prepayment_percent_service'));
     
     $manifest = [];
     $manifest["dir"] = "ltr";

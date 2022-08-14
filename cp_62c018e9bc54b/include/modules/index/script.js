@@ -149,78 +149,6 @@ $(document).ready(function() {
     },
   }
 
-  var subscribeChart = new ApexCharts(
-    document.querySelector("#subscribe-gain-chart"),
-    gainedChartoptions
-  );
-
-  subscribeChart.render();
-
-  var gainedChartoptions = {
-    chart: {
-      height: 100,
-      type: 'area',
-      toolbar: {
-        show: false,
-      },
-      sparkline: {
-        enabled: true
-      },
-      grid: {
-        show: false,
-        padding: {
-          left: 0,
-          right: 0
-        }
-      },
-    },
-    colors: [$info_light],
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'smooth',
-      width: 2.5
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 0.9,
-        opacityFrom: 0.7,
-        opacityTo: 0.5,
-        stops: [0, 80, 100]
-      }
-    },
-    series: [{
-      name: '',
-      data: []
-    }],
-
-    xaxis: {
-      type: 'datetime',
-    },
-    yaxis: [{
-      y: 0,
-      offsetX: 0,
-      offsetY: 0,
-      padding: { left: 0, right: 0 },
-    }],
-    tooltip: {
-      x: {
-            format: 'dd.MM.yyyy'
-         },
-      y: {
-        formatter: function (y) {
-          if (typeof y !== "undefined") {
-            return y;
-          }
-          return y;
-
-        }
-      }
-    },
-  }
-
   var adsChart = new ApexCharts(
     document.querySelector("#ads-gain-chart"),
     gainedChartoptions
@@ -385,14 +313,6 @@ function loadStat(){
         }]);         
       }
 
-      if( parseInt(data["subscribe"]["count"]) != parseInt($(".subscribe-chart-count").html()) ){
-        $(".subscribe-chart-count").html(data["subscribe"]["count"]);
-        subscribeChart.updateSeries([{
-          name: 'Подписчиков',
-          data: data["subscribe"]["data"]
-        }]);
-      }
-
       if( parseInt(data["ads"]["count"]) != parseInt($(".ads-chart-count").html()) ){
         $(".ads-chart-count").html(data["ads"]["count"]);
         adsChart.updateSeries([{
@@ -421,6 +341,7 @@ function loadStat(){
       $(".data-list-users").html(data["list_users"]);
       $(".data-list-traffic").html(data["list_traffic"]);
       $(".data-list-log-action").html(data["list_log_action"]);
+      $(".data-list-chat-messages").html(data["list_chat_messages"]);
 
    }});
 
@@ -456,12 +377,9 @@ $(document).on('click','.metrics-route-more', function () {
 
 $(document).on('click','.delete-notification', function (e) { 
 
-   var id = $(this).data("id");   
-   var el = $(this);
-     
-   $.ajax({type: "POST",url: "include/modules/index/handlers/delete_notification.php",data: "id="+id ,dataType: "html",cache: false,success: function (data) { 
+   $.ajax({type: "POST",url: "include/modules/index/handlers/delete_notification.php",dataType: "html",cache: false,success: function (data) { 
        
-       el.parents('.item-notification').remove().hide();
+       location.reload();
 
    }});
 

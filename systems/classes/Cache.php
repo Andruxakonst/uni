@@ -13,8 +13,8 @@ class Cache{
      function __construct() {
         global $config;
 
-        $dir = $config["basePath"]."/temp/cache";
-        if(!is_dir($dir)){ @mkdir($dir, $config["create_mode"] ); }
+        @mkdir($config["basePath"]."/temp/cache", $config["create_mode"]);
+        @mkdir($config["basePath"]."/temp/cache/tpl", $config["create_mode"]);
 
      }
 
@@ -70,6 +70,7 @@ class Cache{
       global $config;
 
       deleteFolder( $config["basePath"]."/temp/cache" );
+      deleteFolder( $config["basePath"]."/temp/cache/tpl" );
       deleteFolder( $config["template_path"]."/temp" );
 
     }
@@ -79,6 +80,34 @@ class Cache{
 
       if($table) deleteFolder( $config["basePath"]."/temp/cache/" . md5($table) );
 
+    }
+
+    function setTpl( $params = [] ){
+        global $settings,$config;
+
+        $dir = $config["basePath"]."/temp/cache/tpl";
+
+        $key = md5(md5($params["tpl"]).$config["private_hash"]).".temp";
+
+        if(file_put_contents($dir."/".$key, $params['data'])){
+            return true;
+        }else{
+            return false;
+        }
+    }  
+
+    function getTpl( $params = [] ){
+        global $settings,$config;
+
+        $dir = $config["basePath"]."/temp/cache/tpl";
+
+        $key = md5(md5($params["tpl"]).$config["private_hash"]).".temp";
+        
+        if(file_exists($dir."/".$key)){
+           return file_get_contents($dir."/".$key);
+        }else{
+           return false;
+        }
     }
 
 }

@@ -38,7 +38,7 @@ if( getCount("uni_secure") ){
 <div class="row" >
   <div class="col-lg-12" >
     
-      <form method="get" action="/<?php echo $config["folder_admin"]; ?>" >
+      <form method="get" action="<?php echo $config["urlPrefix"].$config["folder_admin"]; ?>" >
         <input type="text" class="form-control" placeholder="Укажите номер заказа или название объявления" style="height: 44px;" value="<?php echo $_GET["search"]; ?>" name="search">
         <input type="hidden" name="route" value="secure" >
       </form>

@@ -182,7 +182,7 @@ class Main{
 
     }
  
-     function price($float=0, $currency_code="", $abbreviation_million=false){
+    function price($float=0, $currency_code="", $abbreviation_million=false){
         global $config, $settings;
 
         $ULang = new ULang();
@@ -191,10 +191,12 @@ class Main{
             $abbreviation_million = false;
         }
 
-        if( $currency_code ){
-           $currency = $config["number_format"]["currency_spacing"] . $settings["currency_data"][ $currency_code ]["sign"];
-        }else{
-           $currency = $settings["currency_main"]["sign"];
+        if($currency_code != 'null'){
+            if( $currency_code ){
+               $currency = $config["number_format"]["currency_spacing"] . $settings["currency_data"][ $currency_code ]["sign"];
+            }else{
+               $currency = $settings["currency_main"]["sign"];
+            }
         }
 
         $float_format = number_format($float,2,".",",");
@@ -216,15 +218,15 @@ class Main{
             if( $float >= 1000000 && $float <= 9999999 ){
                 
                 if( substr($float, 1,1) != 0 ){
-                   return substr($float, 0,1).','.substr($float, 1,1).' '.$ULang->t("млн") .' '.$currency;
+                   return substr($float, 0,1).','.substr($float, 1,1).' '.$ULang->t("млн").$currency;
                 }else{
-                   return substr($float, 0,1).' '. $ULang->t("млн") .' '.$currency;
+                   return substr($float, 0,1).' '. $ULang->t("млн").$currency;
                 }
 
             }elseif( $float >= 10000000 && $float <= 99999999 ){
-                return substr($float, 0,2).' '. $ULang->t("млн") .' '.$currency;
+                return substr($float, 0,2).' '. $ULang->t("млн").$currency;
             }elseif( $float >= 100000000 && $float <= 999999999 ){
-                return substr($float, 0,3).' '. $ULang->t("млн") .' '.$currency;
+                return substr($float, 0,3).' '. $ULang->t("млн").$currency;
             }else{
                 return number_format($float,$config["number_format"]["decimals"],$config["number_format"]["dec_point"],$config["number_format"]["thousands_sep"]).$currency;
             }
@@ -232,6 +234,51 @@ class Main{
         }
 
     } 
+
+    function adPrefixPrice($price,$data=[],$html=true){
+
+        $ULang = new ULang();
+        $priceJoin = '';
+
+        if($html){
+            if($data){
+                if($data['ads_price_from']){
+                    $priceJoin = '<span class="adPrefixPriceFrom" >'.$ULang->t('от').'</span>';
+                }
+                $priceJoin .= ' '.$price.' ';
+                if($data['ads_price_measure']){
+                    $priceJoin .= '<span class="adPrefixPriceMeasure" >'.$ULang->t('за').' '.$ULang->t(getNameMeasuresPrice($data['ads_price_measure'])).'</span>';
+                }            
+                return trim($priceJoin);
+            }
+        }else{
+            if($data){
+                if($data['ads_price_from']){
+                    $priceJoin = $ULang->t('от');
+                }
+                $priceJoin .= ' '.$price.' ';
+                if($data['ads_price_measure']){
+                    $priceJoin .= $ULang->t('за').' '.$ULang->t(getNameMeasuresPrice($data['ads_price_measure']));
+                }            
+                return trim($priceJoin);
+            }
+        }
+
+        return $price;
+    }
+
+    function nameInputPrice($variant_price_id){
+
+        $ULang = new ULang();
+
+        if($variant_price_id){
+            $get = findOne('uni_variants_price', 'variants_price_id=?', [$variant_price_id]);
+            if($get) return $ULang->t($get['variants_price_name']);
+        }
+
+        return $ULang->t('Цена');
+
+    }
 
     function walkNumber($array = array()){
         $temp = array();
@@ -683,7 +730,7 @@ class Main{
 
     }
 
-    function adOutCurrency($price=0, $currency=""){
+    function adOutCurrency($price=0, $currency="", $data=[]){
       global $settings;
 
       $get = getAll("SELECT * FROM uni_currency WHERE code!=?", [$currency]);
@@ -691,7 +738,7 @@ class Main{
       if($get && $settings["ads_currency_price"] && $settings["currency_json"]){
          
          foreach ($get as $value) {
-            $result = $this->currencyConvert( [ "summa" => $price, "from" => $currency, "to" => $value["code"] ] );
+            $result = $this->adPrefixPrice($this->currencyConvert( [ "summa" => $price, "from" => $currency, "to" => $value["code"] ] ),$data);
             if($result) $span .= '<span>'.$result.'</span>';
          }
          

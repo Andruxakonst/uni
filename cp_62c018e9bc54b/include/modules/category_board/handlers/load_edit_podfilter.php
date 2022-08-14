@@ -68,41 +68,41 @@ $getFilter = findOne("uni_ads_filters","ads_filters_id=?", array($id_filter));
 </div>
 
 <div class="form-group row d-flex align-items-center mb-5">
-  <label class="col-lg-3 form-control-label">Выберите значение</label>
-  <div class="col-lg-9">
+    <label class="col-lg-3 form-control-label">Выберите значение</label>
+    <div class="col-lg-9">
 
-      <select class="form-control select-item-podfilter" name="id_item"  >
-      <option value="0" >Не выбрано</option>
-      <?php
-      
-        $items = getAll("SELECT * FROM uni_ads_filters_items WHERE ads_filters_items_id_filter=? order by ads_filters_items_sort asc", array($id_parent));
-          if(count($items)>0){
-           
-             foreach($items AS $item){ 
+        <select class="form-control select-item-podfilter" name="id_item"  >
+        <option value="0" >Не выбрано</option>
+        <?php
+        
+          $items = getAll("SELECT * FROM uni_ads_filters_items WHERE ads_filters_items_id_filter=? order by ads_filters_items_sort asc", array($id_parent));
+            if(count($items)>0){
+             
+               foreach($items AS $item){ 
 
-                   $getFilterItem = findOne("uni_ads_filters_items","ads_filters_items_id=?", array($item["ads_filters_items_id_item_parent"]));
-                   
-                   $countFilterItem = (int)getOne("select count(*) as total from uni_ads_filters_items where ads_filters_items_id_item_parent=? and ads_filters_items_id_filter=?", [$item["ads_filters_items_id"],$id_filter] )["total"];
+                     $getFilterItem = findOne("uni_ads_filters_items","ads_filters_items_id=?", array($item["ads_filters_items_id_item_parent"]));
+                     
+                     $countFilterItem = (int)getOne("select count(*) as total from uni_ads_filters_items where ads_filters_items_id_item_parent=? and ads_filters_items_id_filter=?", [$item["ads_filters_items_id"],$id_filter] )["total"];
 
-                   if($getFilterItem){
-                      $value = $getFilterItem["ads_filters_items_value"] . '-' . $item["ads_filters_items_value"] . '('.$countFilterItem.')';
-                   }else{
-                      $value = $item["ads_filters_items_value"] . '('.$countFilterItem.')';
-                   }
+                     if($getFilterItem){
+                        $value = $getFilterItem["ads_filters_items_value"] . '-' . $item["ads_filters_items_value"] . '('.$countFilterItem.')';
+                     }else{
+                        $value = $item["ads_filters_items_value"] . '('.$countFilterItem.')';
+                     }
 
-                   ?>
-                   <option value="<?php echo $item["ads_filters_items_id"]; ?>" data-id-filter="<?php echo $id_filter; ?>" ><?php echo $value; ?></option>
-                   <?php
-               
-             }   
-          
-          }        
-      
-      ?>
-              
-      </select>
+                     ?>
+                     <option value="<?php echo $item["ads_filters_items_id"]; ?>" data-id-filter="<?php echo $id_filter; ?>" ><?php echo $value; ?></option>
+                     <?php
+                 
+               }   
+            
+            }        
+        
+        ?>
+                
+        </select>
 
-  </div>
+    </div>
 </div>
 
 <div class="form-group row d-flex mb-5">

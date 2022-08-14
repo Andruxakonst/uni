@@ -205,7 +205,27 @@ if( getCount("uni_orders") ){
                    </div>
                    </div>
                     
-                 </div>                                                                   
+                 </div>
+                 <div class="order-list-summary-slider-item" >
+
+                   <span class="order-list-summary-slider-item-icon" ><i class="la la-shield" ></i></span>
+
+                   <h5>Оплата бронирования/аренды</h5>
+                   
+                   <?php
+                      $summary_booking = getOne(" select count(*) as count, sum(orders_price) as total from uni_orders where orders_status_pay=? and orders_action_name=?", [1,'booking'] );
+                   ?>
+                   
+                   <div class="row" >
+                   <div class="col-lg-6" >
+                     <strong>Количество</strong> <br> <span><?php echo (int)$summary_booking["count"]; ?></span>
+                   </div>
+                   <div class="col-lg-6" >
+                     <strong>Сумма</strong> <br> <span><?php echo $Main->price($summary_booking["total"]); ?></span>
+                   </div>
+                   </div>
+                    
+                 </div>                                                                                    
               </div>
 
 

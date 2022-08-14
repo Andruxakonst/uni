@@ -63,7 +63,7 @@ if( !$_POST["image_delete"] ){
 
 if (count($error) == 0) {
        
-      update("UPDATE uni_country SET country_name=?, country_status = ?, country_alias=?, country_desc=?, country_lat=?, country_lng=?, country_format_phone=?, country_code_phone=?, country_image=? WHERE country_id=?", array($country,$status,$alias,$desc,$lat,$lng,$format_phone,$code_phone,$getCountry["country_image"],$id));  
+      update("UPDATE uni_country SET country_name=?, country_status = ?, country_alias=?, country_desc=?, country_lat=?, country_lng=?, country_format_phone=?, country_code_phone=?, country_image=?, country_declination=? WHERE country_id=?", array($country,$status,$alias,$desc,$lat,$lng,$format_phone,$code_phone,$getCountry["country_image"],clear($_POST["declination"]),$id));  
       $_SESSION["CheckMessage"]["success"] = "Действие успешно выполнено!";
       echo true;
 

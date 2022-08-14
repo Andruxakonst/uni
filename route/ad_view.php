@@ -45,6 +45,10 @@ if( !$_SESSION['cp_auth'][ $config["private_hash"] ] ){
 
 }
 
+if($_SESSION['current_load']){
+    $_SESSION['current_load']['ad'] = $data["ad"]["ads_id"];
+}
+
 $Ads->viewAds($data["ad"]["ads_id"],$data["ad"]["ads_id_user"]);
 
 $data["tariff"] = $Profile->getOrderTariff($data["ad"]["ads_id_user"]);

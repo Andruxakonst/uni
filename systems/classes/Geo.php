@@ -130,7 +130,7 @@ class Geo{
 
            }
  
-           $return .= '<div class="col-lg-4 col-md-6 col-sm-6 col-12" >'.$span.'</div>';
+           $return .= $span;
            $span = "";
 
          }
@@ -139,9 +139,9 @@ class Geo{
 
      if($list_country_status){
         if($list_country){
-           return '<div class="row" >'.$list_country.'</div> <hr> <div class="row modal-country-container" >' . $return . '</div>';
+           return $list_country. $return;
         }else{
-           return '<div class="row modal-country-container" >' . $return . '</div>';
+           return $return;
         }
      }else{
         return $return;

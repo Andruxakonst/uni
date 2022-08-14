@@ -723,7 +723,6 @@ fieldset[disabled] a.btn {
 .btn-gradient-01,
 .btn-gradient-01 a {
     background: #e23f83;
-    background: linear-gradient(to right, #e23f83 0%, #ea5844 100%);
     background-size: 200% auto;
     font-weight: 600;
     transition: 0.5s;
@@ -738,45 +737,42 @@ fieldset[disabled] a.btn {
     display: inline-block;
     font-size: 1.2rem;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-gradient-01:hover,
 .btn-gradient-01 a:hover {
     color: #fff;
-    background-position: right center
+    background: #e23f83;
+    opacity: 0.8;
 }
 
 .btn-gradient-01:active {
     color: #fff;
-    background-color: #e23f83;
-    border-color: #e23f83
+    background: #e23f83;
 }
 
 .btn-gradient-01:focus,
 .btn-gradient-01.focus {
     color: #fff;
-    box-shadow: none
+    background: #e23f83;
 }
 
 .btn-gradient-01.disabled,
 .btn-gradient-01:disabled {
-    background-color: none;
-    opacity: .3
+    color: #fff;
+    background: #e23f83;
 }
 
 .btn-gradient-01:active,
 .btn-gradient-01.active,
 .show>.btn-gradient-01.dropdown-toggle {
     color: #fff;
-    background-color: #e23f83;
-    background-image: none
+    background: #e23f83;
 }
 
 .btn-gradient-02,
 .btn-gradient-02 a {
     background: #5d5386;
-    background: linear-gradient(to right, #5d5386 0%, #5d5386 100%);
     background-size: 200% auto;
     font-weight: 600;
     transition: 0.5s;
@@ -790,25 +786,24 @@ fieldset[disabled] a.btn {
     display: inline-block;
     vertical-align: middle;
     font-size: 1.2rem;
-    margin-right: .4rem
 }
 
 .btn-gradient-02:hover,
 .btn-gradient-02 a:hover {
     color: #fff;
-    background-position: right center
+    background: #5d5386;
+    opacity: 0.8;
 }
 
 .btn-gradient-02:active {
     color: #fff;
-    background-color: #5d5386;
-    border-color: #5d5386
+    background: #5d5386;
 }
 
 .btn-gradient-02:focus,
 .btn-gradient-02.focus {
     color: #fff;
-    box-shadow: none
+    background: #5d5386;
 }
 
 .btn-gradient-02.disabled,
@@ -821,14 +816,12 @@ fieldset[disabled] a.btn {
 .btn-gradient-02.active,
 .show>.btn-gradient-02.dropdown-toggle {
     color: #fff;
-    background-color: #5d5386;
-    background-image: none
+    background: #5d5386;
 }
 
 .btn-gradient-03,
 .btn-gradient-03 a {
     background: #6859ea;
-    background: linear-gradient(to right, #6859ea 0%, #6acbe0 100%);
     background-size: 200% auto;
     font-weight: 600;
     transition: 0.5s;
@@ -842,25 +835,24 @@ fieldset[disabled] a.btn {
     display: inline-block;
     font-size: 1.2rem;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-gradient-03:hover,
 .btn-gradient-03 a:hover {
     color: #fff;
-    background-position: right center
+    background: #6859ea;
+    opacity: 0.8;
 }
 
 .btn-gradient-03:active {
     color: #fff;
-    background-color: #e23f83;
-    border-color: #e23f83
+    background: #6859ea;
 }
 
 .btn-gradient-03:focus,
 .btn-gradient-03.focus {
     color: #fff;
-    box-shadow: none
+    background: #6859ea;
 }
 
 .btn-gradient-03.disabled,
@@ -873,14 +865,12 @@ fieldset[disabled] a.btn {
 .btn-gradient-03.active,
 .show>.btn-gradient-03.dropdown-toggle {
     color: #fff;
-    background-color: #e23f83;
-    background-image: none
+    background: #6859ea;
 }
 
 .btn-gradient-04,
 .btn-gradient-04 a {
     background: #41c7af;
-    background: linear-gradient(to right, #41c7af 0%, #54e38e 100%);
     background-size: 200% auto;
     font-weight: 600;
     transition: 0.5s;
@@ -894,25 +884,24 @@ fieldset[disabled] a.btn {
     display: inline-block;
     font-size: 1.2rem;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-gradient-04:hover,
 .btn-gradient-04 a:hover {
     color: #fff;
-    background-position: right center
+    background: #41c7af;
+    opacity: 0.8;
 }
 
 .btn-gradient-04:active {
     color: #fff;
-    background-color: #e23f83;
-    border-color: #e23f83
+    background: #41c7af;
 }
 
 .btn-gradient-04:focus,
 .btn-gradient-04.focus {
     color: #fff;
-    box-shadow: none
+    background: #41c7af;
 }
 
 .btn-gradient-04.disabled,
@@ -925,14 +914,12 @@ fieldset[disabled] a.btn {
 .btn-gradient-04.active,
 .show>.btn-gradient-04.dropdown-toggle {
     color: #fff;
-    background-color: #e23f83;
-    background-image: none
+    background: #41c7af;
 }
 
 .btn-gradient-05,
 .btn-gradient-05 a {
     background: #bc0056;
-    background: linear-gradient(to right, #bc0056 0%, #730062 100%);
     background-size: 200% auto;
     font-weight: 600;
     transition: 0.5s;
@@ -946,25 +933,24 @@ fieldset[disabled] a.btn {
     display: inline-block;
     font-size: 1.2rem;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-gradient-05:hover,
 .btn-gradient-05 a:hover {
     color: #fff;
-    background-position: right center
+    background: #bc0056;
+    opacity: 0.8;
 }
 
 .btn-gradient-05:active {
     color: #fff;
-    background-color: #e23f83;
-    border-color: #e23f83
+    background: #bc0056;
 }
 
 .btn-gradient-05:focus,
 .btn-gradient-05.focus {
     color: #fff;
-    box-shadow: none
+    background: #bc0056;
 }
 
 .btn-gradient-05.disabled,
@@ -977,8 +963,7 @@ fieldset[disabled] a.btn {
 .btn-gradient-05.active,
 .show>.btn-gradient-05.dropdown-toggle {
     color: #fff;
-    background-color: #e23f83;
-    background-image: none
+    background: #bc0056;
 }
 
 .btn-primary {
@@ -992,13 +977,13 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-primary:hover {
     color: #fff;
     background-color: #5d5386;
-    border-color: #5d5386
+    border-color: #5d5386;
+    opacity: 0.8;
 }
 
 .btn-primary:active {
@@ -1045,13 +1030,13 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-secondary:hover {
     color: #fff;
     background-color: #2c304d;
-    border-color: #2c304d
+    border-color: #2c304d;
+    opacity: 0.8;
 }
 
 .btn-secondary:focus,
@@ -1085,13 +1070,13 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-info:hover {
     color: #fff;
     background-color: #31b0d5;
-    border-color: #31b0d5
+    border-color: #31b0d5;
+    opacity: 0.8;
 }
 
 .btn-info:focus,
@@ -1123,13 +1108,13 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-success:hover {
     color: #fff;
     background-color: #449d44;
-    border-color: #449d44
+    border-color: #449d44;
+    opacity: 0.8;
 }
 
 .btn-success:focus,
@@ -1161,13 +1146,13 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-warning:hover {
     color: #fff;
     background-color: #ec971f;
-    border-color: #ec971f
+    border-color: #ec971f;
+    opacity: 0.8;
 }
 
 .btn-warning:focus,
@@ -1204,7 +1189,8 @@ fieldset[disabled] a.btn {
 .btn-danger:hover {
     color: #fff;
     background-color: #c9302c;
-    border-color: #c9302c
+    border-color: #c9302c;
+    opacity: 0.8;
 }
 
 .btn-danger:focus,
@@ -1235,13 +1221,13 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-light:hover {
     color: #2c304d;
     background-color: #f8f9fa;
-    border-color: #f8f9fa
+    border-color: #f8f9fa;
+    opacity: 0.8;
 }
 
 .btn-light:focus,
@@ -1272,13 +1258,13 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-dark:hover {
     color: #fff;
     background-color: #2c304d;
-    border-color: #2c304d
+    border-color: #2c304d;
+    opacity: 0.8;
 }
 
 .btn-dark:focus,
@@ -1311,13 +1297,12 @@ fieldset[disabled] a.btn {
     font-size: 1.2rem;
     display: inline-block;
     vertical-align: middle;
-    margin-right: .4rem
 }
 
 .btn-outline-primary:hover {
     color: #fff;
     background-color: #5d5386;
-    border-color: #5d5386
+    border-color: #5d5386;
 }
 
 .btn-outline-primary:focus,
@@ -1356,7 +1341,7 @@ fieldset[disabled] a.btn {
 .btn-outline-secondary:hover {
     color: #fff;
     background-color: #2c304d;
-    border-color: #2c304d
+    border-color: #2c304d;
 }
 
 .btn-outline-secondary:focus,
@@ -1375,7 +1360,6 @@ fieldset[disabled] a.btn {
 .show>.btn-outline-secondary.dropdown-toggle {
     color: #fff;
     background-color: #2c304d;
-    border-color: #2c304d
 }
 
 .btn-outline-info {
@@ -2537,7 +2521,6 @@ span.badge-pulse-orange {
 .quick-actions .dropdown-toggle {
     color: #98a8b4;
     background: none;
-    border: none;
     padding: 0;
     font-size: 1.7rem
 }
@@ -2599,8 +2582,6 @@ span.badge-pulse-orange {
 
 .actions .dropdown-toggle {
     color: #98a8b4;
-    background: none;
-    border: none;
     padding: 0;
     font-size: 1.7rem
 }
@@ -15223,16 +15204,270 @@ max-width: 750px; margin: 0 auto;  text-align: center; padding: 18px 30px; borde
 .new-update-notification-close i{
     cursor: pointer; color: white; font-size: 20px;
 }
-
-
-
-
-
-
-
-
-
-
+.admin-chat-users-list-item{
+    display: flex;
+    flex-grow: 1;
+    padding: 8px;
+    border-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.admin-chat-users-list-item-name{
+    flex-grow: 1;
+}
+.admin-chat-users-list-item:hover{
+    background-color: white;
+}
+.admin-chat-users-list-item-avatar{
+    overflow: hidden; border-radius: 50%; align-items: center; height: 35px; width: 35px; margin-right: 10px;
+}
+.admin-chat-users-list-item-avatar img{
+    height: 100%;
+}
+.admin-chat-users-list-item-count span{
+    min-width: 15px; height: 15px; background-color: red; padding: 5px;
+    border-radius: 50px; color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 11px;
+}
+.admin-chat-users-dialog-item{
+    margin: 10px 0;
+}
+.admin-chat-users-dialog-item-msg{
+    display: block; padding: 10px 15px; border-radius: 10px; background-color: #f0f8ff; color: black;
+}
+.admin-chat-users-dialog-item-text{
+    margin: 0;
+}
+.admin-chat-users-dialog-date{
+    text-align: center; font-size: 13px;
+}
+.admin-chat-users-dialog-item-date{
+    text-align: right; margin-top: 7px; font-size: 12px;
+}
+.admin-chat-users-dialog-item-box{
+    display: inline-block;
+}
+.admin-chat-users-dialog-item-attach{
+    margin-top: 10px;
+}
+.admin-chat-users-dialog-header{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+.admin-chat-users-dialog-header-block-1{
+    height: 40px; width: 40px; border-radius: 50%; overflow: hidden; margin-right: 10px;
+}
+.admin-chat-users-dialog-header-block-1 img{
+    height: 100%;
+}
+.admin-chat-users-dialog-header-block-2{
+    font-weight: bold;
+    flex-grow: 1;
+}
+.admin-chat-users-dialog-content{
+    height: 600px; overflow: auto;
+}
+.admin-chat-users-dialog-footer-flex-box{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+.admin-chat-users-dialog-footer-flex-box2{
+    flex-grow: 1;
+}
+.admin-chat-users-dialog-footer-flex-box1{
+    margin-right: 10px;
+}
+.admin-chat-users-dialog-footer-attach-change{
+    cursor: pointer;
+}
+.admin-chat-users-list-item.active{
+    background-color: white;
+}
+.image-autofocus{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.admin-chat-users-dialog-footer-attach-files-loader img{
+    opacity: 0.5;
+}
+.admin-chat-users-dialog-footer-attach-files-preview{
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+    position: relative;
+}
+.admin-chat-users-dialog-footer-attach-delete{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.admin-chat-users-dialog-footer-attach-list{
+    margin-top: 10px;
+}
+.admin-chat-users-dialog-footer-attach-list > div{
+    margin-right: 10px;
+}
+.admin-chat-users-dialog-item-name{
+    font-weight: bold;
+}
+.admin-chat-users-dialog-header-block-3 i{
+    font-size: 22px; cursor: pointer;
+}
+.admin-chat-users-dialog-header-block-3 span{
+    margin-left: 7px;
+}
+.admin-chat-users-dialog-header-block-3 span:hover{
+    color: red;
+}
+.admin-chat-users-dialog-footer-locked-info{
+    padding: 10px; border-radius: 10px; background-color: #ffe5ed; margin-bottom: 15px;
+}
+.admin-chat-users-dialog-item-attach img{
+    width: 80%;
+}
+.admin-chat-users-dialog-content::-webkit-scrollbar{
+    width: 7px; height: 7px;
+    background-color: #f7f8fa;
+}
+.admin-chat-users-dialog-content::-webkit-scrollbar-thumb{
+    background: #d4d6db;
+}
+.admin-chat-users-list-scroll, .admin-chat-users-list-responders{
+    overflow: auto; max-height: 600px;
+}
+.widget-list-chat-message-item{
+    display: flex;
+    flex-grow: 1;
+    margin-bottom: 5px;
+}
+.widget-list-chat-message-item-avatar span{
+    width: 30px; height: 30px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; 
+}
+.widget-list-chat-message-item-avatar img{
+    height: 100%;
+}
+.widget-list-chat-message-item-avatar{
+    width: 30px; margin-right: 10px;
+}
+.widget-list-chat-message-item-text{
+    padding: 10px; border-radius: 10px; background-color: #f0f8ff;
+}
+.widget-list-chat-message-item-attach img{
+    width: 70%;
+}
+.widget-list-chat-message-item-attach{
+    margin-top: 5px;
+}
+.widget-title-flex{
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.widget-title-flex span{
+    display: inline-block;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 25px;
+    background-color: #F2F3F8;
+    color: black;
+    cursor: pointer;
+}
+.widget-title-flex h3{
+    margin: 0;
+}
+.widget-list-log-action-item a{
+    margin-bottom: 5px;
+}
+.admin-chat-users-list-responder-item{
+    padding: 10px; background-color: white; border-radius: 10px; margin-bottom: 10px; position: relative;
+}
+.admin-chat-users-list-responder-item p{
+    margin-top: 3px; margin-bottom: 0; font-weight: bold;
+}
+.admin-chat-users-list-responders{
+    margin-top: 15px;
+}
+.admin-chat-users-list-responder-item-stat{
+    text-align: center;
+}
+.admin-chat-users-list-responder-item-stat span{
+    display: block;
+}
+.admin-chat-users-list-responder-item-stat strong{
+    display: block; margin-top: 5px;
+}
+.admin-chat-users-list-responder-item-stat i{
+    font-size: 25px;
+}
+.admin-chat-users-list-responder-item-delete{
+    position: absolute; top: 10px; right: 10px; cursor: pointer; display: none; color: black;
+}
+.admin-chat-users-list-responder-item-delete i{
+    font-size: 18px; color: #98a8b4;
+}
+.admin-chat-users-list-responder-item-delete i:hover{
+    color: black;
+}
+.admin-chat-users-list-responder-item:hover .admin-chat-users-list-responder-item-delete{
+   display: block;
+}
+.icon-subtitle{
+    text-align: center; color: #98a8b4; margin-top: 15px;
+}
+.icon-subtitle i{
+    font-size: 30px;
+}
+.icon-subtitle span{
+    display: block;
+}
+.admin-chat-users{
+    margin-bottom: 20px;
+}
+.category-block-booking-options{
+    display: none;
+}
+.box-label-flex{
+    display: flex; flex-grow: 1;
+}
+.box2-label-flex{
+     margin-left: 10px;
+}
+.box2-label-flex-grow1{
+    flex-grow: 1;
+}
+.box-label-flex-align-center{
+    align-items: center;
+}
+.list-variants-prefix-price-item, .list-variants-measure-price-item{
+    margin-bottom: 7px;
+}
 
 
 

@@ -328,6 +328,23 @@ class Admin{
 			   Необходимо настроить платежную систему для приема оплаты с сайта. Для этого перейдите в <a href="?route=settings&tab=payments" >настройку платежных систем</a>
 			  </div>
         ';
+	    
+		if($settings["functionality"]["booking"]){
+			if(!$settings["booking_payment_service_name"]){
+				$alert = "alert-warning";
+				$check = "";
+			}else{
+				$alert = "alert-success";
+				$check = '<span class="alert-status-check" ><i class="la la-check"></i></span>';
+			}
+
+			$warning .= '
+				<div class="alert-custom '.$alert.'">
+				'.$check.'
+				Необходимо выбрать платежную систему для приема оплаты онлайн бронирования и аренды. Для этого перейдите в <a href="?route=settings&tab=booking" >настройку бронирования</a>
+				</div>
+			';
+	    }
 
        return ["html"=>$warning, "count"=>$count_warning];
 
@@ -379,9 +396,38 @@ class Admin{
 		return $data[ mt_rand(0, count($data)-1 ) ];
 	}
 
+	function getAllMessagesSupport($notification=false){
 
+        $total = 0;
+        $groupBy = [];
 
+        $getAll = getAll("select * from uni_chat_users where chat_users_id_user=?", array(0));
 
+        if(count($getAll)){
+
+           foreach ($getAll as $key => $value) {
+
+              $groupBy[ $value["chat_users_id_hash"] ] = $value["chat_users_id_hash"];
+
+           }
+
+           if( count($groupBy) ){
+               foreach ($groupBy as $id_hash) {
+
+               	  if($notification){
+               	  	 $total += (int)getOne("select count(*) as total from uni_chat_messages where chat_messages_id_hash=? and chat_messages_status=? and chat_messages_id_user!=? and chat_messages_notification=?",array($id_hash,0,0,0))["total"];
+               	  	 update("update uni_chat_messages set chat_messages_notification=? where chat_messages_id_hash=?", [1,$id_hash]);
+               	  }else{
+               	  	 $total += (int)getOne("select count(*) as total from uni_chat_messages where chat_messages_id_hash=? and chat_messages_status=? and chat_messages_id_user!=?",array($id_hash,0,0))["total"];
+               	  }
+
+               }
+           }
+
+        }
+
+        return $total;
+    }
 
 
 }

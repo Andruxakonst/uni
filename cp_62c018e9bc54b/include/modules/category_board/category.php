@@ -13,8 +13,8 @@ include("fn.php");
 </div>  
 
 <div class="form-group">
-<a  href="?route=add_category_board" class="btn btn-gradient-04 mr-1 mb-2"><i class="la la-plus"></i> Добавить категорию</a>
-<a  href="?route=filters" class="btn btn-gradient-02 mr-1 mb-2"><i class="la la-filter filter"></i> Фильтры</a>
+<a  href="?route=add_category_board" class="btn btn-gradient-04 mr-1 mb-2">Добавить категорию</a>
+<a  href="?route=filters" class="btn btn-gradient-02 mr-1 mb-2">Фильтры</a>
 </div>
 
 <div class="row" >
@@ -38,7 +38,10 @@ include("fn.php");
                         <?php } ?>
                         <?php if($settings["functionality"]["marketplace"]){ ?>
                         <th>Маркетплейс</th>
-                        <?php } ?>                        
+                        <?php } ?>
+                        <?php if($settings["functionality"]["booking"]){ ?>
+                        <th>Бронирование/Аренда</th>
+                        <?php } ?>                                                
                         <th>На главной</th>
                         <th style="text-align: right;" ></th>
                        </tr>

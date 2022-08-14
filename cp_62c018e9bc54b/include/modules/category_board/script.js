@@ -7,7 +7,7 @@ $(document).ready(function() {
         $('.proccess_load').show(); 
         $.ajax({
             type: "POST",url: "include/modules/category_board/handlers/add.php",data: data_form,dataType: "html",cache: false,contentType: false,processData: false,                                                
-            success: function (data) { console.log(data);
+            success: function (data) {
                 if (data==true){
                     location.href = "?route=category_board";  
                 }else{
@@ -163,6 +163,16 @@ $(document).ready(function() {
 
      });
 
+    $(document).on("change", "input[name=booking]", function() {
+
+        if($( this ).prop("checked") == false){
+             $(".category-block-booking-options").hide();         
+        }else{
+             $(".category-block-booking-options").show();            
+        }
+
+     });
+
     $(document).on('click','.filters-open-category', function () {
       var id = $(this).data("id");
       var status = $(this).attr("data-status");
@@ -175,25 +185,6 @@ $(document).ready(function() {
           $(this).find("i").attr("class", 'la la-plus'); 
           $(this).attr("data-status",0);
       }  
-    });
-
-    $(document).on("change", "select[name=variant_price]", function() {
-
-        if( $( this ).val() == "0" ){
-             $(".category-block-conditional-function, .category-block-conditional-online-view").show();         
-        }else if( $( this ).val() == "1" ){
-             $(".category-block-conditional-function, .category-block-conditional-online-view").hide();            
-        }else if( $( this ).val() == "2" ){
-             $(".category-block-conditional-function").show();   
-             $(".category-block-conditional-online-view").hide();         
-        }else if( $( this ).val() == "3" ){
-             $(".category-block-conditional-function").hide();   
-             $(".category-block-conditional-online-view").show();             
-        }else if( $( this ).val() == "4" ){
-             $(".category-block-conditional-function").hide();   
-             $(".category-block-conditional-online-view").show();             
-        }
-
     });
 
     function copyLink(el) {
@@ -214,6 +205,102 @@ $(document).ready(function() {
 
     });
 
+    $(document).on('click','.list-variants-prefix-price-save', function (e) {
+    
+        $('.proccess_load').show(); 
+        $.ajax({
+            type: "POST",url: "include/modules/category_board/handlers/variants_price.php",data: $('.list-variants-prefix-price-form').serialize(),dataType: "html",cache: false,                                                
+            success: function (data) {
+                location.reload();                                           
+            }
+        });
+        e.preventDefault();
+    });
 
+    $(document).on('click','.list-variants-prefix-price-delete', function (e) {
+
+        var id = $(this).data('id');
+
+        if(id != '0'){
+    
+            $('.proccess_load').show(); 
+            $.ajax({
+                type: "POST",url: "include/modules/category_board/handlers/delete_variant_price.php",data: 'id='+id,dataType: "html",cache: false,                                                
+                success: function (data) {
+                    $('#variant-price'+id).remove().hide();    
+                    $('.proccess_load').hide();
+                    notification();                                        
+                }
+            });
+
+        }else{
+
+            $(this).parents('.list-variants-prefix-price-item').remove().hide();
+
+        }
+
+        e.preventDefault();
+    });
+
+    $(document).on('click','.list-variants-prefix-price-add', function (e) {
+
+        $('.list-variants-prefix-price-form').append(`
+                <div class="list-variants-prefix-price-item" >
+
+                     <div class="box-label-flex box-label-flex-align-center" >
+                         <div class="box1-label-flex box2-label-flex-grow1" >
+                            <input type="text" name="list_variant_price[add][]" value="" class="form-control" >
+                         </div>
+                         <div class="box2-label-flex" >
+                            <span data-id="0" class="list-variants-prefix-price-delete" style="cursor: pointer;" ><i class="la la-trash" style="font-size: 16px;" ></i></span>
+                         </div>
+                     </div>
+
+                </div>
+        `);
+
+        e.preventDefault();
+    });
+
+    $(document).on('click','.list-variants-measure-price-add', function (e) {
+
+        $('.list-variants-measure-price-form').append(`
+                <div class="list-variants-measure-price-item" >
+
+                     <div class="box-label-flex box-label-flex-align-center" >
+                         <div class="box1-label-flex box2-label-flex-grow1" >
+                            <input type="text" name="list_measure_price[]" value="" class="form-control" >
+                         </div>
+                         <div class="box2-label-flex" >
+                            <span data-id="0" class="list-variants-measure-price-delete" style="cursor: pointer;" ><i class="la la-trash" style="font-size: 16px;" ></i></span>
+                         </div>
+                     </div>
+
+                </div>
+        `);
+
+        e.preventDefault();
+    });
+
+    $(document).on('click','.list-variants-measure-price-delete', function (e) {
+
+        var id = $(this).data('id');
+
+        $(this).parents('.list-variants-measure-price-item').remove().hide();
+
+        e.preventDefault();
+    });
+
+    $(document).on('click','.list-variants-measure-price-save', function (e) {
+    
+        $('.proccess_load').show(); 
+        $.ajax({
+            type: "POST",url: "include/modules/category_board/handlers/measure_price.php",data: $('.list-variants-measure-price-form').serialize(),dataType: "html",cache: false,                                                
+            success: function (data) {
+                location.reload();                                           
+            }
+        });
+        e.preventDefault();
+    });
   
 });

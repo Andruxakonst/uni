@@ -32,7 +32,7 @@ $Main = new Main();
 <div class="row">
    <div class="page-header">
       <div class="d-flex align-items-center">
-         <h2 class="page-header-title">Обращения</h2>
+         <h2 class="page-header-title">Жалобы</h2>
       </div>
    </div>
 </div>  
@@ -74,7 +74,7 @@ $Main = new Main();
                            <tr>
                             <th>Обращение</th>
                             <th>Заявитель</th>
-                            <th>Дата обращения</th>
+                            <th>Дата</th>
                             <th>Действие</th>
                            </tr>
                         </thead>
@@ -172,7 +172,7 @@ $Main = new Main();
                          ?>
                             <div class="plug" >
                                <i class="la la-exclamation-triangle"></i>
-                               <p>Обращений нет</p>
+                               <p>Жалоб нет</p>
                             </div>
                          <?php
 

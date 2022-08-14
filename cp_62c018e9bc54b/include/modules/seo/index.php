@@ -18,13 +18,14 @@ $get = getAll("SELECT * FROM uni_seo WHERE lang_iso=?", [$lang_iso]);
   }
 
   $defaultMakros = array(
-      '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Название Вашего домена ('.$_SERVER["SERVER_NAME"].')" >{domen}</span>',
-      '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Ссылка на Ваш сайт ('.$config["urlPath"].')" >{url}</span>',
+      '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Название домена ('.$_SERVER["SERVER_NAME"].')" >{domen}</span>',
+      '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Название проекта ('.$settings["site_name"].')" >{site_name}</span>',
+      '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Ссылка на сайт ('.$config["urlPath"].')" >{url}</span>',
       '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Страна посетителя" >{country}</span>',
       '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Город посетителя" >{city}</span>',
       '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Регион посетителя" >{region}</span>',
-      '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Название Вашего проекта ('.$settings["site_name"].')" >{site_name}</span>',
       '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Локация посетителя, то что удалось определить (Страна,город или регион)" >{geo}</span>',
+      '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Локация посетителя со склонением" >{geo_declination}</span>',
       '<span data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Описание из города, региона или страны" >{geo_meta_desc}</span>',
   );
 

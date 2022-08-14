@@ -45,9 +45,8 @@ $id = (int)$_GET["id"];
 
 $_SESSION["ByShow"] = 60;
 
-$getSecure = (int)getOne("select count(*) as total from uni_secure where secure_status IN(0,1,2,4)")["total"];
-
 $getWarning = $Admin->warningSystems();
+$getNewChatMessages = $Admin->getAllMessagesSupport();
 
 if($_GET["route"] == "users" || $_GET["route"] == "user" || $_GET["route"] == "add_user"){
   if(!$_SESSION["cp_control_admin"]){
@@ -101,13 +100,17 @@ if($_GET["route"] == "users" || $_GET["route"] == "user" || $_GET["route"] == "a
   if(!$_SESSION["cp_control_city"]){
     header("Location: ?route=index");
   }
-}elseif($_GET["route"] == "secure" || $_GET["route"] == "secure_view"){
-  if(!$_SESSION["cp_control_secure"]){
+}elseif($_GET["route"] == "secure" || $_GET["route"] == "secure_view" || $_GET["route"] == "booking" || $_GET["route"] == "booking_view"){
+  if(!$_SESSION["cp_control_transactions"]){
     header("Location: ?route=index");
   }
 }elseif($_GET["route"] == "index" || !$_GET["route"]){
   if(!$_SESSION["cp_control_statistics"]){
     header("Location: ?route=card_user");
+  }
+}elseif($_GET["route"] == "chat"){
+  if(!$_SESSION["cp_control_chat"]){
+    header("Location: ?route=index");
   }
 }
 

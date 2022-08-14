@@ -14,9 +14,7 @@ if( !(new Admin())->accessAdmin($_SESSION['cp_control_statistics']) ){
 
 if(isAjax() == true){
 
-$id = (int)$_POST["id"];
-
-update("delete from uni_notifications where id=?", array($id));
+update("delete from uni_notifications", []);
   
 echo true;
     

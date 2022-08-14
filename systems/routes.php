@@ -76,6 +76,10 @@ Router::route('order/([0-9]+)', function($id_order){
     require 'route/order.php';
 });
 
+Router::route('booking/([0-9]+)', function($id_order){
+    require 'route/order_booking.php';
+});
+
 Router::route('pay/status/([a-zA-Z=]+)', function($status){
     require 'route/pay_status.php';
 });

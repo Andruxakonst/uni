@@ -118,6 +118,24 @@ if($settings["sitemap_category"]){
    
 }
 
+if($settings["sitemap_ads"]){
+
+   $getAds = $Ads->getAll(["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now()"]);
+
+   if($getAds['count']){
+      foreach ($getAds['all'] as $key => $ad_value) {
+         $lines .= '
+             <url>
+              <loc>'.$Ads->alias($ad_value).'</loc>
+              <lastmod>'.date("Y-m-d").'</lastmod>
+              <priority>0.6</priority>
+             </url>
+         ';
+      }
+   }
+   
+}
+
 if($settings["sitemap_blog"]){
 
    $get = $Blog->getAll( ["query"=>"blog_articles_visible='1'"] );
@@ -174,15 +192,7 @@ if($settings["sitemap_shops"]){
 
 if($lines){
 
-    $content = '
-       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ' . $lines . '</urlset>';
-
-    $fp = fopen( $config["basePath"] . "/sitemap.xml", "w");
- 
-    fwrite($fp, $content);
-     
-    fclose($fp);
+    file_put_contents($config["basePath"] . '/sitemap.xml', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $lines . '</urlset>');
 
 }
 

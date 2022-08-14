@@ -21,6 +21,7 @@ $Blog = new Blog();
 $Cache = new Cache();
 $Geo = new Geo();
 $Shop = new Shop();
+$Admin = new Admin();
 
 $getCron = getAll("select * from uni_crontab");
 

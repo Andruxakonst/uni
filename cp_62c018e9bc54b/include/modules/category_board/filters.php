@@ -49,7 +49,7 @@ if(!empty($_GET["search"])){
 
 <div class="form-group" style="margin-top: 20px;" >
 
- <a href="#" data-toggle="modal" data-target="#modal-add-filters" class="btn btn-gradient-04 mr-1 mb-2" ><i class="la la-plus"></i> Добавить фильтр</a>
+ <a href="#" data-toggle="modal" data-target="#modal-add-filters" class="btn btn-gradient-04 mr-1 mb-2" >Добавить фильтр</a>
 
  <div class="btn-group mb5" >
    <div class="dropdown">
@@ -159,6 +159,7 @@ if(!empty($_GET["search"])){
                       <option value="select" >Выпадающий список с одиночным выбором</option>
                       <option value="select_multi" >Выпадающий список с множественным выбором</option>
                       <option value="input" >Поле ввода цифр</option>
+                      <option value="input_text" >Поле ввода текста</option>
                     </select>
                 </div>
               </div>
@@ -183,19 +184,21 @@ if(!empty($_GET["search"])){
                 </div>
               </div>
 
-              <div class="form-group row d-flex mb-5">
-                <label class="col-lg-3 form-control-label">Значения фильтра</label>
-                <div class="col-lg-9">
+              <div class="box-value-filters" >
+                 <div class="form-group row d-flex mb-5">
+                   <label class="col-lg-3 form-control-label">Значения фильтра</label>
+                   <div class="col-lg-9">
 
-                 <button class="btn btn-success btn-sm action-add-item-filter" ><i class="la la-plus" ></i> Добавить значение</button>
+                    <button class="btn btn-success btn-sm action-add-item-filter" ><i class="la la-plus" ></i> Добавить значение</button>
 
-                  <div class="alert alert-primary filter-slider-hint" style="margin-top: 15px; font-size: 12px;" role="alert">
-                    Добавьте 2 поля. В первом укажите значение от, а во втором поле значение до
-                  </div>
+                     <div class="alert alert-primary filter-slider-hint" style="margin-top: 15px; font-size: 12px;" role="alert">
+                       Добавьте 2 поля. В первом укажите значение от, а во втором поле значение до
+                     </div>
 
-                 <div class="list-podfilter" ></div>
+                    <div class="list-podfilter" ></div>
 
-                </div>
+                   </div>
+                 </div>
               </div>
               
             </form>

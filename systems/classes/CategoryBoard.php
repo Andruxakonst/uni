@@ -70,13 +70,22 @@ class CategoryBoard{
                     $array['category_board_id'][$result['category_board_id']]['category_board_count_free'] =  $result['category_board_count_free'];          
                     $array['category_board_id'][$result['category_board_id']]['category_board_status_paid'] =  $result['category_board_status_paid'];          
                     $array['category_board_id'][$result['category_board_id']]['category_board_display_price'] =  $result['category_board_display_price'];
-                    $array['category_board_id'][$result['category_board_id']]['category_board_variant_price'] =  $result['category_board_variant_price'];
-                    $array['category_board_id'][$result['category_board_id']]['category_board_measure_price'] =  $result['category_board_measure_price'];
+                    $array['category_board_id'][$result['category_board_id']]['category_board_variant_price_id'] =  $result['category_board_variant_price_id'];
+                    $array['category_board_id'][$result['category_board_id']]['category_board_measures_price'] =  $result['category_board_measures_price'];
                     $array['category_board_id'][$result['category_board_id']]['category_board_auto_title'] =  $result['category_board_auto_title'];
                     $array['category_board_id'][$result['category_board_id']]['category_board_online_view'] =  $result['category_board_online_view'];
                     $array['category_board_id'][$result['category_board_id']]['category_board_h1'] =  $result['category_board_h1'];
                     $array['category_board_id'][$result['category_board_id']]['category_board_auto_title_template'] =  $result['category_board_auto_title_template'];
                     $array['category_board_id'][$result['category_board_id']]['category_board_show_index'] =  $result['category_board_show_index'];
+                    $array['category_board_id'][$result['category_board_id']]['category_board_booking'] =  $result['category_board_booking'];
+                    $array['category_board_id'][$result['category_board_id']]['category_board_booking_variant'] =  $result['category_board_booking_variant'];
+
+                    if($result['category_board_rules']){
+                        $category_board_rules = json_decode($result['category_board_rules'], true);
+                        foreach ($category_board_rules as $value_key) {
+                            $array['category_board_id'][$result['category_board_id']]['category_board_rules'][$value_key] = 1;
+                        }
+                    }
 
                     if($settings["functionality"]["secure"]){
                        $array['category_board_id'][$result['category_board_id']]['category_board_secure'] =  $result['category_board_secure'];
@@ -94,6 +103,12 @@ class CategoryBoard{
                        $array['category_board_id'][$result['category_board_id']]['category_board_marketplace'] =  $result['category_board_marketplace'];
                     }else{
                        $array['category_board_id'][$result['category_board_id']]['category_board_marketplace'] =  0;
+                    }
+                    
+                    if($settings["functionality"]["booking"]){
+                       $array['category_board_id'][$result['category_board_id']]['category_board_booking'] =  $result['category_board_booking'];
+                    }else{
+                       $array['category_board_id'][$result['category_board_id']]['category_board_booking'] =  0;
                     }
                                             
                 }  
@@ -298,6 +313,8 @@ class CategoryBoard{
                      $count = (int)$getCache['geo'][$id][$_SESSION["geo"]["data"]["region_id"]];
                  }elseif($_SESSION["geo"]["data"]["country_id"]){
                      $count = (int)$getCache['geo'][$id][$_SESSION["geo"]["data"]["country_id"]];
+                 }else{
+                     $count = (int)$getCache['category'][$id];
                  }
 
              }else{

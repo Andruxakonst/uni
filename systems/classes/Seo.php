@@ -8,21 +8,18 @@
    $ULang = new ULang();
 
     if($_SESSION["geo"]){
-       
-       $geolocation = ["city"=>$_SESSION["geo"]["data"]["city_name"],"region"=>$_SESSION["geo"]["data"]["region_name"],"country"=>$_SESSION["geo"]["data"]["country_name"]];
-
-    }else{
-
-       $geolocation = $Geo->geoIp($_SERVER['REMOTE_ADDR']);
-
+       $geolocation = ["city"=>$_SESSION["geo"]["data"]["city_name"],"region"=>$_SESSION["geo"]["data"]["region_name"],"country"=>$_SESSION["geo"]["data"]["country_name"],"city_declination"=>$_SESSION["geo"]["data"]["city_declination"],"region_declination"=>$_SESSION["geo"]["data"]["region_declination"],"country_declination"=>$_SESSION["geo"]["data"]["country_declination"]];
     }
 
     if($geolocation["city"]){
-       $geo_name = $ULang->t($geolocation["city"] , [ "table" => "geo", "field" => "geo_name" ] );
+       $geo_name = $ULang->t($geolocation["city"] , [ "table" => "geo", "field" => "geo_name" ]);
+       if($geolocation["city_declination"]) $geo_declination = $ULang->t($geolocation["city_declination"] , [ "table" => "geo", "field" => "geo_name" ] );
     }elseif($geolocation["region"]){
-       $geo_name = $ULang->t($geolocation["region"] , [ "table" => "geo", "field" => "geo_name" ] );
+       $geo_name = $ULang->t($geolocation["region"] , [ "table" => "geo", "field" => "geo_name" ]);
+       if($geolocation["region_declination"]) $geo_declination = $ULang->t($geolocation["region_declination"] , [ "table" => "geo", "field" => "geo_name" ] );
     }elseif($geolocation["country"]){
-       $geo_name = $ULang->t($geolocation["country"] , [ "table" => "geo", "field" => "geo_name" ] );
+       $geo_name = $ULang->t($geolocation["country"] , [ "table" => "geo", "field" => "geo_name" ]);
+       if($geolocation["country_declination"]) $geo_declination = $ULang->t($geolocation["country_declination"] , [ "table" => "geo", "field" => "geo_name" ] );
     }
 
       $param_name = array(
@@ -33,6 +30,7 @@
         "{region}",
         "{site_name}",
         "{geo}",
+        "{geo_declination}",
       );
 
       $param_val = array(
@@ -42,7 +40,8 @@
         $ULang->t($geolocation["city"] , [ "table" => "geo", "field" => "geo_name" ] ),
         $ULang->t($geolocation["region"] , [ "table" => "geo", "field" => "geo_name" ] ),
         $settings["site_name"],
-        $geo_name  
+        $geo_name,
+        $geo_declination
       ); 
 
       return str_replace($param_name, $param_val, $text);
@@ -61,23 +60,29 @@
    $ULang = new ULang();
      
    if(count($param)){
+    
+    if($data["ad"]["city_name"]){
 
-    if($_SESSION["geo"]){
-       
-       $geolocation = ["city"=>$_SESSION["geo"]["data"]["city_name"],"region"=>$_SESSION["geo"]["data"]["region_name"],"country"=>$_SESSION["geo"]["data"]["country_name"]];
+      $geo_name = $ULang->t($data["ad"]["city_name"], [ "table" => "geo", "field" => "geo_name" ]);
+      if($data["ad"]["city_declination"]) $geo_declination = $ULang->t($data["ad"]["city_declination"] , [ "table" => "geo", "field" => "geo_name" ] );
 
     }else{
+     
+      if($_SESSION["geo"]){
+         $geolocation = ["city"=>$_SESSION["geo"]["data"]["city_name"],"region"=>$_SESSION["geo"]["data"]["region_name"],"country"=>$_SESSION["geo"]["data"]["country_name"],"city_declination"=>$_SESSION["geo"]["data"]["city_declination"],"region_declination"=>$_SESSION["geo"]["data"]["region_declination"],"country_declination"=>$_SESSION["geo"]["data"]["country_declination"]];
+      }
+  
+      if($geolocation["city"]){
+         $geo_name = $ULang->t($geolocation["city"] , [ "table" => "geo", "field" => "geo_name" ]);
+         if($geolocation["city_declination"]) $geo_declination = $ULang->t($geolocation["city_declination"] , [ "table" => "geo", "field" => "geo_name" ] );
+      }elseif($geolocation["region"]){
+         $geo_name = $ULang->t($geolocation["region"] , [ "table" => "geo", "field" => "geo_name" ]);
+         if($geolocation["region_declination"]) $geo_declination = $ULang->t($geolocation["region_declination"] , [ "table" => "geo", "field" => "geo_name" ] );
+      }elseif($geolocation["country"]){
+         $geo_name = $ULang->t($geolocation["country"] , [ "table" => "geo", "field" => "geo_name" ]);
+         if($geolocation["country_declination"]) $geo_declination = $ULang->t($geolocation["country_declination"] , [ "table" => "geo", "field" => "geo_name" ] );
+      }
 
-       $geolocation = $Geo->geoIp($_SERVER['REMOTE_ADDR']);
-
-    }
-
-    if($geolocation["city"]){
-       $geo_name = $ULang->t($geolocation["city"] , [ "table" => "geo", "field" => "geo_name" ] );
-    }elseif($geolocation["region"]){
-       $geo_name = $ULang->t($geolocation["region"] , [ "table" => "geo", "field" => "geo_name" ] );
-    }elseif($geolocation["country"]){
-       $geo_name = $ULang->t($geolocation["country"] , [ "table" => "geo", "field" => "geo_name" ] );
     }
 
     if($data["category"]["category_board_description"]){
@@ -106,7 +111,7 @@
 
     if($data["ad"]["ads_price"]){
 
-       $data["ad"]["ads_price"] = $Main->price($data["ad"]["ads_price"], $data["ad"]["ads_currency"], true);
+       $data["ad"]["ads_price"] = $Main->adPrefixPrice($Main->price($data["ad"]["ads_price"], $data["ad"]["ads_currency"], true),$data["ad"],false);
 
     }else{
 
@@ -130,6 +135,7 @@
       "{board_category_title}",
       "{board_category_h1}",
       "{geo}",
+      "{geo_declination}",
       "{geo_meta_desc}",
       "{board_category_meta_desc}",
       "{board_category_text}",
@@ -163,6 +169,7 @@
       $data["category"]["category_board_title"],
       $data["category"]["category_board_h1"],
       $geo_name,
+      $geo_declination,
       $ULang->t($_SESSION["geo"]["desc"] , [ "table" => "geo", "field" => "geo_desc" ] ),
       $data["category"]["category_board_description"],
       $data["category"]["category_board_text"],

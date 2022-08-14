@@ -360,13 +360,13 @@ function datetime_format_cp($string) {
  }
 }
 
-function file_get_contents_curl($url) {
+function file_get_contents_curl($url, $timeout=2) {
 	$ch = curl_init();
 
 	curl_setopt($ch, CURLOPT_HEADER, 0);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 
 	$data = curl_exec($ch);
 	curl_close($ch);
@@ -654,6 +654,22 @@ function notifications($action, $param = array()){
            }
       }
 
+   }elseif($action == "chat_message"){
+
+      if($settings["notification_method_new_chat_message"]){
+       $notification_method_new_chat_message = explode(",",$settings["notification_method_new_chat_message"]);
+           if(in_array("email", $notification_method_new_chat_message)){
+            
+             $data = array("{EMAIL_TO}"=>$settings["email_alert"]);
+
+             email_notification( array( "variable" => $data, "code" => "ADMIN_NEW_CHAT_MESSAGE" ) );
+
+           }
+           if(in_array("telegram", $notification_method_new_chat_message)){
+              telegram($static_msg["56"]);
+           }
+      }
+
    }
 
 }
@@ -719,7 +735,7 @@ function sms($phone_to="",$text="",$method="sms"){
 
    }elseif($settings["sms_service"] == "sms.by" ){
 
-      return file_get_contents_curl("https://app.sms.by/api/v1/sendQuickSMS?token=".$settings["sms_service_id"]."&message=".urlencode($text)."&phone=".$phone_to);
+      return file_get_contents_curl("https://app.sms.by/api/v1/sendQuickSMS?token=".$settings["sms_service_id"]."&message=".urlencode($text)."&phone=".$phone_to."&alphaname_id=".$settings["sms_service_label"]);
 
    }elseif($settings["sms_service"] == "cheapglobalsms.com" ){
 
@@ -742,6 +758,21 @@ function sms($phone_to="",$text="",$method="sms"){
         $result = oson_sms_call_api('http://api.osonsms.com/sendsms_v1.php', "GET", $params);
 
         return json_decode($result['msg']);
+
+   }elseif($settings["sms_service"] == "playmobile.uz" ){
+
+        $params['messages'] = [
+            "recipient" => trim($phone_to, '+'),
+            "message-id" => mt_rand(1000000,9000000),
+            "sms" => [
+                "originator" => '3700',
+                "content" => [
+                    "text" => $text
+                ]
+            ]
+        ];
+
+        return json_encode(sendPostRequest('http://91.204.239.44/broker-api/send', $params, ['Content-Type: application/json', 'Authorization: Basic '.base64_encode($settings["sms_service_login"].":".$settings["sms_service_pass"])]));
 
    }
 
@@ -1029,13 +1060,14 @@ function parseUriBlog($string,$getCategoryBlog=[]){
 
 function generateRandomColor()
 {
-   global $config;
 
-   if( count($config["icon_colors"]) == 1 ){
-      return $config["icon_colors"][0];
+   $icon_colors = ["#FD3660","#0572EC", "#E78AF2", "#6DF066", "#A8DEC7", "#EB66AA", "#DFFB2D", "#387876", "#ED979C", "#F6772A", "#A1BED1", "#D1AD2A", "#B207E0", "#E9D3D3", "#95345F", "#02F4AA", "#219972", "#FDCB07", "#8EB945", "#DD5E54", "#4C8BF4", "#9D5CCB", "#82D8E9", "#C82C97", "#E57920", "#E9A7D5", "#6CAC27", "#2EA0A2", "#7A14AF"];
+
+   if( count($icon_colors) == 1 ){
+      return $icon_colors[0];
    }
 
-   $rand_color = $config["icon_colors"][ mt_rand( 0, count($config["icon_colors"]) - 1 ) ];
+   $rand_color = $icon_colors[ mt_rand( 0, count($icon_colors) - 1 ) ];
 
    if($rand_color){
       return $rand_color;
@@ -1672,6 +1704,41 @@ function verify_mass_requests(){
     }
 
     $_SESSION["time_last_requests_ad_create"] = $milliseconds;
+}
+
+function sendPostRequest($api_url, $args, $header=[])
+{
+
+    if (is_array($args)) {
+        $args = json_encode($args);
+    }
+
+    if ($curl = curl_init()) {
+        curl_setopt($curl, CURLOPT_URL, $api_url);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $args);
+
+        if($header) curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+
+        $out = curl_exec($curl);
+        $json = json_decode($out, true);
+
+        curl_close($curl);
+
+        return $json;
+
+    }
+}
+
+function getNameMeasuresPrice($key=''){
+    global $settings;
+
+    $measuresPrice = json_decode($settings['measures_price'], true);
+
+    return $measuresPrice[$key] ? $measuresPrice[$key] : $key;
 }
 
 

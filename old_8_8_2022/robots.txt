@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /
+Host: http://crowdfaster.com
+Sitemap: http://crowdfaster.com/sitemap.xml
+Disallow: /media/
+Disallow: /temp/
+Disallow: /templates/

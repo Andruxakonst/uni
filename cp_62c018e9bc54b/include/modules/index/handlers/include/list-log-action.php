@@ -1,38 +1,25 @@
+<div class="widget-list-log-action" >
 <?php  
 
-   if(count($getLogs) > 0){   
+   if(count($getLogs)){   
 
    ?>
-   <h3 class="widget-title" >Уведомления</h3>
+      <div class="widget-title-flex" >
+         <h3 class="widget-title" >Уведомления</h3> <span class="delete-notification" >Очистить</span>
+      </div>
 
-   <table class="table mb-0">
-      <thead>
-         <tr>
-            <th>Действия</th>
-            <th></th>
-         </tr>
-      </thead>
-      <tbody> 
-
-      <?php
-
-      foreach($getLogs AS $value){
+      <div class="widget-list-log-action-item" >
          
-      ?>
+         <?php
+         foreach($getLogs AS $value){
+          ?>
+            <div><a href="<?php echo $value['link']; ?>"><?php echo $value['title']; ?> <span class="label-count" ><?php echo $value['count']; ?></span></a> </div>       
+          <?php                                         
+         } 
+         ?>
 
-         <tr class="item-notification" >
-            <td><a href="<?php echo $value['link']; ?>"><?php echo $value['title']; ?> <span class="label-count" ><?php echo $value['count']; ?></span></a></td>
-            <td class="td-actions" style="text-align: right;" >
-               <a href="#" class="delete-notification" data-id="<?php echo $value['id']; ?>"><i class="la la-close delete"></i></a>
-            </td>
-         </tr>
-                    
-       <?php                                         
-      } 
+      </div>
 
-      ?>
-      </tbody>
-      </table>
       <?php               
    }else{
       ?>
@@ -43,3 +30,4 @@
       <?php
    }                  
 ?>
+</div>

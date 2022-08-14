@@ -33,7 +33,7 @@ if(!$name){
 
 if(count($error) == 0){
 
-update("UPDATE uni_city SET city_name=?, city_alias = ?, city_desc=? WHERE city_id=?", array($name,$alias,$desc,$id));  
+update("UPDATE uni_city SET city_name=?, city_alias = ?, city_desc=?, city_declination=? WHERE city_id=?", array($name,$alias,$desc,clear($_POST["declination"]),$id));  
 $_SESSION["CheckMessage"]["success"] = "Действие успешно выполнено!";
 echo true;
 $Cache->update( "cityDefault" );

@@ -1,0 +1,5186 @@
+<?php return array (
+  'time' => 1660479493,
+  'data' => 
+  array (
+    'id_parent' => 
+    array (
+      0 => 
+      array (
+        6 => 
+        array (
+          'ads_filters_id' => '6',
+          'ads_filters_name' => 'Кто разместил',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '1',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kto-razmestil',
+          'ads_filters_required' => '1',
+        ),
+        3 => 
+        array (
+          'ads_filters_id' => '3',
+          'ads_filters_name' => 'Тип квартиры',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '2',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-kvartiri',
+          'ads_filters_required' => '1',
+        ),
+        4 => 
+        array (
+          'ads_filters_id' => '4',
+          'ads_filters_name' => 'Комнат в квартире',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '3',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'komnat-v-kvartire',
+          'ads_filters_required' => '1',
+        ),
+        5 => 
+        array (
+          'ads_filters_id' => '5',
+          'ads_filters_name' => 'Общая площадь, м²',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '4',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'obshchaya-ploshchad',
+          'ads_filters_required' => '1',
+        ),
+        7 => 
+        array (
+          'ads_filters_id' => '7',
+          'ads_filters_name' => 'Этаж',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '5',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'etazh',
+          'ads_filters_required' => '1',
+        ),
+        8 => 
+        array (
+          'ads_filters_id' => '8',
+          'ads_filters_name' => 'Балкон',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '6',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'balkon',
+          'ads_filters_required' => '0',
+        ),
+        11 => 
+        array (
+          'ads_filters_id' => '11',
+          'ads_filters_name' => 'До метро',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '7',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'do-metro',
+          'ads_filters_required' => '0',
+        ),
+        12 => 
+        array (
+          'ads_filters_id' => '12',
+          'ads_filters_name' => 'Площадь кухни, м²',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '8',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ploshchad-kuhni-m',
+          'ads_filters_required' => '0',
+        ),
+        13 => 
+        array (
+          'ads_filters_id' => '13',
+          'ads_filters_name' => 'Этажность дома',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '9',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'etazhnost-doma',
+          'ads_filters_required' => '0',
+        ),
+        14 => 
+        array (
+          'ads_filters_id' => '14',
+          'ads_filters_name' => 'Тип дома',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '10',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-doma',
+          'ads_filters_required' => '0',
+        ),
+        15 => 
+        array (
+          'ads_filters_id' => '15',
+          'ads_filters_name' => 'Санузлы',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '11',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'sanuzli',
+          'ads_filters_required' => '0',
+        ),
+        16 => 
+        array (
+          'ads_filters_id' => '16',
+          'ads_filters_name' => 'Лифт',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '12',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'lift',
+          'ads_filters_required' => '0',
+        ),
+        17 => 
+        array (
+          'ads_filters_id' => '17',
+          'ads_filters_name' => 'Ремонт',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '13',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'remont',
+          'ads_filters_required' => '0',
+        ),
+        18 => 
+        array (
+          'ads_filters_id' => '18',
+          'ads_filters_name' => 'Год постройки',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '14',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'god-postroyki',
+          'ads_filters_required' => '0',
+        ),
+        21 => 
+        array (
+          'ads_filters_id' => '21',
+          'ads_filters_name' => 'Тип дома',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '15',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-doma',
+          'ads_filters_required' => '1',
+        ),
+        22 => 
+        array (
+          'ads_filters_id' => '22',
+          'ads_filters_name' => 'Электричество',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '16',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'elektrichestvo',
+          'ads_filters_required' => '0',
+        ),
+        23 => 
+        array (
+          'ads_filters_id' => '23',
+          'ads_filters_name' => 'Газ',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '17',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'gaz',
+          'ads_filters_required' => '0',
+        ),
+        24 => 
+        array (
+          'ads_filters_id' => '24',
+          'ads_filters_name' => 'Площадь дома, м²',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '18',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ploshchad-doma-m',
+          'ads_filters_required' => '1',
+        ),
+        25 => 
+        array (
+          'ads_filters_id' => '25',
+          'ads_filters_name' => 'Водоснабжение',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '19',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vodosnabzhenie',
+          'ads_filters_required' => '0',
+        ),
+        26 => 
+        array (
+          'ads_filters_id' => '26',
+          'ads_filters_name' => 'Материал дома',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '20',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'material-doma',
+          'ads_filters_required' => '0',
+        ),
+        27 => 
+        array (
+          'ads_filters_id' => '27',
+          'ads_filters_name' => 'Тип участка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '21',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-uchastka',
+          'ads_filters_required' => '1',
+        ),
+        28 => 
+        array (
+          'ads_filters_id' => '28',
+          'ads_filters_name' => 'Площадь участка, сот.',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '22',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ploshchad-uchastka-sot',
+          'ads_filters_required' => '1',
+        ),
+        29 => 
+        array (
+          'ads_filters_id' => '29',
+          'ads_filters_name' => 'Санузлы',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '23',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'sanuzli',
+          'ads_filters_required' => '0',
+        ),
+        30 => 
+        array (
+          'ads_filters_id' => '30',
+          'ads_filters_name' => 'Отопление',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '24',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'otoplenie',
+          'ads_filters_required' => '0',
+        ),
+        31 => 
+        array (
+          'ads_filters_id' => '31',
+          'ads_filters_name' => 'Количество спален',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '25',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kolichestvo-spalen',
+          'ads_filters_required' => '0',
+        ),
+        32 => 
+        array (
+          'ads_filters_id' => '32',
+          'ads_filters_name' => 'Гараж',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '26',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'garazh',
+          'ads_filters_required' => '0',
+        ),
+        33 => 
+        array (
+          'ads_filters_id' => '33',
+          'ads_filters_name' => 'Этажей',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '27',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'etazhey',
+          'ads_filters_required' => '0',
+        ),
+        34 => 
+        array (
+          'ads_filters_id' => '34',
+          'ads_filters_name' => 'Срок владения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '28',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'srok-vladeniya',
+          'ads_filters_required' => '0',
+        ),
+        35 => 
+        array (
+          'ads_filters_id' => '35',
+          'ads_filters_name' => 'Требуемый опыт',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '29',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'trebuemiy-opit',
+          'ads_filters_required' => '0',
+        ),
+        36 => 
+        array (
+          'ads_filters_id' => '36',
+          'ads_filters_name' => 'Тип занятости',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '30',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-zanyatosti',
+          'ads_filters_required' => '0',
+        ),
+        37 => 
+        array (
+          'ads_filters_id' => '37',
+          'ads_filters_name' => 'Характер работы',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '31',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'harakter-raboti',
+          'ads_filters_required' => '0',
+        ),
+        38 => 
+        array (
+          'ads_filters_id' => '38',
+          'ads_filters_name' => 'Другие условия',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '32',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'drugie-usloviya',
+          'ads_filters_required' => '0',
+        ),
+        42 => 
+        array (
+          'ads_filters_id' => '42',
+          'ads_filters_name' => 'Комиссия',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '33',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'komissiya',
+          'ads_filters_required' => '0',
+        ),
+        43 => 
+        array (
+          'ads_filters_id' => '43',
+          'ads_filters_name' => 'Стиральная машина',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '34',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'stiralnaya-mashina',
+          'ads_filters_required' => '0',
+        ),
+        44 => 
+        array (
+          'ads_filters_id' => '44',
+          'ads_filters_name' => 'Предоплата',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '35',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'predoplata',
+          'ads_filters_required' => '0',
+        ),
+        45 => 
+        array (
+          'ads_filters_id' => '45',
+          'ads_filters_name' => 'Коммунальные услуги',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '36',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kommunalnie-uslugi',
+          'ads_filters_required' => '0',
+        ),
+        46 => 
+        array (
+          'ads_filters_id' => '46',
+          'ads_filters_name' => 'Посудомоечная машина',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '37',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'posudomoechnaya-mashina',
+          'ads_filters_required' => '0',
+        ),
+        47 => 
+        array (
+          'ads_filters_id' => '47',
+          'ads_filters_name' => 'Холодильник',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '38',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'holodilnik',
+          'ads_filters_required' => '0',
+        ),
+        48 => 
+        array (
+          'ads_filters_id' => '48',
+          'ads_filters_name' => 'Ремонт в комнате',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '39',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'remont-v-komnate',
+          'ads_filters_required' => '0',
+        ),
+        49 => 
+        array (
+          'ads_filters_id' => '49',
+          'ads_filters_name' => 'Площадь комнаты, м²',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '40',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ploshchad-komnati-m',
+          'ads_filters_required' => '0',
+        ),
+        50 => 
+        array (
+          'ads_filters_id' => '50',
+          'ads_filters_name' => 'Балкон в комнате',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '41',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'balkon-v-komnate',
+          'ads_filters_required' => '0',
+        ),
+        51 => 
+        array (
+          'ads_filters_id' => '51',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '42',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        52 => 
+        array (
+          'ads_filters_id' => '52',
+          'ads_filters_name' => 'Тип строения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '43',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-stroeniya',
+          'ads_filters_required' => '1',
+        ),
+        53 => 
+        array (
+          'ads_filters_id' => '53',
+          'ads_filters_name' => 'Тип сделки',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '44',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-sdelki',
+          'ads_filters_required' => '1',
+        ),
+        54 => 
+        array (
+          'ads_filters_id' => '54',
+          'ads_filters_name' => 'Площадь, м²',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '45',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ploshchad-m2',
+          'ads_filters_required' => '0',
+        ),
+        55 => 
+        array (
+          'ads_filters_id' => '55',
+          'ads_filters_name' => 'Тип строения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '46',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-stroeniya',
+          'ads_filters_required' => '1',
+        ),
+        56 => 
+        array (
+          'ads_filters_id' => '56',
+          'ads_filters_name' => 'Торг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '47',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'torg',
+          'ads_filters_required' => '0',
+        ),
+        57 => 
+        array (
+          'ads_filters_id' => '57',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '48',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        58 => 
+        array (
+          'ads_filters_id' => '58',
+          'ads_filters_name' => 'Категория бизнеса',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '49',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kategoriya-biznesa',
+          'ads_filters_required' => '1',
+        ),
+        59 => 
+        array (
+          'ads_filters_id' => '59',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '50',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        60 => 
+        array (
+          'ads_filters_id' => '60',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '51',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        61 => 
+        array (
+          'ads_filters_id' => '61',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '52',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        62 => 
+        array (
+          'ads_filters_id' => '62',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '53',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        63 => 
+        array (
+          'ads_filters_id' => '63',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '54',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        64 => 
+        array (
+          'ads_filters_id' => '64',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '55',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        65 => 
+        array (
+          'ads_filters_id' => '65',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '56',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        66 => 
+        array (
+          'ads_filters_id' => '66',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '57',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        67 => 
+        array (
+          'ads_filters_id' => '67',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '58',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        68 => 
+        array (
+          'ads_filters_id' => '68',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '59',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        69 => 
+        array (
+          'ads_filters_id' => '69',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '60',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        70 => 
+        array (
+          'ads_filters_id' => '70',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '61',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        71 => 
+        array (
+          'ads_filters_id' => '71',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '62',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        72 => 
+        array (
+          'ads_filters_id' => '72',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '63',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        73 => 
+        array (
+          'ads_filters_id' => '73',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '64',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        74 => 
+        array (
+          'ads_filters_id' => '74',
+          'ads_filters_name' => 'Вид услуг',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '65',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-uslug',
+          'ads_filters_required' => '1',
+        ),
+        75 => 
+        array (
+          'ads_filters_id' => '75',
+          'ads_filters_name' => 'Порода',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '66',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'poroda',
+          'ads_filters_required' => '1',
+        ),
+        76 => 
+        array (
+          'ads_filters_id' => '76',
+          'ads_filters_name' => 'Порода',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '67',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'poroda',
+          'ads_filters_required' => '1',
+        ),
+        77 => 
+        array (
+          'ads_filters_id' => '77',
+          'ads_filters_name' => 'Вид птицы',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '68',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-pticy',
+          'ads_filters_required' => '1',
+        ),
+        78 => 
+        array (
+          'ads_filters_id' => '78',
+          'ads_filters_name' => 'Вид животного',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '69',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-zhivotnogo',
+          'ads_filters_required' => '1',
+        ),
+        79 => 
+        array (
+          'ads_filters_id' => '79',
+          'ads_filters_name' => 'Вид животного',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '70',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-zhivotnogo',
+          'ads_filters_required' => '1',
+        ),
+        80 => 
+        array (
+          'ads_filters_id' => '80',
+          'ads_filters_name' => 'Вид животного',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '71',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-zhivotnogo',
+          'ads_filters_required' => '1',
+        ),
+        81 => 
+        array (
+          'ads_filters_id' => '81',
+          'ads_filters_name' => 'Тип товара',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '72',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-tovara',
+          'ads_filters_required' => '1',
+        ),
+        82 => 
+        array (
+          'ads_filters_id' => '82',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '73',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        83 => 
+        array (
+          'ads_filters_id' => '83',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '74',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        84 => 
+        array (
+          'ads_filters_id' => '84',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '75',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        85 => 
+        array (
+          'ads_filters_id' => '85',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '76',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        86 => 
+        array (
+          'ads_filters_id' => '86',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '77',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        87 => 
+        array (
+          'ads_filters_id' => '87',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '78',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        88 => 
+        array (
+          'ads_filters_id' => '88',
+          'ads_filters_name' => 'Вид транспорта',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '79',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-transporta',
+          'ads_filters_required' => '1',
+        ),
+        89 => 
+        array (
+          'ads_filters_id' => '89',
+          'ads_filters_name' => 'Состояние',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '80',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'sostoyanie',
+          'ads_filters_required' => '1',
+        ),
+        90 => 
+        array (
+          'ads_filters_id' => '90',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '81',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        91 => 
+        array (
+          'ads_filters_id' => '91',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '83',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        92 => 
+        array (
+          'ads_filters_id' => '92',
+          'ads_filters_name' => 'Диаметр (R), дюймов',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '84',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'diametr-r-dyuymov',
+          'ads_filters_required' => '1',
+        ),
+        93 => 
+        array (
+          'ads_filters_id' => '93',
+          'ads_filters_name' => 'Вид транспорта',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '85',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-transporta',
+          'ads_filters_required' => '1',
+        ),
+        94 => 
+        array (
+          'ads_filters_id' => '94',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '86',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        95 => 
+        array (
+          'ads_filters_id' => '95',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '87',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        96 => 
+        array (
+          'ads_filters_id' => '96',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '88',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        97 => 
+        array (
+          'ads_filters_id' => '97',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '89',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        98 => 
+        array (
+          'ads_filters_id' => '98',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '90',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        99 => 
+        array (
+          'ads_filters_id' => '99',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '91',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        100 => 
+        array (
+          'ads_filters_id' => '100',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '92',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        101 => 
+        array (
+          'ads_filters_id' => '101',
+          'ads_filters_name' => 'Пол',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '93',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'pol',
+          'ads_filters_required' => '1',
+        ),
+        102 => 
+        array (
+          'ads_filters_id' => '102',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '94',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        103 => 
+        array (
+          'ads_filters_id' => '103',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '95',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        104 => 
+        array (
+          'ads_filters_id' => '104',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '96',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        105 => 
+        array (
+          'ads_filters_id' => '105',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '97',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        106 => 
+        array (
+          'ads_filters_id' => '106',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '98',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        107 => 
+        array (
+          'ads_filters_id' => '107',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '99',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        108 => 
+        array (
+          'ads_filters_id' => '108',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '100',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        109 => 
+        array (
+          'ads_filters_id' => '109',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '101',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        110 => 
+        array (
+          'ads_filters_id' => '110',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '102',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        111 => 
+        array (
+          'ads_filters_id' => '111',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '103',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        112 => 
+        array (
+          'ads_filters_id' => '112',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '104',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        113 => 
+        array (
+          'ads_filters_id' => '113',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '105',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        114 => 
+        array (
+          'ads_filters_id' => '114',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '106',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        115 => 
+        array (
+          'ads_filters_id' => '115',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '107',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        116 => 
+        array (
+          'ads_filters_id' => '116',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '108',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        117 => 
+        array (
+          'ads_filters_id' => '117',
+          'ads_filters_name' => 'Группа',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '109',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'gruppa',
+          'ads_filters_required' => '1',
+        ),
+        118 => 
+        array (
+          'ads_filters_id' => '118',
+          'ads_filters_name' => 'Крепление',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '110',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kreplenie',
+          'ads_filters_required' => '0',
+        ),
+        119 => 
+        array (
+          'ads_filters_id' => '119',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '111',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        120 => 
+        array (
+          'ads_filters_id' => '120',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '112',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        121 => 
+        array (
+          'ads_filters_id' => '121',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '113',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        122 => 
+        array (
+          'ads_filters_id' => '122',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '114',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        123 => 
+        array (
+          'ads_filters_id' => '123',
+          'ads_filters_name' => 'Возраст',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '115',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vozrast',
+          'ads_filters_required' => '1',
+        ),
+        124 => 
+        array (
+          'ads_filters_id' => '124',
+          'ads_filters_name' => 'Количество блоков',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '116',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kolichestvo-blokov',
+          'ads_filters_required' => '0',
+        ),
+        125 => 
+        array (
+          'ads_filters_id' => '125',
+          'ads_filters_name' => 'Тип колес',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '117',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-koles',
+          'ads_filters_required' => '0',
+        ),
+        126 => 
+        array (
+          'ads_filters_id' => '126',
+          'ads_filters_name' => 'Особенности',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '118',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'osobennosti',
+          'ads_filters_required' => '0',
+        ),
+        127 => 
+        array (
+          'ads_filters_id' => '127',
+          'ads_filters_name' => 'Регулировки',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '119',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'regulirovki',
+          'ads_filters_required' => '0',
+        ),
+        128 => 
+        array (
+          'ads_filters_id' => '128',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '120',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        129 => 
+        array (
+          'ads_filters_id' => '129',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '121',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        130 => 
+        array (
+          'ads_filters_id' => '130',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '122',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        131 => 
+        array (
+          'ads_filters_id' => '131',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '123',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        132 => 
+        array (
+          'ads_filters_id' => '132',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '124',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        133 => 
+        array (
+          'ads_filters_id' => '133',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '125',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        134 => 
+        array (
+          'ads_filters_id' => '134',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '126',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        135 => 
+        array (
+          'ads_filters_id' => '135',
+          'ads_filters_name' => 'Тип измерений',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '127',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-izmereniy',
+          'ads_filters_required' => '1',
+        ),
+        136 => 
+        array (
+          'ads_filters_id' => '136',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '128',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        137 => 
+        array (
+          'ads_filters_id' => '137',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '129',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        138 => 
+        array (
+          'ads_filters_id' => '138',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '130',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        139 => 
+        array (
+          'ads_filters_id' => '139',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '131',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        140 => 
+        array (
+          'ads_filters_id' => '140',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '132',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        141 => 
+        array (
+          'ads_filters_id' => '141',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '133',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        142 => 
+        array (
+          'ads_filters_id' => '142',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '134',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        143 => 
+        array (
+          'ads_filters_id' => '143',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '135',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        155 => 
+        array (
+          'ads_filters_id' => '155',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '136',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        144 => 
+        array (
+          'ads_filters_id' => '144',
+          'ads_filters_name' => 'Операционная система',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '137',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'operacionnaya-sistema',
+          'ads_filters_required' => '1',
+        ),
+        145 => 
+        array (
+          'ads_filters_id' => '145',
+          'ads_filters_name' => 'Встроенная память',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '138',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vstroennaya-pamyat',
+          'ads_filters_required' => '0',
+        ),
+        146 => 
+        array (
+          'ads_filters_id' => '146',
+          'ads_filters_name' => 'Срок использования',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '139',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'srok-ispolzovaniya',
+          'ads_filters_required' => '0',
+        ),
+        147 => 
+        array (
+          'ads_filters_id' => '147',
+          'ads_filters_name' => 'Диагональ экрана',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '140',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'diagonal-ekrana',
+          'ads_filters_required' => '0',
+        ),
+        148 => 
+        array (
+          'ads_filters_id' => '148',
+          'ads_filters_name' => 'Оперативная память',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '141',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'operativnaya-pamyat',
+          'ads_filters_required' => '0',
+        ),
+        149 => 
+        array (
+          'ads_filters_id' => '149',
+          'ads_filters_name' => 'Основная камера',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '142',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'osnovnaya-kamera',
+          'ads_filters_required' => '0',
+        ),
+        150 => 
+        array (
+          'ads_filters_id' => '150',
+          'ads_filters_name' => 'Фронтальная камера',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '143',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'frontalnaya-kamera',
+          'ads_filters_required' => '0',
+        ),
+        151 => 
+        array (
+          'ads_filters_id' => '151',
+          'ads_filters_name' => 'Слот для карты памяти',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '144',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'slot-dlya-karty-pamyati',
+          'ads_filters_required' => '0',
+        ),
+        152 => 
+        array (
+          'ads_filters_id' => '152',
+          'ads_filters_name' => '3G',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '145',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => '3g',
+          'ads_filters_required' => '0',
+        ),
+        153 => 
+        array (
+          'ads_filters_id' => '153',
+          'ads_filters_name' => '4G LTE',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '146',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => '4g-lte',
+          'ads_filters_required' => '0',
+        ),
+        154 => 
+        array (
+          'ads_filters_id' => '154',
+          'ads_filters_name' => 'GPS',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '147',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'gps',
+          'ads_filters_required' => '0',
+        ),
+        158 => 
+        array (
+          'ads_filters_id' => '158',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '148',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        159 => 
+        array (
+          'ads_filters_id' => '159',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '149',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        160 => 
+        array (
+          'ads_filters_id' => '160',
+          'ads_filters_name' => 'Совместимость с Android',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '150',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'sovmestimost-s-android',
+          'ads_filters_required' => '0',
+        ),
+        161 => 
+        array (
+          'ads_filters_id' => '161',
+          'ads_filters_name' => 'Совместимость с iOS',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '151',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'sovmestimost-s-ios',
+          'ads_filters_required' => '0',
+        ),
+        162 => 
+        array (
+          'ads_filters_id' => '162',
+          'ads_filters_name' => 'Влагозащита',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '152',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vlagozashchita',
+          'ads_filters_required' => '0',
+        ),
+        163 => 
+        array (
+          'ads_filters_id' => '163',
+          'ads_filters_name' => 'Шагомер',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '153',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'shagomer',
+          'ads_filters_required' => '0',
+        ),
+        164 => 
+        array (
+          'ads_filters_id' => '164',
+          'ads_filters_name' => 'Пульсометр',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '154',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'pulsometr',
+          'ads_filters_required' => '0',
+        ),
+        165 => 
+        array (
+          'ads_filters_id' => '165',
+          'ads_filters_name' => 'Мониторинг сна',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '155',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'monitoring-sna',
+          'ads_filters_required' => '0',
+        ),
+        166 => 
+        array (
+          'ads_filters_id' => '166',
+          'ads_filters_name' => 'Телефонные звонки',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '156',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'telefonnye-zvonki',
+          'ads_filters_required' => '0',
+        ),
+        167 => 
+        array (
+          'ads_filters_id' => '167',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '157',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        168 => 
+        array (
+          'ads_filters_id' => '168',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '158',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        169 => 
+        array (
+          'ads_filters_id' => '169',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '159',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        170 => 
+        array (
+          'ads_filters_id' => '170',
+          'ads_filters_name' => 'Устройство',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '160',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ustroystvo',
+          'ads_filters_required' => '0',
+        ),
+        171 => 
+        array (
+          'ads_filters_id' => '171',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '161',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        172 => 
+        array (
+          'ads_filters_id' => '172',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '162',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        173 => 
+        array (
+          'ads_filters_id' => '173',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '163',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        174 => 
+        array (
+          'ads_filters_id' => '174',
+          'ads_filters_name' => 'Диагональ экрана',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '164',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'diagonal-ekrana',
+          'ads_filters_required' => '0',
+        ),
+        175 => 
+        array (
+          'ads_filters_id' => '175',
+          'ads_filters_name' => 'Оперативная память',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '165',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'operativnaya-pamyat',
+          'ads_filters_required' => '0',
+        ),
+        176 => 
+        array (
+          'ads_filters_id' => '176',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '166',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '0',
+        ),
+        177 => 
+        array (
+          'ads_filters_id' => '177',
+          'ads_filters_name' => 'Игровой',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '167',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'igrovoy',
+          'ads_filters_required' => '0',
+        ),
+        178 => 
+        array (
+          'ads_filters_id' => '178',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '168',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '0',
+        ),
+        179 => 
+        array (
+          'ads_filters_id' => '179',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '169',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        180 => 
+        array (
+          'ads_filters_id' => '180',
+          'ads_filters_name' => 'Диагональ экрана',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '170',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'diagonal-ekrana',
+          'ads_filters_required' => '0',
+        ),
+        181 => 
+        array (
+          'ads_filters_id' => '181',
+          'ads_filters_name' => 'Разъем HDMI',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '171',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'razem-hdmi',
+          'ads_filters_required' => '0',
+        ),
+        182 => 
+        array (
+          'ads_filters_id' => '182',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '172',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        183 => 
+        array (
+          'ads_filters_id' => '183',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '173',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        184 => 
+        array (
+          'ads_filters_id' => '184',
+          'ads_filters_name' => 'Тип подключения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '174',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-podklyucheniya',
+          'ads_filters_required' => '1',
+        ),
+        185 => 
+        array (
+          'ads_filters_id' => '185',
+          'ads_filters_name' => 'Игровые',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '175',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'igrovye',
+          'ads_filters_required' => '0',
+        ),
+        186 => 
+        array (
+          'ads_filters_id' => '186',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '176',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        187 => 
+        array (
+          'ads_filters_id' => '187',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '177',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        188 => 
+        array (
+          'ads_filters_id' => '188',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '178',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        189 => 
+        array (
+          'ads_filters_id' => '189',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '179',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        190 => 
+        array (
+          'ads_filters_id' => '190',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '180',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        191 => 
+        array (
+          'ads_filters_id' => '191',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '181',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        192 => 
+        array (
+          'ads_filters_id' => '192',
+          'ads_filters_name' => 'Устройство',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '182',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ustroystvo',
+          'ads_filters_required' => '1',
+        ),
+        193 => 
+        array (
+          'ads_filters_id' => '193',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '183',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        194 => 
+        array (
+          'ads_filters_id' => '194',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '184',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        195 => 
+        array (
+          'ads_filters_id' => '195',
+          'ads_filters_name' => 'Категория камеры',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '185',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kategoriya-kamery',
+          'ads_filters_required' => '1',
+        ),
+        196 => 
+        array (
+          'ads_filters_id' => '196',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '186',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        197 => 
+        array (
+          'ads_filters_id' => '197',
+          'ads_filters_name' => 'Видоискатель',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '187',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vidoiskatel',
+          'ads_filters_required' => '0',
+        ),
+        198 => 
+        array (
+          'ads_filters_id' => '198',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '188',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        199 => 
+        array (
+          'ads_filters_id' => '199',
+          'ads_filters_name' => 'Качество видео',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '189',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'kachestvo-video',
+          'ads_filters_required' => '0',
+        ),
+        200 => 
+        array (
+          'ads_filters_id' => '200',
+          'ads_filters_name' => 'Формат носителя',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '190',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'format-nositelya',
+          'ads_filters_required' => '0',
+        ),
+        201 => 
+        array (
+          'ads_filters_id' => '201',
+          'ads_filters_name' => 'Видоискатель',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '191',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vidoiskatel',
+          'ads_filters_required' => '0',
+        ),
+        202 => 
+        array (
+          'ads_filters_id' => '202',
+          'ads_filters_name' => 'Стабилизатор изображения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '192',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'stabilizator-izobrazheniya',
+          'ads_filters_required' => '0',
+        ),
+        203 => 
+        array (
+          'ads_filters_id' => '203',
+          'ads_filters_name' => 'Экшн-камера',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '193',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'ekshn-kamera',
+          'ads_filters_required' => '0',
+        ),
+        204 => 
+        array (
+          'ads_filters_id' => '204',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '194',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        205 => 
+        array (
+          'ads_filters_id' => '205',
+          'ads_filters_name' => 'Тип подключения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '195',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-podklyucheniya',
+          'ads_filters_required' => '0',
+        ),
+        206 => 
+        array (
+          'ads_filters_id' => '206',
+          'ads_filters_name' => 'Wi-fi',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '196',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'wi-fi',
+          'ads_filters_required' => '0',
+        ),
+        207 => 
+        array (
+          'ads_filters_id' => '207',
+          'ads_filters_name' => 'Датчик движения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '197',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'datchik-dvizheniya',
+          'ads_filters_required' => '0',
+        ),
+        208 => 
+        array (
+          'ads_filters_id' => '208',
+          'ads_filters_name' => 'Встроенный микрофон',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '198',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vstroennyy-mikrofon',
+          'ads_filters_required' => '0',
+        ),
+        209 => 
+        array (
+          'ads_filters_id' => '209',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '199',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        210 => 
+        array (
+          'ads_filters_id' => '210',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '200',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        211 => 
+        array (
+          'ads_filters_id' => '211',
+          'ads_filters_name' => 'Автофокус',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '201',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'avtofokus',
+          'ads_filters_required' => '0',
+        ),
+        212 => 
+        array (
+          'ads_filters_id' => '212',
+          'ads_filters_name' => 'Стабилизатор изображения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '202',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'stabilizator-izobrazheniya',
+          'ads_filters_required' => '0',
+        ),
+        213 => 
+        array (
+          'ads_filters_id' => '213',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '203',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        214 => 
+        array (
+          'ads_filters_id' => '214',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '204',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        215 => 
+        array (
+          'ads_filters_id' => '215',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '205',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        216 => 
+        array (
+          'ads_filters_id' => '216',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '206',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        217 => 
+        array (
+          'ads_filters_id' => '217',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '207',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        218 => 
+        array (
+          'ads_filters_id' => '218',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '208',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        219 => 
+        array (
+          'ads_filters_id' => '219',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '209',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        220 => 
+        array (
+          'ads_filters_id' => '220',
+          'ads_filters_name' => 'Диагональ экрана',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '210',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'diagonal-ekrana',
+          'ads_filters_required' => '0',
+        ),
+        221 => 
+        array (
+          'ads_filters_id' => '221',
+          'ads_filters_name' => 'Smart TV',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '211',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'smart-tv',
+          'ads_filters_required' => '0',
+        ),
+        222 => 
+        array (
+          'ads_filters_id' => '222',
+          'ads_filters_name' => 'Поддержка 3D',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '212',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'podderzhka-3d',
+          'ads_filters_required' => '0',
+        ),
+        223 => 
+        array (
+          'ads_filters_id' => '223',
+          'ads_filters_name' => 'Разрешение экрана',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '213',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'razreshenie-ekrana',
+          'ads_filters_required' => '0',
+        ),
+        224 => 
+        array (
+          'ads_filters_id' => '224',
+          'ads_filters_name' => 'Wi-Fi',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '214',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'wi-fi',
+          'ads_filters_required' => '0',
+        ),
+        225 => 
+        array (
+          'ads_filters_id' => '225',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '215',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        226 => 
+        array (
+          'ads_filters_id' => '226',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '216',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        227 => 
+        array (
+          'ads_filters_id' => '227',
+          'ads_filters_name' => 'Разрешение',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '217',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'razreshenie',
+          'ads_filters_required' => '0',
+        ),
+        228 => 
+        array (
+          'ads_filters_id' => '228',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '218',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        229 => 
+        array (
+          'ads_filters_id' => '229',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '219',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        230 => 
+        array (
+          'ads_filters_id' => '230',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '220',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        231 => 
+        array (
+          'ads_filters_id' => '231',
+          'ads_filters_name' => 'Караоке',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '221',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'karaoke',
+          'ads_filters_required' => '0',
+        ),
+        232 => 
+        array (
+          'ads_filters_id' => '232',
+          'ads_filters_name' => 'Тип акустики',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '222',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-akustiki',
+          'ads_filters_required' => '0',
+        ),
+        233 => 
+        array (
+          'ads_filters_id' => '233',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '223',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        234 => 
+        array (
+          'ads_filters_id' => '234',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '224',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        235 => 
+        array (
+          'ads_filters_id' => '235',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '225',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        236 => 
+        array (
+          'ads_filters_id' => '236',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '226',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        237 => 
+        array (
+          'ads_filters_id' => '237',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '227',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        238 => 
+        array (
+          'ads_filters_id' => '238',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '228',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        239 => 
+        array (
+          'ads_filters_id' => '239',
+          'ads_filters_name' => 'Вид микрофона',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '229',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-mikrofona',
+          'ads_filters_required' => '1',
+        ),
+        240 => 
+        array (
+          'ads_filters_id' => '240',
+          'ads_filters_name' => 'Тип подключения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '230',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-podklyucheniya',
+          'ads_filters_required' => '0',
+        ),
+        241 => 
+        array (
+          'ads_filters_id' => '241',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '231',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        242 => 
+        array (
+          'ads_filters_id' => '242',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '232',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        243 => 
+        array (
+          'ads_filters_id' => '243',
+          'ads_filters_name' => 'Область применения',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '233',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'oblast-primeneniya',
+          'ads_filters_required' => '0',
+        ),
+        244 => 
+        array (
+          'ads_filters_id' => '244',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '234',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        245 => 
+        array (
+          'ads_filters_id' => '245',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '235',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        246 => 
+        array (
+          'ads_filters_id' => '246',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '236',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        247 => 
+        array (
+          'ads_filters_id' => '247',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '237',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        248 => 
+        array (
+          'ads_filters_id' => '248',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '238',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        249 => 
+        array (
+          'ads_filters_id' => '249',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '239',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        250 => 
+        array (
+          'ads_filters_id' => '250',
+          'ads_filters_name' => 'Тип конфорок',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '240',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-konforok',
+          'ads_filters_required' => '0',
+        ),
+        251 => 
+        array (
+          'ads_filters_id' => '251',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '241',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        252 => 
+        array (
+          'ads_filters_id' => '252',
+          'ads_filters_name' => 'Тип установки',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '242',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-ustanovki',
+          'ads_filters_required' => '0',
+        ),
+        253 => 
+        array (
+          'ads_filters_id' => '253',
+          'ads_filters_name' => 'Марка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '243',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'marka',
+          'ads_filters_required' => '1',
+        ),
+        254 => 
+        array (
+          'ads_filters_id' => '254',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '244',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        255 => 
+        array (
+          'ads_filters_id' => '255',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '245',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        256 => 
+        array (
+          'ads_filters_id' => '256',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '246',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        257 => 
+        array (
+          'ads_filters_id' => '257',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '247',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        258 => 
+        array (
+          'ads_filters_id' => '258',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '248',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        259 => 
+        array (
+          'ads_filters_id' => '259',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '249',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        260 => 
+        array (
+          'ads_filters_id' => '260',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '250',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        261 => 
+        array (
+          'ads_filters_id' => '261',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '251',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        262 => 
+        array (
+          'ads_filters_id' => '262',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '252',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        263 => 
+        array (
+          'ads_filters_id' => '263',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '253',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        264 => 
+        array (
+          'ads_filters_id' => '264',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '254',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        265 => 
+        array (
+          'ads_filters_id' => '265',
+          'ads_filters_name' => 'Пол',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '255',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'pol',
+          'ads_filters_required' => '1',
+        ),
+        266 => 
+        array (
+          'ads_filters_id' => '266',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '256',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        267 => 
+        array (
+          'ads_filters_id' => '267',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '257',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        268 => 
+        array (
+          'ads_filters_id' => '268',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '258',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        269 => 
+        array (
+          'ads_filters_id' => '269',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '259',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        270 => 
+        array (
+          'ads_filters_id' => '270',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '260',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        271 => 
+        array (
+          'ads_filters_id' => '271',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '261',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        272 => 
+        array (
+          'ads_filters_id' => '272',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '262',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        273 => 
+        array (
+          'ads_filters_id' => '273',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '263',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        274 => 
+        array (
+          'ads_filters_id' => '274',
+          'ads_filters_name' => 'Вид спорта',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '264',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'vid-sporta',
+          'ads_filters_required' => '0',
+        ),
+        275 => 
+        array (
+          'ads_filters_id' => '275',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '265',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        276 => 
+        array (
+          'ads_filters_id' => '276',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '266',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        277 => 
+        array (
+          'ads_filters_id' => '277',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '267',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        278 => 
+        array (
+          'ads_filters_id' => '278',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '268',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        279 => 
+        array (
+          'ads_filters_id' => '279',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '269',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        280 => 
+        array (
+          'ads_filters_id' => '280',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '270',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        281 => 
+        array (
+          'ads_filters_id' => '281',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '271',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        282 => 
+        array (
+          'ads_filters_id' => '282',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '272',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        283 => 
+        array (
+          'ads_filters_id' => '283',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '273',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        284 => 
+        array (
+          'ads_filters_id' => '284',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '274',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        285 => 
+        array (
+          'ads_filters_id' => '285',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '275',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        286 => 
+        array (
+          'ads_filters_id' => '286',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '276',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        287 => 
+        array (
+          'ads_filters_id' => '287',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '277',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        288 => 
+        array (
+          'ads_filters_id' => '288',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '278',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        289 => 
+        array (
+          'ads_filters_id' => '289',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '279',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        290 => 
+        array (
+          'ads_filters_id' => '290',
+          'ads_filters_name' => 'Платформа',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '280',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'platforma',
+          'ads_filters_required' => '1',
+        ),
+        292 => 
+        array (
+          'ads_filters_id' => '292',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '282',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        293 => 
+        array (
+          'ads_filters_id' => '293',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '283',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        294 => 
+        array (
+          'ads_filters_id' => '294',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '284',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        295 => 
+        array (
+          'ads_filters_id' => '295',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '285',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        296 => 
+        array (
+          'ads_filters_id' => '296',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '286',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        297 => 
+        array (
+          'ads_filters_id' => '297',
+          'ads_filters_name' => 'Размер',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '287',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'razmer',
+          'ads_filters_required' => '1',
+        ),
+        298 => 
+        array (
+          'ads_filters_id' => '298',
+          'ads_filters_name' => 'Состояние товара',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '288',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'sostoyanie-tovara',
+          'ads_filters_required' => '1',
+        ),
+        299 => 
+        array (
+          'ads_filters_id' => '299',
+          'ads_filters_name' => 'Бренд',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '289',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'brend',
+          'ads_filters_required' => '1',
+        ),
+        300 => 
+        array (
+          'ads_filters_id' => '300',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '290',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        306 => 
+        array (
+          'ads_filters_id' => '306',
+          'ads_filters_name' => 'Привод',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '291',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'privod',
+          'ads_filters_required' => '0',
+        ),
+        308 => 
+        array (
+          'ads_filters_id' => '308',
+          'ads_filters_name' => 'Коробка',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '292',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'korobka',
+          'ads_filters_required' => '0',
+        ),
+        309 => 
+        array (
+          'ads_filters_id' => '309',
+          'ads_filters_name' => 'Тип кузова',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '293',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-kuzova',
+          'ads_filters_required' => '0',
+        ),
+        310 => 
+        array (
+          'ads_filters_id' => '310',
+          'ads_filters_name' => 'Пробег, км',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '294',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'probeg-km',
+          'ads_filters_required' => '0',
+        ),
+        311 => 
+        array (
+          'ads_filters_id' => '311',
+          'ads_filters_name' => 'Год',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '295',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'god',
+          'ads_filters_required' => '0',
+        ),
+        312 => 
+        array (
+          'ads_filters_id' => '312',
+          'ads_filters_name' => 'Тип двигателя',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '296',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip-dvigatelya',
+          'ads_filters_required' => '0',
+        ),
+        313 => 
+        array (
+          'ads_filters_id' => '313',
+          'ads_filters_name' => 'Мощность, л.с',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '297',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'moshchnost-l-s',
+          'ads_filters_required' => '0',
+        ),
+        314 => 
+        array (
+          'ads_filters_id' => '314',
+          'ads_filters_name' => 'Объем, л',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'input',
+          'ads_filters_position' => '298',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'obem-l',
+          'ads_filters_required' => '0',
+        ),
+        315 => 
+        array (
+          'ads_filters_id' => '315',
+          'ads_filters_name' => 'Состояние',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '299',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'sostoyanie',
+          'ads_filters_required' => '0',
+        ),
+        316 => 
+        array (
+          'ads_filters_id' => '316',
+          'ads_filters_name' => 'Руль',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '300',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'rul',
+          'ads_filters_required' => '0',
+        ),
+        317 => 
+        array (
+          'ads_filters_id' => '317',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '301',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        318 => 
+        array (
+          'ads_filters_id' => '318',
+          'ads_filters_name' => 'Бренд',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '302',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'brend',
+          'ads_filters_required' => '1',
+        ),
+        319 => 
+        array (
+          'ads_filters_id' => '319',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '303',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        321 => 
+        array (
+          'ads_filters_id' => '321',
+          'ads_filters_name' => 'Тип',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '304',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'tip',
+          'ads_filters_required' => '1',
+        ),
+        320 => 
+        array (
+          'ads_filters_id' => '320',
+          'ads_filters_name' => 'Размер',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '305',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '0',
+          'ads_filters_alias' => 'razmer',
+          'ads_filters_required' => '1',
+        ),
+      ),
+      90 => 
+      array (
+        302 => 
+        array (
+          'ads_filters_id' => '302',
+          'ads_filters_name' => 'Модель',
+          'ads_filters_visible' => '1',
+          'ads_filters_type' => 'select',
+          'ads_filters_position' => '82',
+          'ads_filters_podcat' => '1',
+          'ads_filters_id_parent' => '90',
+          'ads_filters_alias' => 'model',
+          'ads_filters_required' => '1',
+        ),
+      ),
+    ),
+    'id' => 
+    array (
+      6 => 
+      array (
+        'ads_filters_name' => 'Кто разместил',
+        'ads_filters_type' => 'select',
+      ),
+      3 => 
+      array (
+        'ads_filters_name' => 'Тип квартиры',
+        'ads_filters_type' => 'select',
+      ),
+      4 => 
+      array (
+        'ads_filters_name' => 'Комнат в квартире',
+        'ads_filters_type' => 'select',
+      ),
+      5 => 
+      array (
+        'ads_filters_name' => 'Общая площадь, м²',
+        'ads_filters_type' => 'input',
+      ),
+      7 => 
+      array (
+        'ads_filters_name' => 'Этаж',
+        'ads_filters_type' => 'input',
+      ),
+      8 => 
+      array (
+        'ads_filters_name' => 'Балкон',
+        'ads_filters_type' => 'select',
+      ),
+      11 => 
+      array (
+        'ads_filters_name' => 'До метро',
+        'ads_filters_type' => 'select',
+      ),
+      12 => 
+      array (
+        'ads_filters_name' => 'Площадь кухни, м²',
+        'ads_filters_type' => 'input',
+      ),
+      13 => 
+      array (
+        'ads_filters_name' => 'Этажность дома',
+        'ads_filters_type' => 'input',
+      ),
+      14 => 
+      array (
+        'ads_filters_name' => 'Тип дома',
+        'ads_filters_type' => 'select',
+      ),
+      15 => 
+      array (
+        'ads_filters_name' => 'Санузлы',
+        'ads_filters_type' => 'select',
+      ),
+      16 => 
+      array (
+        'ads_filters_name' => 'Лифт',
+        'ads_filters_type' => 'select',
+      ),
+      17 => 
+      array (
+        'ads_filters_name' => 'Ремонт',
+        'ads_filters_type' => 'select',
+      ),
+      18 => 
+      array (
+        'ads_filters_name' => 'Год постройки',
+        'ads_filters_type' => 'input',
+      ),
+      21 => 
+      array (
+        'ads_filters_name' => 'Тип дома',
+        'ads_filters_type' => 'select',
+      ),
+      22 => 
+      array (
+        'ads_filters_name' => 'Электричество',
+        'ads_filters_type' => 'select',
+      ),
+      23 => 
+      array (
+        'ads_filters_name' => 'Газ',
+        'ads_filters_type' => 'select',
+      ),
+      24 => 
+      array (
+        'ads_filters_name' => 'Площадь дома, м²',
+        'ads_filters_type' => 'input',
+      ),
+      25 => 
+      array (
+        'ads_filters_name' => 'Водоснабжение',
+        'ads_filters_type' => 'select',
+      ),
+      26 => 
+      array (
+        'ads_filters_name' => 'Материал дома',
+        'ads_filters_type' => 'select',
+      ),
+      27 => 
+      array (
+        'ads_filters_name' => 'Тип участка',
+        'ads_filters_type' => 'select',
+      ),
+      28 => 
+      array (
+        'ads_filters_name' => 'Площадь участка, сот.',
+        'ads_filters_type' => 'input',
+      ),
+      29 => 
+      array (
+        'ads_filters_name' => 'Санузлы',
+        'ads_filters_type' => 'select',
+      ),
+      30 => 
+      array (
+        'ads_filters_name' => 'Отопление',
+        'ads_filters_type' => 'select',
+      ),
+      31 => 
+      array (
+        'ads_filters_name' => 'Количество спален',
+        'ads_filters_type' => 'input',
+      ),
+      32 => 
+      array (
+        'ads_filters_name' => 'Гараж',
+        'ads_filters_type' => 'select',
+      ),
+      33 => 
+      array (
+        'ads_filters_name' => 'Этажей',
+        'ads_filters_type' => 'input',
+      ),
+      34 => 
+      array (
+        'ads_filters_name' => 'Срок владения',
+        'ads_filters_type' => 'select',
+      ),
+      35 => 
+      array (
+        'ads_filters_name' => 'Требуемый опыт',
+        'ads_filters_type' => 'select',
+      ),
+      36 => 
+      array (
+        'ads_filters_name' => 'Тип занятости',
+        'ads_filters_type' => 'select',
+      ),
+      37 => 
+      array (
+        'ads_filters_name' => 'Характер работы',
+        'ads_filters_type' => 'select',
+      ),
+      38 => 
+      array (
+        'ads_filters_name' => 'Другие условия',
+        'ads_filters_type' => 'select',
+      ),
+      42 => 
+      array (
+        'ads_filters_name' => 'Комиссия',
+        'ads_filters_type' => 'select',
+      ),
+      43 => 
+      array (
+        'ads_filters_name' => 'Стиральная машина',
+        'ads_filters_type' => 'select',
+      ),
+      44 => 
+      array (
+        'ads_filters_name' => 'Предоплата',
+        'ads_filters_type' => 'select',
+      ),
+      45 => 
+      array (
+        'ads_filters_name' => 'Коммунальные услуги',
+        'ads_filters_type' => 'select',
+      ),
+      46 => 
+      array (
+        'ads_filters_name' => 'Посудомоечная машина',
+        'ads_filters_type' => 'select',
+      ),
+      47 => 
+      array (
+        'ads_filters_name' => 'Холодильник',
+        'ads_filters_type' => 'select',
+      ),
+      48 => 
+      array (
+        'ads_filters_name' => 'Ремонт в комнате',
+        'ads_filters_type' => 'select',
+      ),
+      49 => 
+      array (
+        'ads_filters_name' => 'Площадь комнаты, м²',
+        'ads_filters_type' => 'input',
+      ),
+      50 => 
+      array (
+        'ads_filters_name' => 'Балкон в комнате',
+        'ads_filters_type' => 'select',
+      ),
+      51 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      52 => 
+      array (
+        'ads_filters_name' => 'Тип строения',
+        'ads_filters_type' => 'select',
+      ),
+      53 => 
+      array (
+        'ads_filters_name' => 'Тип сделки',
+        'ads_filters_type' => 'select',
+      ),
+      54 => 
+      array (
+        'ads_filters_name' => 'Площадь, м²',
+        'ads_filters_type' => 'input',
+      ),
+      55 => 
+      array (
+        'ads_filters_name' => 'Тип строения',
+        'ads_filters_type' => 'select',
+      ),
+      56 => 
+      array (
+        'ads_filters_name' => 'Торг',
+        'ads_filters_type' => 'select',
+      ),
+      57 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      58 => 
+      array (
+        'ads_filters_name' => 'Категория бизнеса',
+        'ads_filters_type' => 'select',
+      ),
+      59 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      60 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      61 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      62 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      63 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      64 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      65 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      66 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      67 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      68 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      69 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      70 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      71 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      72 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      73 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      74 => 
+      array (
+        'ads_filters_name' => 'Вид услуг',
+        'ads_filters_type' => 'select',
+      ),
+      75 => 
+      array (
+        'ads_filters_name' => 'Порода',
+        'ads_filters_type' => 'select',
+      ),
+      76 => 
+      array (
+        'ads_filters_name' => 'Порода',
+        'ads_filters_type' => 'select',
+      ),
+      77 => 
+      array (
+        'ads_filters_name' => 'Вид птицы',
+        'ads_filters_type' => 'select',
+      ),
+      78 => 
+      array (
+        'ads_filters_name' => 'Вид животного',
+        'ads_filters_type' => 'select',
+      ),
+      79 => 
+      array (
+        'ads_filters_name' => 'Вид животного',
+        'ads_filters_type' => 'select',
+      ),
+      80 => 
+      array (
+        'ads_filters_name' => 'Вид животного',
+        'ads_filters_type' => 'select',
+      ),
+      81 => 
+      array (
+        'ads_filters_name' => 'Тип товара',
+        'ads_filters_type' => 'select',
+      ),
+      82 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      83 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      84 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      85 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      86 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      87 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      88 => 
+      array (
+        'ads_filters_name' => 'Вид транспорта',
+        'ads_filters_type' => 'select',
+      ),
+      89 => 
+      array (
+        'ads_filters_name' => 'Состояние',
+        'ads_filters_type' => 'select',
+      ),
+      90 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      302 => 
+      array (
+        'ads_filters_name' => 'Модель',
+        'ads_filters_type' => 'select',
+      ),
+      91 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      92 => 
+      array (
+        'ads_filters_name' => 'Диаметр (R), дюймов',
+        'ads_filters_type' => 'select',
+      ),
+      93 => 
+      array (
+        'ads_filters_name' => 'Вид транспорта',
+        'ads_filters_type' => 'select',
+      ),
+      94 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      95 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      96 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      97 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      98 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      99 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      100 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      101 => 
+      array (
+        'ads_filters_name' => 'Пол',
+        'ads_filters_type' => 'select',
+      ),
+      102 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      103 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      104 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      105 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      106 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      107 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      108 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      109 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      110 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      111 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      112 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      113 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      114 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      115 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      116 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      117 => 
+      array (
+        'ads_filters_name' => 'Группа',
+        'ads_filters_type' => 'select',
+      ),
+      118 => 
+      array (
+        'ads_filters_name' => 'Крепление',
+        'ads_filters_type' => 'select',
+      ),
+      119 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      120 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      121 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      122 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      123 => 
+      array (
+        'ads_filters_name' => 'Возраст',
+        'ads_filters_type' => 'select',
+      ),
+      124 => 
+      array (
+        'ads_filters_name' => 'Количество блоков',
+        'ads_filters_type' => 'select',
+      ),
+      125 => 
+      array (
+        'ads_filters_name' => 'Тип колес',
+        'ads_filters_type' => 'select',
+      ),
+      126 => 
+      array (
+        'ads_filters_name' => 'Особенности',
+        'ads_filters_type' => 'select',
+      ),
+      127 => 
+      array (
+        'ads_filters_name' => 'Регулировки',
+        'ads_filters_type' => 'select',
+      ),
+      128 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      129 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      130 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      131 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      132 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      133 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      134 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      135 => 
+      array (
+        'ads_filters_name' => 'Тип измерений',
+        'ads_filters_type' => 'select',
+      ),
+      136 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      137 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      138 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      139 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      140 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      141 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      142 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      143 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      155 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      144 => 
+      array (
+        'ads_filters_name' => 'Операционная система',
+        'ads_filters_type' => 'select',
+      ),
+      145 => 
+      array (
+        'ads_filters_name' => 'Встроенная память',
+        'ads_filters_type' => 'select',
+      ),
+      146 => 
+      array (
+        'ads_filters_name' => 'Срок использования',
+        'ads_filters_type' => 'select',
+      ),
+      147 => 
+      array (
+        'ads_filters_name' => 'Диагональ экрана',
+        'ads_filters_type' => 'select',
+      ),
+      148 => 
+      array (
+        'ads_filters_name' => 'Оперативная память',
+        'ads_filters_type' => 'select',
+      ),
+      149 => 
+      array (
+        'ads_filters_name' => 'Основная камера',
+        'ads_filters_type' => 'select',
+      ),
+      150 => 
+      array (
+        'ads_filters_name' => 'Фронтальная камера',
+        'ads_filters_type' => 'select',
+      ),
+      151 => 
+      array (
+        'ads_filters_name' => 'Слот для карты памяти',
+        'ads_filters_type' => 'select',
+      ),
+      152 => 
+      array (
+        'ads_filters_name' => '3G',
+        'ads_filters_type' => 'select',
+      ),
+      153 => 
+      array (
+        'ads_filters_name' => '4G LTE',
+        'ads_filters_type' => 'select',
+      ),
+      154 => 
+      array (
+        'ads_filters_name' => 'GPS',
+        'ads_filters_type' => 'select',
+      ),
+      158 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      159 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      160 => 
+      array (
+        'ads_filters_name' => 'Совместимость с Android',
+        'ads_filters_type' => 'select',
+      ),
+      161 => 
+      array (
+        'ads_filters_name' => 'Совместимость с iOS',
+        'ads_filters_type' => 'select',
+      ),
+      162 => 
+      array (
+        'ads_filters_name' => 'Влагозащита',
+        'ads_filters_type' => 'select',
+      ),
+      163 => 
+      array (
+        'ads_filters_name' => 'Шагомер',
+        'ads_filters_type' => 'select',
+      ),
+      164 => 
+      array (
+        'ads_filters_name' => 'Пульсометр',
+        'ads_filters_type' => 'select',
+      ),
+      165 => 
+      array (
+        'ads_filters_name' => 'Мониторинг сна',
+        'ads_filters_type' => 'select',
+      ),
+      166 => 
+      array (
+        'ads_filters_name' => 'Телефонные звонки',
+        'ads_filters_type' => 'select',
+      ),
+      167 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      168 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      169 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      170 => 
+      array (
+        'ads_filters_name' => 'Устройство',
+        'ads_filters_type' => 'select',
+      ),
+      171 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      172 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      173 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      174 => 
+      array (
+        'ads_filters_name' => 'Диагональ экрана',
+        'ads_filters_type' => 'select',
+      ),
+      175 => 
+      array (
+        'ads_filters_name' => 'Оперативная память',
+        'ads_filters_type' => 'select',
+      ),
+      176 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      177 => 
+      array (
+        'ads_filters_name' => 'Игровой',
+        'ads_filters_type' => 'select',
+      ),
+      178 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      179 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      180 => 
+      array (
+        'ads_filters_name' => 'Диагональ экрана',
+        'ads_filters_type' => 'select',
+      ),
+      181 => 
+      array (
+        'ads_filters_name' => 'Разъем HDMI',
+        'ads_filters_type' => 'select',
+      ),
+      182 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      183 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      184 => 
+      array (
+        'ads_filters_name' => 'Тип подключения',
+        'ads_filters_type' => 'select',
+      ),
+      185 => 
+      array (
+        'ads_filters_name' => 'Игровые',
+        'ads_filters_type' => 'select',
+      ),
+      186 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      187 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      188 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      189 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      190 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      191 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      192 => 
+      array (
+        'ads_filters_name' => 'Устройство',
+        'ads_filters_type' => 'select',
+      ),
+      193 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      194 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      195 => 
+      array (
+        'ads_filters_name' => 'Категория камеры',
+        'ads_filters_type' => 'select',
+      ),
+      196 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      197 => 
+      array (
+        'ads_filters_name' => 'Видоискатель',
+        'ads_filters_type' => 'select',
+      ),
+      198 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      199 => 
+      array (
+        'ads_filters_name' => 'Качество видео',
+        'ads_filters_type' => 'select',
+      ),
+      200 => 
+      array (
+        'ads_filters_name' => 'Формат носителя',
+        'ads_filters_type' => 'select',
+      ),
+      201 => 
+      array (
+        'ads_filters_name' => 'Видоискатель',
+        'ads_filters_type' => 'select',
+      ),
+      202 => 
+      array (
+        'ads_filters_name' => 'Стабилизатор изображения',
+        'ads_filters_type' => 'select',
+      ),
+      203 => 
+      array (
+        'ads_filters_name' => 'Экшн-камера',
+        'ads_filters_type' => 'select',
+      ),
+      204 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      205 => 
+      array (
+        'ads_filters_name' => 'Тип подключения',
+        'ads_filters_type' => 'select',
+      ),
+      206 => 
+      array (
+        'ads_filters_name' => 'Wi-fi',
+        'ads_filters_type' => 'select',
+      ),
+      207 => 
+      array (
+        'ads_filters_name' => 'Датчик движения',
+        'ads_filters_type' => 'select',
+      ),
+      208 => 
+      array (
+        'ads_filters_name' => 'Встроенный микрофон',
+        'ads_filters_type' => 'select',
+      ),
+      209 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      210 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      211 => 
+      array (
+        'ads_filters_name' => 'Автофокус',
+        'ads_filters_type' => 'select',
+      ),
+      212 => 
+      array (
+        'ads_filters_name' => 'Стабилизатор изображения',
+        'ads_filters_type' => 'select',
+      ),
+      213 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      214 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      215 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      216 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      217 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      218 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      219 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      220 => 
+      array (
+        'ads_filters_name' => 'Диагональ экрана',
+        'ads_filters_type' => 'select',
+      ),
+      221 => 
+      array (
+        'ads_filters_name' => 'Smart TV',
+        'ads_filters_type' => 'select',
+      ),
+      222 => 
+      array (
+        'ads_filters_name' => 'Поддержка 3D',
+        'ads_filters_type' => 'select',
+      ),
+      223 => 
+      array (
+        'ads_filters_name' => 'Разрешение экрана',
+        'ads_filters_type' => 'select',
+      ),
+      224 => 
+      array (
+        'ads_filters_name' => 'Wi-Fi',
+        'ads_filters_type' => 'select',
+      ),
+      225 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      226 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      227 => 
+      array (
+        'ads_filters_name' => 'Разрешение',
+        'ads_filters_type' => 'select',
+      ),
+      228 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      229 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      230 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      231 => 
+      array (
+        'ads_filters_name' => 'Караоке',
+        'ads_filters_type' => 'select',
+      ),
+      232 => 
+      array (
+        'ads_filters_name' => 'Тип акустики',
+        'ads_filters_type' => 'select',
+      ),
+      233 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      234 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      235 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      236 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      237 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      238 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      239 => 
+      array (
+        'ads_filters_name' => 'Вид микрофона',
+        'ads_filters_type' => 'select',
+      ),
+      240 => 
+      array (
+        'ads_filters_name' => 'Тип подключения',
+        'ads_filters_type' => 'select',
+      ),
+      241 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      242 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      243 => 
+      array (
+        'ads_filters_name' => 'Область применения',
+        'ads_filters_type' => 'select',
+      ),
+      244 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      245 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      246 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      247 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      248 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      249 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      250 => 
+      array (
+        'ads_filters_name' => 'Тип конфорок',
+        'ads_filters_type' => 'select',
+      ),
+      251 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      252 => 
+      array (
+        'ads_filters_name' => 'Тип установки',
+        'ads_filters_type' => 'select',
+      ),
+      253 => 
+      array (
+        'ads_filters_name' => 'Марка',
+        'ads_filters_type' => 'select',
+      ),
+      254 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      255 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      256 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      257 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      258 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      259 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      260 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      261 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      262 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      263 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      264 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      265 => 
+      array (
+        'ads_filters_name' => 'Пол',
+        'ads_filters_type' => 'select',
+      ),
+      266 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      267 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      268 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      269 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      270 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      271 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      272 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      273 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      274 => 
+      array (
+        'ads_filters_name' => 'Вид спорта',
+        'ads_filters_type' => 'select',
+      ),
+      275 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      276 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      277 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      278 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      279 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      280 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      281 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      282 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      283 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      284 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      285 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      286 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      287 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      288 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      289 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      290 => 
+      array (
+        'ads_filters_name' => 'Платформа',
+        'ads_filters_type' => 'select',
+      ),
+      292 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      293 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      294 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      295 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      296 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      297 => 
+      array (
+        'ads_filters_name' => 'Размер',
+        'ads_filters_type' => 'select',
+      ),
+      298 => 
+      array (
+        'ads_filters_name' => 'Состояние товара',
+        'ads_filters_type' => 'select',
+      ),
+      299 => 
+      array (
+        'ads_filters_name' => 'Бренд',
+        'ads_filters_type' => 'select',
+      ),
+      300 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      306 => 
+      array (
+        'ads_filters_name' => 'Привод',
+        'ads_filters_type' => 'select',
+      ),
+      308 => 
+      array (
+        'ads_filters_name' => 'Коробка',
+        'ads_filters_type' => 'select',
+      ),
+      309 => 
+      array (
+        'ads_filters_name' => 'Тип кузова',
+        'ads_filters_type' => 'select',
+      ),
+      310 => 
+      array (
+        'ads_filters_name' => 'Пробег, км',
+        'ads_filters_type' => 'input',
+      ),
+      311 => 
+      array (
+        'ads_filters_name' => 'Год',
+        'ads_filters_type' => 'input',
+      ),
+      312 => 
+      array (
+        'ads_filters_name' => 'Тип двигателя',
+        'ads_filters_type' => 'select',
+      ),
+      313 => 
+      array (
+        'ads_filters_name' => 'Мощность, л.с',
+        'ads_filters_type' => 'input',
+      ),
+      314 => 
+      array (
+        'ads_filters_name' => 'Объем, л',
+        'ads_filters_type' => 'input',
+      ),
+      315 => 
+      array (
+        'ads_filters_name' => 'Состояние',
+        'ads_filters_type' => 'select',
+      ),
+      316 => 
+      array (
+        'ads_filters_name' => 'Руль',
+        'ads_filters_type' => 'select',
+      ),
+      317 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      318 => 
+      array (
+        'ads_filters_name' => 'Бренд',
+        'ads_filters_type' => 'select',
+      ),
+      319 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      321 => 
+      array (
+        'ads_filters_name' => 'Тип',
+        'ads_filters_type' => 'select',
+      ),
+      320 => 
+      array (
+        'ads_filters_name' => 'Размер',
+        'ads_filters_type' => 'select',
+      ),
+    ),
+  ),
+) ?>

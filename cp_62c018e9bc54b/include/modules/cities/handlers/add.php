@@ -53,7 +53,7 @@ if( !$_POST["image_delete"] ){
 
 if (count($error) == 0) {
 
-   insert("INSERT INTO uni_country(country_name, country_status, country_alias, country_desc, country_lat, country_lng, country_format_phone, country_code_phone, country_image)VALUES(?,?,?,?,?,?,?,?,?)", array($country,$status,$alias,$desc,$lat,$lng,$format_phone,$code_phone,$image["name"]));             
+   insert("INSERT INTO uni_country(country_name, country_status, country_alias, country_desc, country_lat, country_lng, country_format_phone, country_code_phone, country_image, country_declination)VALUES(?,?,?,?,?,?,?,?,?,?)", array($country,$status,$alias,$desc,$lat,$lng,$format_phone,$code_phone,$image["name"],clear($_POST["declination"])));             
    $_SESSION["CheckMessage"]["success"] = "Действие успешно выполнено!";
    echo true;            
 

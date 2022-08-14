@@ -34,6 +34,13 @@ if( !(new Admin())->accessAdmin($_SESSION['cp_control_city']) ){
   </div>
 
   <div class="form-group row d-flex align-items-center mb-5">
+    <label class="col-lg-3 form-control-label">Склонение</label>
+    <div class="col-lg-9">
+         <input type="text" class="form-control" value="<?php echo $get->region_declination; ?>" name="declination" >
+    </div>
+  </div>
+
+  <div class="form-group row d-flex align-items-center mb-5">
     <label class="col-lg-3 form-control-label">Описание</label>
     <div class="col-lg-9">
          <textarea name="desc" class="form-control" ><?php echo $get->region_desc; ?></textarea>

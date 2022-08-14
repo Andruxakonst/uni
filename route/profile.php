@@ -20,7 +20,7 @@ $Shop = new Shop();
 
 $getCategoryBoard = $CategoryBoard->getCategories("where category_board_visible=1");
 
-$array_tabs = array("ad", "sold", "archive" , "orders", "favorites", "settings", "balance", "history", "reviews", "subscriptions", $settings['user_shop_alias_url_page'], "tariff", "statistics", "scheduler");
+$array_tabs = array("ad", "sold", "archive" , "orders", "favorites", "settings", "balance", "history", "reviews", "subscriptions", $settings['user_shop_alias_url_page'], "tariff", "statistics", "scheduler", "booking");
 
 $user = $Profile->oneUser(" where clients_id_hash=?" , array( clear($id_user) ) );
 
@@ -82,6 +82,8 @@ if($data["advanced"]){
 
   }
 
+  $data["orders"]["booking"] = getAll("select * from uni_ads_booking where ads_booking_id_user_from=? or ads_booking_id_user_to=? order by ads_booking_id desc", [ intval($_SESSION['profile']['id']),intval($_SESSION['profile']['id']) ]);
+
   $data["subscriptions_search"] = getAll("select * from uni_ads_subscriptions where ads_subscriptions_email=? or ads_subscriptions_id_user=? order by ads_subscriptions_id desc", [ $user["clients_email"], intval($_SESSION['profile']['id']) ]);
 
   $data["subscriptions_shops"] = getAll("select * from uni_clients_subscriptions INNER JOIN `uni_clients_shops` ON `uni_clients_shops`.clients_shops_id = `uni_clients_subscriptions`.clients_subscriptions_id_shop where clients_subscriptions_id_user_from=? order by clients_subscriptions_id desc", [ intval($_SESSION['profile']['id']) ]);
@@ -101,6 +103,7 @@ if($data["advanced"]){
 }
 
 $user["clients_score"] = decrypt($user["clients_score"]);
+$user["clients_score_booking"] = decrypt($user["clients_score_booking"]);
 $data["new_messages"] = $Profile->getMessage();
 
 $data["menu_links"] = $Profile->arrayMenu();

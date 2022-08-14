@@ -25,8 +25,12 @@ class Profile{
 
                foreach ($getAll as $key => $value) {
 
-                  $get = findOne("uni_clients", "clients_id=?", [$value["chat_users_id_interlocutor"]]);
-                  if( $get ){
+                  if($value["chat_users_id_interlocutor"]){
+                      $get = findOne("uni_clients", "clients_id=?", [$value["chat_users_id_interlocutor"]]);
+                      if( $get ){
+                          $groupBy[ $value["chat_users_id_hash"] ] = $value["chat_users_id_hash"];
+                      }
+                  }else{
                       $groupBy[ $value["chat_users_id_hash"] ] = $value["chat_users_id_hash"];
                   }
 
@@ -87,57 +91,91 @@ class Profile{
       
       $Shop = new Shop();
 
-      if($_SESSION['profile']){
-
+      if(intval($_SESSION['profile']['id'])){
          $get = findOne("uni_clients", "clients_id=?", [$_SESSION['profile']['id']]);
+      }elseif($_COOKIE["tokenAuth"]){
+         $get = findOne("uni_clients", "clients_cookie_token=?", [clear($_COOKIE["tokenAuth"])]);
+      }
 
-         if(!$get || $get["clients_status"] == 2 || $get["clients_status"] == 3){
-           unset($_COOKIE['rememberme']);  unset($_SESSION['profile']);
+      if($get){
+
+         $_SESSION['profile']['id'] = $get->clients_id;
+
+         if($get->clients_status == 2 || $get->clients_status == 3){
+           update('update uni_clients set clients_cookie_token=? where clients_id=?',['',$get->clients_id]);
+           unset($_SESSION['profile']); 
+           setcookie("tokenAuth", "", time() - 2592000);
          }else{
            $_SESSION["profile"]["data"] = $get;
-           $_SESSION["profile"]["tariff"] = $this->getOrderTariff($_SESSION['profile']['id']);
-           $getShop = $Shop->getShop(['user_id'=>$_SESSION['profile']['id'],'conditions'=>false]);
+           $_SESSION["profile"]["tariff"] = $this->getOrderTariff($get->clients_id);
+           $getShop = $Shop->getShop(['user_id'=>$get->clients_id,'conditions'=>false]);
            if($getShop){
               $_SESSION["profile"]['shop'] = $getShop;
            }else{
               $_SESSION["profile"]['shop'] = [];
            }
            unset($_SESSION["profile"]["data"]["clients_pass"]);
+           unset($_SESSION["profile"]["data"]["clients_cookie_token"]);
          }
 
       }
 
     }
 
-    function chatDialog($id_hash = 0){
+    function chatDialog($id_hash = 0, $support = 0){
       global $config, $settings;
 
       $Ads = new Ads();
       $Profile = new Profile();
       $Main = new Main();
       $ULang = new ULang();
+      $Admin = new Admin();
 
       if($id_hash){
 
-        $getChatUser = getOne("select * from uni_chat_users where chat_users_id_hash=? and chat_users_id_user=?", array($id_hash,intval($_SESSION['profile']['id'])) );
-        $getAd = $Ads->get("ads_id=".$getChatUser["chat_users_id_ad"] );
-        $getAd["ads_images"] = $Ads->getImages($getAd["ads_images"]);
+        if(!$support){
 
-        if( $id_hash == md5( $getChatUser["chat_users_id_ad"] . $getChatUser["chat_users_id_interlocutor"] ) || $id_hash == md5( $getChatUser["chat_users_id_ad"] . $getChatUser["chat_users_id_user"] ) ){
+            $getChatUser = getOne("select * from uni_chat_users where chat_users_id_hash=? and chat_users_id_user=?", array($id_hash,intval($_SESSION['profile']['id'])) );
+            $getAd = $Ads->get("ads_id=".$getChatUser["chat_users_id_ad"] );
+            $getAd["ads_images"] = $Ads->getImages($getAd["ads_images"]);
 
-          update("update uni_chat_messages set chat_messages_status=? where chat_messages_id_hash=? and chat_messages_id_user!=?", array(1,$id_hash,$_SESSION['profile']['id']));
+            if( $id_hash == md5( $getChatUser["chat_users_id_ad"] . $getChatUser["chat_users_id_interlocutor"] ) || $id_hash == md5( $getChatUser["chat_users_id_ad"] . $getChatUser["chat_users_id_user"] ) ){
 
-          $getDialog = getAll("select * from uni_chat_messages where chat_messages_id_hash=? order by chat_messages_date asc", array($id_hash) );
+              update("update uni_chat_messages set chat_messages_status=? where chat_messages_id_hash=? and chat_messages_id_user!=?", array(1,$id_hash,$_SESSION['profile']['id']));
 
-          $getLocked = findOne( "uni_chat_locked", "chat_locked_user_id=? and chat_locked_user_id_locked=?", array(intval($_SESSION['profile']['id']),$getChatUser["chat_users_id_interlocutor"]) );
+              $getDialog = getAll("select * from uni_chat_messages where chat_messages_id_hash=? order by chat_messages_date asc", array($id_hash) );
 
-          $getMyLocked = findOne( "uni_chat_locked", "chat_locked_user_id=? and chat_locked_user_id_locked=?", array( $getChatUser["chat_users_id_interlocutor"],intval($_SESSION['profile']['id'])) );
+              $getLocked = findOne( "uni_chat_locked", "chat_locked_user_id=? and chat_locked_user_id_locked=?", array(intval($_SESSION['profile']['id']),$getChatUser["chat_users_id_interlocutor"]) );
 
-          ob_start();
-          require $config["template_path"] . "/include/chat_dialog.php";
-          $list_dialog = ob_get_clean();
+              $getMyLocked = findOne( "uni_chat_locked", "chat_locked_user_id=? and chat_locked_user_id_locked=?", array( $getChatUser["chat_users_id_interlocutor"],intval($_SESSION['profile']['id'])) );
 
-          return $list_dialog;
+              ob_start();
+              require $config["template_path"] . "/include/chat_dialog.php";
+              $list_dialog = ob_get_clean();
+
+              return $list_dialog;
+
+            }
+
+        }else{
+
+            $getChatUser = getOne("select * from uni_chat_users where chat_users_id_hash=? and chat_users_id_user=?", array($id_hash,intval($_SESSION['profile']['id'])) );
+
+            if($id_hash == md5('support' . $_SESSION['profile']['id'])){
+
+                update("update uni_chat_messages set chat_messages_status=? where chat_messages_id_hash=? and chat_messages_id_user!=?", array(1,$id_hash,$_SESSION['profile']['id']));
+
+                $getDialog = getAll("select * from uni_chat_messages where chat_messages_id_hash=? order by chat_messages_date asc", array($id_hash) );
+
+                $getMyLocked = findOne( "uni_chat_locked", "chat_locked_user_id=? and chat_locked_user_id_locked=?", array( $getChatUser["chat_users_id_interlocutor"],intval($_SESSION['profile']['id'])) );
+
+                ob_start();
+                require $config["template_path"] . "/include/chat_dialog_support.php";
+                $list_dialog = ob_get_clean();
+
+                return $list_dialog;
+
+            }
 
         }
 
@@ -188,28 +226,30 @@ class Profile{
 
        $getUserLocked = $this->getUserLocked($param["user_to"],$param["user_from"]);
 
-       if(!$getUserLocked){
+       if($getUserLocked) return false;
 
-           if( count($param["attach"]) ){
+       if( count($param["attach"]) ){
 
-              foreach ($param["attach"] as $name) {
-                  if(file_exists($config["basePath"] . "/" . $config["media"]["temp_images"] . "/" . $name)){
-                    @copy( $config["basePath"] . "/" . $config["media"]["temp_images"] . "/" . $name , $config["basePath"] . "/" . $config["media"]["attach"] . "/" . $name );
-                    $attach['images'][] = $name;
-                  }
+          foreach ($param["attach"] as $name) {
+              if(file_exists($config["basePath"] . "/" . $config["media"]["temp_images"] . "/" . $name)){
+                @copy( $config["basePath"] . "/" . $config["media"]["temp_images"] . "/" . $name , $config["basePath"] . "/" . $config["media"]["attach"] . "/" . $name );
+                $attach['images'][] = $name;
               }
-              
-           }
+          }
+          
+       }
 
-           if($param["voice"]){
-              $attach['voice'] = $param["voice"];
-              $attach['duration'] = $param["duration"];
-           }
+       if($param["voice"]){
+          $attach['voice'] = $param["voice"];
+          $attach['duration'] = $param["duration"];
+       }
 
-           if($param["text"] || $attach || $param["action"]){
+       if($param["text"] || $attach || $param["action"]){
 
-               if($param["text"]) $encrypt_text = encrypt($param["text"]);
-               
+           if($param["text"]) $encrypt_text = encrypt($param["text"]);
+           
+           if(!$param["support"]){
+
                $getAd = $Ads->get("ads_id=".intval($param["id_ad"]) );
 
                if(!$param["id_hash"]){
@@ -224,15 +264,22 @@ class Profile{
 
                }
 
-               if(!$param["action"]){
-               insert("INSERT INTO uni_chat_users(chat_users_id_ad,chat_users_id_user,chat_users_id_hash,chat_users_id_interlocutor)VALUES(?,?,?,?)", array( $param["id_ad"],$param["user_from"], $param["id_hash"], $param["user_to"] ));
-               }
-               
-               insert("INSERT INTO uni_chat_users(chat_users_id_ad,chat_users_id_user,chat_users_id_hash,chat_users_id_interlocutor)VALUES(?,?,?,?)", array($param["id_ad"],$param["user_to"], $param["id_hash"], $param["user_from"]));
+           }else{
 
-               insert("INSERT INTO uni_chat_messages(chat_messages_text,chat_messages_date,chat_messages_id_hash,chat_messages_id_user,chat_messages_action,chat_messages_attach)VALUES(?,?,?,?,?,?)", array($encrypt_text, date("Y-m-d H:i:s"),$param["id_hash"],$param["user_from"],intval($param["action"]),json_encode($attach)));
+               if( $param["id_hash"] != md5( 'support' . $param["user_from"] ) && $param["id_hash"] != md5( 'support' . $param["user_to"] ) ){
+                  exit;
+               }
 
            }
+
+
+           if(!$param["action"]){
+           insert("INSERT INTO uni_chat_users(chat_users_id_ad,chat_users_id_user,chat_users_id_hash,chat_users_id_interlocutor,chat_users_id_responder)VALUES(?,?,?,?,?)", array(intval($param["id_ad"]),$param["user_from"], $param["id_hash"], $param["user_to"],intval($param["id_responder"])));
+           }
+           
+           insert("INSERT INTO uni_chat_users(chat_users_id_ad,chat_users_id_user,chat_users_id_hash,chat_users_id_interlocutor,chat_users_id_responder)VALUES(?,?,?,?,?)", array(intval($param["id_ad"]),$param["user_to"], $param["id_hash"], $param["user_from"], intval($param["id_responder"])));
+
+           insert("INSERT INTO uni_chat_messages(chat_messages_text,chat_messages_date,chat_messages_id_hash,chat_messages_id_user,chat_messages_action,chat_messages_attach,chat_messages_id_responder)VALUES(?,?,?,?,?,?,?)", array($encrypt_text, date("Y-m-d H:i:s"),$param["id_hash"],$param["user_from"],intval($param["action"]),json_encode($attach),intval($param["id_responder"])));
 
        }
 
@@ -754,18 +801,30 @@ class Profile{
         ]];
      }
 
+     if($settings["functionality"]["booking"]){
+       $orders = ["name"=>$ULang->t("Заказы"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M9.5 19a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-7 1a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm7 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm-9.87-5.27A1.5 1.5 0 0 0 8.113 16H20v1H8.113a2.5 2.5 0 0 1-2.47-2.115L4.033 4.558l-2.06-1.78.653-.756L4.917 4H20.18a1.5 1.5 0 0 1 1.471 1.794l-1.24 6.196a2.5 2.5 0 0 1-2.45 2.01H8v-1h9.96a1.5 1.5 0 0 0 1.471-1.206l1.24-6.196A.5.5 0 0 0 20.18 5H5.113l1.516 9.73z"></path></svg>', "nested" => [
+            
+            "orders"=>["link"=>_link("user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/orders"),"icon" => '<svg width="24" height="24" ></svg>', "name" => $ULang->t("Все заказы")],
+            "booking"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/booking" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => $ULang->t("Бронирования")],
+
+        ]];
+     }else{
+        $orders = ["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/orders" ), "name" => $ULang->t("Заказы"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M9.5 19a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-7 1a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm7 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm-9.87-5.27A1.5 1.5 0 0 0 8.113 16H20v1H8.113a2.5 2.5 0 0 1-2.47-2.115L4.033 4.558l-2.06-1.78.653-.756L4.917 4H20.18a1.5 1.5 0 0 1 1.471 1.794l-1.24 6.196a2.5 2.5 0 0 1-2.45 2.01H8v-1h9.96a1.5 1.5 0 0 0 1.471-1.206l1.24-6.196A.5.5 0 0 0 20.18 5H5.113l1.516 9.73z"></path></svg>'];
+     }
+
      return [
         "balance"=>[ "link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/balance" ), "name"=> $ULang->t("Кошелек"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M21 19.5a1.5 1.5 0 0 1-1.5 1.5H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5A1.5 1.5 0 0 1 19 4.5V6h.5A1.5 1.5 0 0 1 21 7.5v12zM19.5 7H4v12a1 1 0 0 0 1 1h14.5a.5.5 0 0 0 .5-.5V16h-3.5a2.5 2.5 0 1 1 0-5H20V7.5a.5.5 0 0 0-.5-.5zm.5 5h-3.5a1.5 1.5 0 0 0 0 3H20v-3zm-2.5-8H5a1 1 0 1 0 0 2h13V4.5a.5.5 0 0 0-.5-.5z"></path></svg>' ],
         
         "services"=>$services,
 
-        "ad"=>[ "link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/ad" ), "name" => $ULang->t("Мои объявления"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M6.077 14c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v1.154c0 .669-.07.911-.2 1.156a1.371 1.371 0 0 1-.567.567c-.245.13-.487.2-1.156.2H4.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.13-.245-.2-.487-.2-1.156v-1.154c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.245-.13.487-.2 1.156-.2h1.154zm.14 1H4.924c-.459 0-.57.022-.684.082a.364.364 0 0 0-.157.157c-.054.1-.077.2-.081.543L4 17.077c0 .459.022.57.082.684.038.07.087.12.157.157.113.06.225.082.684.082h1.154c.459 0 .57-.022.684-.082a.364.364 0 0 0 .157-.157c.06-.113.082-.225.082-.684v-1.154c0-.459-.022-.57-.082-.684a.364.364 0 0 0-.157-.157c-.1-.054-.2-.077-.543-.081zM21 16v1H10v-1h11zM6.077 5c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v1.154c0 .669-.07.911-.2 1.156a1.371 1.371 0 0 1-.567.567c-.245.13-.487.2-1.156.2H4.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.13-.245-.2-.487-.2-1.156V6.923c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.245-.13.487-.2 1.156-.2h1.154zm.14 1H4.924c-.459 0-.57.022-.684.082a.364.364 0 0 0-.157.157c-.054.1-.077.2-.081.543L4 8.077c0 .459.022.57.082.684.038.07.087.12.157.157.113.06.225.082.684.082h1.154c.459 0 .57-.022.684-.082a.364.364 0 0 0 .157-.157c.06-.113.082-.225.082-.684V6.923c0-.459-.022-.57-.082-.684a.364.364 0 0 0-.157-.157c-.1-.054-.2-.077-.543-.081zM21 7v1H10V7h11z"></path></svg>' ],
+        "ad"=>[ "link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/ad" ), "name" => $ULang->t("Объявления"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M6.077 14c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v1.154c0 .669-.07.911-.2 1.156a1.371 1.371 0 0 1-.567.567c-.245.13-.487.2-1.156.2H4.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.13-.245-.2-.487-.2-1.156v-1.154c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.245-.13.487-.2 1.156-.2h1.154zm.14 1H4.924c-.459 0-.57.022-.684.082a.364.364 0 0 0-.157.157c-.054.1-.077.2-.081.543L4 17.077c0 .459.022.57.082.684.038.07.087.12.157.157.113.06.225.082.684.082h1.154c.459 0 .57-.022.684-.082a.364.364 0 0 0 .157-.157c.06-.113.082-.225.082-.684v-1.154c0-.459-.022-.57-.082-.684a.364.364 0 0 0-.157-.157c-.1-.054-.2-.077-.543-.081zM21 16v1H10v-1h11zM6.077 5c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v1.154c0 .669-.07.911-.2 1.156a1.371 1.371 0 0 1-.567.567c-.245.13-.487.2-1.156.2H4.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.13-.245-.2-.487-.2-1.156V6.923c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.245-.13.487-.2 1.156-.2h1.154zm.14 1H4.924c-.459 0-.57.022-.684.082a.364.364 0 0 0-.157.157c-.054.1-.077.2-.081.543L4 8.077c0 .459.022.57.082.684.038.07.087.12.157.157.113.06.225.082.684.082h1.154c.459 0 .57-.022.684-.082a.364.364 0 0 0 .157-.157c.06-.113.082-.225.082-.684V6.923c0-.459-.022-.57-.082-.684a.364.364 0 0 0-.157-.157c-.1-.054-.2-.077-.543-.081zM21 7v1H10V7h11z"></path></svg>' ],
 
-        "orders"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/orders" ), "name" => $ULang->t("Мои заказы"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M9.5 19a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-7 1a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm7 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm-9.87-5.27A1.5 1.5 0 0 0 8.113 16H20v1H8.113a2.5 2.5 0 0 1-2.47-2.115L4.033 4.558l-2.06-1.78.653-.756L4.917 4H20.18a1.5 1.5 0 0 1 1.471 1.794l-1.24 6.196a2.5 2.5 0 0 1-2.45 2.01H8v-1h9.96a1.5 1.5 0 0 0 1.471-1.206l1.24-6.196A.5.5 0 0 0 20.18 5H5.113l1.516 9.73z"></path></svg>'],
+        "orders"=>$orders,
+
         "chat"=>["modal_id"=>"modal-chat-user", "name" => $ULang->t("Сообщения").'<span class="chat-message-counter label-count" ></span>', "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M18.936 4c.888 0 1.324.084 1.777.326.413.221.74.548.96.961.243.453.327.889.327 1.777v9.872c0 .888-.084 1.324-.326 1.777a2.31 2.31 0 0 1-.961.96c-.453.243-.889.327-1.777.327H5.064c-.888 0-1.324-.084-1.777-.326a2.317 2.317 0 0 1-.96-.961C2.083 18.26 2 17.824 2 16.936V7.064c0-.888.084-1.324.326-1.777a2.31 2.31 0 0 1 .961-.96C3.74 4.083 4.176 4 5.064 4h13.872zm0 1H5.064c-.737 0-1.017.054-1.305.208a1.317 1.317 0 0 0-.551.551C3.054 6.047 3 6.327 3 7.064v9.872c0 .737.054 1.017.208 1.305.128.239.312.423.551.551.288.154.568.208 1.305.208h13.872c.737 0 1.017-.054 1.305-.208.239-.128.423-.312.551-.551.154-.288.208-.568.208-1.305V7.064c0-.737-.054-1.017-.208-1.305a1.317 1.317 0 0 0-.551-.551C19.953 5.054 19.673 5 18.936 5zm-.535 2l.598.8L12 13.025 5.001 7.8l.598-.802L12 11.776 18.401 7z"></path></svg>'],
         "favorites"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/favorites" ), "name" => $ULang->t("Избранное"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M12.333 5.673L12 5.97l-.333-.298C10.487 4.618 9.229 4 8 4 4.962 4 3 5.962 3 9c0 4.01 3.244 7.656 8.842 10.975a.4.4 0 0 0 .326-.004C17.772 16.615 21 12.996 21 9c0-3.038-1.962-5-5-5-1.229 0-2.488.618-3.667 1.673zM16 3c3.59 0 6 2.41 6 6 0 4.452-3.44 8.308-9.311 11.824-.394.246-.98.246-1.366.006C5.46 17.353 2 13.466 2 9c0-3.59 2.41-6 6-6 1.39 0 2.746.61 4 1.641C13.254 3.61 14.61 3 16 3z"></path></svg>'],
         "settings"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/settings" ), "name" => $ULang->t("Настройки"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" fill-rule="evenodd" d="M14.841 5.975l-.063-.17-.125-.334-.276-.738a48.538 48.538 0 0 0-.4-1.049c-.16-.38-.63-.684-1.081-.684h-1.792c-.45 0-.918.305-1.1.726a475.491 475.491 0 0 0-.652 1.746l-.121.332-.062.168-1.018.597-.18-.03-.35-.06-.776-.133a51.697 51.697 0 0 0-1.156-.189c-.418-.054-.92.197-1.144.58L3.65 8.268c-.222.38-.188.927.09 1.291.017.025.308.374.7.838l.508.603.228.27.127.15-.009.195-.005.148-.003.086a5.479 5.479 0 0 0 .006.516l.017.207-.134.158-.231.274c-.173.205-.347.41-.508.603-.403.48-.688.821-.724.87-.253.327-.284.874-.062 1.255l.896 1.531c.224.383.726.63 1.19.575.03-.003.482-.079 1.085-.182l.785-.135.343-.06.176-.03 1.032.58.064.172a421.646 421.646 0 0 0 .402 1.079c.22.586.376.999.402 1.054.16.38.63.684 1.08.684h1.792c.45 0 .918-.305 1.1-.726.012-.028.171-.448.382-1.01l.277-.741.123-.332.062-.168 1.015-.59.178.03a17398.007 17398.007 0 0 0 1.93.322l.342.057c.424.055.926-.195 1.15-.579l.896-1.531c.222-.38.188-.927-.09-1.291a69.29 69.29 0 0 0-.699-.833l-.508-.6-.23-.27-.126-.149.008-.196.006-.151.003-.088a5.786 5.786 0 0 0-.001-.45 2.582 2.582 0 0 0-.004-.077l-.014-.203.131-.156.231-.273c.173-.205.347-.41.508-.603.403-.479.687-.82.723-.87.253-.326.284-.873.062-1.254l-.896-1.531c-.224-.383-.726-.63-1.19-.575-.031.003-.483.078-1.088.18l-.786.135c-.276.047-.276.047-.344.06l-.178.03-1.028-.592zm1.214-.455a10307.99 10307.99 0 0 1 .931-.16 44.378 44.378 0 0 1 1.174-.192c.843-.102 1.732.335 2.158 1.064l.896 1.531c.427.73.371 1.72-.124 2.358-.049.068-.3.37-.752.907l-.516.612-.106.126a11.75 11.75 0 0 1-.002.417.409.409 0 0 0 .102.177l.504.595c.47.554.711.843.746.892.514.674.575 1.659.148 2.39l-.896 1.531c-.426.729-1.317 1.172-2.126 1.068l-.393-.065-.786-.131-.967-.162-.393.229-.061.165-.273.73a42.104 42.104 0 0 1-.412 1.081c-.333.775-1.162 1.317-2.011 1.317h-1.792c-.848 0-1.684-.54-1.995-1.28-.035-.076-.173-.44-.418-1.093l-.283-.758-.062-.166-.402-.226a10061.036 10061.036 0 0 1-.931.16 41.73 41.73 0 0 1-1.173.195c-.843.102-1.732-.336-2.158-1.064l-.896-1.531c-.427-.73-.371-1.72.124-2.358.05-.068.3-.37.753-.908l.516-.612.106-.125a10.03 10.03 0 0 1 0-.413c-.024-.083-.058-.123-.102-.176l-.504-.597c-.468-.555-.71-.846-.745-.894a2.203 2.203 0 0 1-.148-2.39l.896-1.532c.425-.727 1.316-1.172 2.117-1.068.085.007.48.072 1.184.191l.806.138.17.029.395-.232.06-.164c.092-.248.185-.497.27-.73a40.21 40.21 0 0 1 .408-1.079C9.426 2.542 10.255 2 11.104 2h1.792c.848 0 1.684.54 1.995 1.28.035.076.173.438.417 1.087l.282.754.062.167.403.232zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path></svg>'],
-        "subscriptions"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/subscriptions" ), "name" => $ULang->t("Мои подписки"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path d="M17.876 13.145c.948.431 1.69.952 2.221 1.566.55.637.854 1.353.903 2.167v2.352l-.212.15c-2.424 1.706-5.358 2.557-8.788 2.557-3.42 0-6.354-.851-8.787-2.557L3 19.23v-.26l.001-2.127c.05-.72.329-1.382.828-1.976.475-.564 1.199-1.127 2.174-1.698l.506.862c-.885.519-1.524 1.015-1.915 1.48-.366.435-.56.898-.594 1.367v1.829c2.216 1.486 4.879 2.23 8 2.23 3.13 0 5.793-.744 8-2.23v-1.799c-.033-.558-.25-1.068-.66-1.543-.428-.496-1.053-.935-1.878-1.31l.414-.91zM12.05 2c1 0 1.89.258 2.637.755l-.554.833C13.554 3.202 12.856 3 12.05 3 9.316 3 7.768 5.441 8.158 8.945 8.56 12.577 10.095 15 12.05 15c1.363 0 2.522-1.146 3.255-3.187l.941.337c-.86 2.396-2.33 3.85-4.196 3.85-2.617 0-4.433-2.869-4.886-6.945C6.715 5.021 8.63 2 12.05 2zM17 3v3h3v1h-3v3h-1V7h-3V6h3V3h1z" fill="#333" fill-rule="evenodd"></path></svg>'],
+        "subscriptions"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/subscriptions" ), "name" => $ULang->t("Подписки"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path d="M17.876 13.145c.948.431 1.69.952 2.221 1.566.55.637.854 1.353.903 2.167v2.352l-.212.15c-2.424 1.706-5.358 2.557-8.788 2.557-3.42 0-6.354-.851-8.787-2.557L3 19.23v-.26l.001-2.127c.05-.72.329-1.382.828-1.976.475-.564 1.199-1.127 2.174-1.698l.506.862c-.885.519-1.524 1.015-1.915 1.48-.366.435-.56.898-.594 1.367v1.829c2.216 1.486 4.879 2.23 8 2.23 3.13 0 5.793-.744 8-2.23v-1.799c-.033-.558-.25-1.068-.66-1.543-.428-.496-1.053-.935-1.878-1.31l.414-.91zM12.05 2c1 0 1.89.258 2.637.755l-.554.833C13.554 3.202 12.856 3 12.05 3 9.316 3 7.768 5.441 8.158 8.945 8.56 12.577 10.095 15 12.05 15c1.363 0 2.522-1.146 3.255-3.187l.941.337c-.86 2.396-2.33 3.85-4.196 3.85-2.617 0-4.433-2.869-4.886-6.945C6.715 5.021 8.63 2 12.05 2zM17 3v3h3v1h-3v3h-1V7h-3V6h3V3h1z" fill="#333" fill-rule="evenodd"></path></svg>'],
         "logout"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/?logout=1" ), "name" => $ULang->t("Выход"), "icon" => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#333" d="M14.936 2c.888 0 1.324.084 1.777.326.413.221.74.548.96.961.243.453.327.889.327 1.777V8h-1V5.064c0-.737-.054-1.017-.208-1.305a1.319 1.319 0 0 0-.551-.551C15.953 3.054 15.673 3 14.936 3l-6.375-.001 1.773 1.007c.558.317.8.495 1.036.753.223.245.384.522.487.837.109.332.143.631.143 1.273v11.13l2.936.001c.737 0 1.017-.054 1.305-.208.239-.128.423-.312.551-.551.154-.288.208-.568.208-1.305V13h1v2.936c0 .888-.084 1.324-.326 1.777a2.31 2.31 0 0 1-.961.96c-.453.243-.889.327-1.777.327L12 18.999v.484a2.5 2.5 0 0 1-3.735 2.173L5.666 20.18c-.558-.317-.8-.495-1.036-.753a2.276 2.276 0 0 1-.487-.837C4.034 18.258 4 17.959 4 17.317V4.703c0-.126.01-.25.027-.371.043-.438.135-.738.3-1.045.22-.413.547-.74.96-.96C5.74 2.083 6.176 2 7.064 2h7.872zM6.5 3.203c-.75 0-1.373.552-1.483 1.272-.011.158-.017.35-.017.589v10.872h-.001L5 17.317c0 .546.023.747.093.962.06.181.149.334.277.475.152.167.316.287.79.556l2.599 1.477A1.5 1.5 0 0 0 11 19.483V6.869c0-.546-.023-.747-.093-.962a1.292 1.292 0 0 0-.277-.475c-.152-.167-.316-.287-.79-.556L7.241 3.399a1.503 1.503 0 0 0-.741-.196zM20 8.493l1.3 1.3.707.707L20 12.507l-.707-.707.798-.8H14v-1h6.093l-.8-.8.707-.707z"></path></svg>'],
      ];
      
@@ -777,7 +836,7 @@ class Profile{
       $ULang = new ULang();
 
       if($action == "ad"){
-        return $ULang->t("Мои объявления");
+        return $ULang->t("Объявления");
       }elseif($action == "orders"){
         return $ULang->t("Заказы");
       }elseif($action == "favorites"){
@@ -791,7 +850,7 @@ class Profile{
       }elseif($action == "reviews"){
         return $ULang->t("Отзывы");
       }elseif($action == "subscriptions"){
-        return $ULang->t("Мои подписки");
+        return $ULang->t("Подписки");
       }elseif($action == $settings['user_shop_alias_url_page']){
         return $ULang->t("Магазин");
       }elseif($action == "statistics"){
@@ -800,8 +859,10 @@ class Profile{
         return $ULang->t("Планировщик задач");
       }elseif($action == "tariff"){
         return $ULang->t("Тариф");
+      }elseif($action == "booking"){
+        return $ULang->t("Бронирования");
       }else{
-        return $ULang->t("Мои объявления");
+        return $ULang->t("Объявления");
       }
 
   }
@@ -818,7 +879,7 @@ class Profile{
 
              if($value['nested']){
 
-                 $links .= '<div class="dropdown-box-list-nested-toggle" ><a href="#" ><svg width="24" height="24" viewBox="0 0 24 24" class="sc-biOYSp jfKzIP"><path fill="#333" fill-rule="evenodd" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 1a9 9 0 1 0 .001 18.001A9 9 0 0 0 12 3zm.732 3.667l.326.007c.426.02.822.08 1.186.18a3.26 3.26 0 0 1 1.17.569c.326.255.58.577.765.967.184.39.276.857.276 1.399s-.097 1.013-.292 1.414a2.842 2.842 0 0 1-.797 1 3.389 3.389 0 0 1-1.187.594c-.455.13-.949.195-1.48.195h-1.642v1.642h2.618v1.073h-2.618V18h-1.3v-2.293H8.601v-1.073h1.154v-1.642H8.602v-1.138h1.154V6.667h2.976zm0 1.138h-1.675v4.049h1.675c.748 0 1.336-.171 1.764-.513.428-.341.642-.859.642-1.552 0-.694-.214-1.198-.642-1.513-.428-.314-1.016-.471-1.764-.471z"></path></svg> '.$value["name"].' <i class="las la-angle-down"></i></a><div class="dropdown-box-list-nested" >';
+                 $links .= '<div class="dropdown-box-list-nested-toggle" ><a href="#" >'.$value['icon'].' '.$value["name"].' <i class="las la-angle-down"></i></a><div class="dropdown-box-list-nested" >';
 
                  foreach ($value['nested'] as $page_nested => $nested){
                     
@@ -881,7 +942,7 @@ class Profile{
 
              if($value['nested']){
 
-                 $links .= '<div class="dropdown-box-list-nested-toggle" ><a href="#" ><svg width="24" height="24" viewBox="0 0 24 24" class="sc-biOYSp jfKzIP"><path fill="#333" fill-rule="evenodd" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 1a9 9 0 1 0 .001 18.001A9 9 0 0 0 12 3zm.732 3.667l.326.007c.426.02.822.08 1.186.18a3.26 3.26 0 0 1 1.17.569c.326.255.58.577.765.967.184.39.276.857.276 1.399s-.097 1.013-.292 1.414a2.842 2.842 0 0 1-.797 1 3.389 3.389 0 0 1-1.187.594c-.455.13-.949.195-1.48.195h-1.642v1.642h2.618v1.073h-2.618V18h-1.3v-2.293H8.601v-1.073h1.154v-1.642H8.602v-1.138h1.154V6.667h2.976zm0 1.138h-1.675v4.049h1.675c.748 0 1.336-.171 1.764-.513.428-.341.642-.859.642-1.552 0-.694-.214-1.198-.642-1.513-.428-.314-1.016-.471-1.764-.471z"></path></svg> '.$value["name"].' <i class="las la-angle-down"></i></a><div class="dropdown-box-list-nested" >';
+                 $links .= '<div class="dropdown-box-list-nested-toggle" ><a href="#" >'.$value['icon'].' '.$value["name"].' <i class="las la-angle-down"></i></a><div class="dropdown-box-list-nested" >';
 
                  foreach ($value['nested'] as $page_nested => $nested){
                     
@@ -1161,7 +1222,31 @@ class Profile{
                                  "{UNSUBCRIBE}"=>"",
                                  "{EMAIL_TO}"=>$getAd["clients_email"]); 
 
-             $this->userNotification( [ "mail"=>["params"=>$param, "code"=>"USER_NEW_BUY", "email"=>$getAd["clients_email"]], "sms"=>["phone"=>$getAd["clients_phone"],"text"=>$static_msg["8"]." «{$getAd["ads_title"]}» " . $static_msg["9"] . " " . $config["urlPath"]],"method"=>2 ] );
+             $this->userNotification( [ "mail"=>["params"=>$param, "code"=>"USER_NEW_BUY", "email"=>$getAd["clients_email"]],"method"=>1 ] );
+
+          }elseif($output_param["action"] == "booking"){
+
+             update("update uni_ads_booking set ads_booking_status_pay=? where ads_booking_id_order=?", [ 1, $output_param["id_order"] ]);
+
+             insert("INSERT INTO uni_ads_booking_prepayments(ads_booking_prepayments_id_order,ads_booking_prepayments_amount)VALUES(?,?)", array($output_param["id_order"], $output_param["amount"]));
+
+             $Main->addActionStatistics(['ad_id'=>$output_param["id_ad"],'from_user_id'=>$output_param["from_user_id"],'to_user_id'=>$output_param["to_user_id"]],"booking");
+
+             $getAd = $Ads->get("ads_id=?", [ $output_param["id_ad"] ]);
+
+             $param      = array("{USER_NAME}"=>$getAd["clients_name"],
+                                 "{USER_EMAIL}"=>$getAd["clients_email"],
+                                 "{ADS_TITLE}"=>$getAd["ads_title"],
+                                 "{ADS_LINK}"=>$Ads->alias($getAd),
+                                 "{PROFILE_LINK_ORDER}"=>$output_param["link_order"],
+                                 "{UNSUBCRIBE}"=>"",
+                                 "{EMAIL_TO}"=>$getAd["clients_email"]); 
+
+             if($getAd['category_board_booking_variant'] == 0){
+                $this->userNotification( [ "mail"=>["params"=>$param, "code"=>"USER_NEW_ORDER_BOOKING", "email"=>$getAd["clients_email"]],"method"=>1 ] );
+             }else{
+                $this->userNotification( [ "mail"=>["params"=>$param, "code"=>"USER_NEW_ORDER_RENT", "email"=>$getAd["clients_email"]],"method"=>1 ] );
+             }
 
           }
 
@@ -1244,6 +1329,17 @@ class Profile{
              
             return 'https://www.facebook.com/dialog/oauth?' . urldecode(http_build_query($params));
 
+        }elseif($name == "yandex"){
+
+            $params = array(
+                'client_id'     => $social_auth_params["yandex"]["id_app"],
+                'redirect_uri'  => $config["urlPath"] . "/systems/ajax/oauth.php?network=yandex",
+                'response_type' => 'code',
+                'state'         => '123'
+            );
+             
+            return 'https://oauth.yandex.ru/authorize?' . urldecode(http_build_query($params));
+
         }
 
     }
@@ -1253,24 +1349,31 @@ class Profile{
             
         $authorization_social_list = explode(",", $settings["authorization_social"]);
 
+        if( in_array( "yandex" , $authorization_social_list ) ){
+           ?>
+           <a class="auth-yandex" href="<?php echo $this->authLink("yandex"); ?>" >
+              <img src="<?php echo $settings["path_other"].'/media_social_yandex_61627.svg'; ?>">
+           </a>                           
+           <?php  
+        }
         if( in_array( "vk" , $authorization_social_list ) ){
            ?>
            <a class="auth-vk" href="<?php echo $this->authLink("vk"); ?>" >
-              <i class="lab la-vk"></i> ВКонтакте
+              <img src="<?php echo $settings["path_other"].'/media_social_vk_vkontakte_icon_124252.svg'; ?>">
            </a>                           
            <?php
         }
         if( in_array( "google" , $authorization_social_list ) ){
            ?>
            <a class="auth-google" href="<?php echo $this->authLink("google"); ?>" >
-              <i class="lab la-google"></i> Google
+              <img src="<?php echo $settings["path_other"].'/media_social_google_62736.svg'; ?>">
            </a>                           
            <?php  
         }                                               
         if( in_array( "fb" , $authorization_social_list ) ){
            ?>
            <a class="auth-fb" href="<?php echo $this->authLink("fb"); ?>" >
-              <i class="lab la-facebook-square"></i> FaceBook
+              <img src="<?php echo $settings["path_other"].'/media_social_facebook_59205.svg'; ?>">
            </a>                           
            <?php  
         }                          
@@ -1546,6 +1649,10 @@ class Profile{
         }elseif($action == 'cart'){
 
             return $this->getCountActionStatistics($ad_id,$days,$months,$years,'add_to_cart');
+
+        }elseif($action == 'booking'){
+
+            return $this->getCountActionStatistics($ad_id,$days,$months,$years,'booking');
 
         }elseif($action == 'date'){
 

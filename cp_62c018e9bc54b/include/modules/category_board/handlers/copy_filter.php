@@ -33,15 +33,17 @@ $value_filter = array();
 if(empty($name)){$error[] = "Укажите название фильтра!"; }
 if(!$_POST["id_cat"] || !is_array($_POST["id_cat"])){ $error[] = "Выберите категорию!";  }
 
-foreach ($_POST["value_filter"] as $action => $array) {
-   foreach ($array as $id => $value) {
+if($type_filter != 'input_text'){
+   foreach ($_POST["value_filter"] as $action => $array) {
+      foreach ($array as $id => $value) {
 
-      if(trim($value)) $value_filter[] =  trim($value);
-      
+         if(trim($value)) $value_filter[] =  trim($value);
+         
+      }
    }
-}
 
-if(!$value_filter){ $error[] = "Добавьте значения фильтра!"; }
+   if(!$value_filter){ $error[] = "Добавьте значения фильтра!"; }
+}
 
 if (count($error) == 0) {
 
@@ -55,7 +57,7 @@ if (count($error) == 0) {
 
     }
 
-    if($_POST["value_filter"]){
+    if($_POST["value_filter"] && $type_filter != 'input_text'){
        foreach ($_POST["value_filter"] as $action => $array) {
          foreach ($array as $id => $value) {
 

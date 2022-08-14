@@ -8,7 +8,7 @@ include_once( $config["basePath"] . "/systems/classes/UniSite.php");
 include_once( $config["basePath"] . "/" . $config["folder_admin"] . "/lang/" . $settings["lang_admin_default"].".php" );
 $static_msg = require $config["basePath"] . "/static/msg.php";
 
-if( !(new Admin())->accessAdmin($_SESSION['cp_control_secure']) ){
+if( !(new Admin())->accessAdmin($_SESSION['cp_control_transactions']) ){
    $_SESSION["CheckMessage"]["warning"] = "Ограничение прав доступа!";
    exit;
 }

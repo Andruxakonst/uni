@@ -34,18 +34,17 @@ if(!$_POST["paid"]){
 }
 
 if(!$_POST["display_price"]){
-    $_POST["variant_price"] = 0;
-    $_POST["measure_price"] = 0;
-    $_POST["auction"] = 0;
-}
-
-if( $_POST["variant_price"] != 0 && $_POST["variant_price"] !=2 ){
+    $_POST["variant_price_id"] = 0;
+    $_POST["booking"] = 0;
     $_POST["auction"] = 0;
     $_POST["secure"] = 0;
+    $_POST["marketplace"] = 0;
 }
 
-if( $_POST["variant_price"] == 1 || $_POST["variant_price"] == 2 ){
-    $_POST["online_view"] = 0;
+if($_POST["booking"]){
+    if($_POST["auction"] || $_POST["secure"]){
+        $error[] = "Бронирование/Аренда доступны без аукционов и безопасных сделок";
+    }
 }
 
 if($_POST["paid"]){
@@ -67,6 +66,14 @@ if(!$_POST["title"]){
 
 if(!$_POST["h1"]){
     $_POST["h1"] = $_POST["title"];
+}
+
+if($_POST["measures_price"]){
+    $measures_price = json_encode($_POST["measures_price"],JSON_UNESCAPED_UNICODE);
+}
+
+if($_POST["rules"]){
+    $rules = json_encode($_POST["rules"],JSON_UNESCAPED_UNICODE);
 }
 
 if(empty($_POST["alias"])){
@@ -108,13 +115,14 @@ if( !$_POST["image_delete"] ){
 
 if (count($error) == 0) {
     
-  update("UPDATE uni_category_board SET category_board_name='".clear($_POST["name"])."',category_board_title='".clear($_POST["title"])."',category_board_alias='$alias',category_board_text='".urlencode($_POST["text"])."',category_board_description='".$_POST["desc"]."',category_board_visible='".intval($_POST["visible"])."',category_board_price='".round($_POST["price"],2)."',category_board_count_free='".intval($_POST["count_free"])."',category_board_status_paid='".intval($_POST["paid"])."',category_board_display_price='".intval($_POST["display_price"])."',category_board_variant_price='".intval($_POST["variant_price"])."',category_board_measure_price='".intval($_POST["measure_price"])."',category_board_auction='".intval($_POST["auction"])."',category_board_secure='".intval($_POST["secure"])."',category_board_image='".$getCategory["category_board_image"]."',category_board_online_view='".intval($_POST["online_view"])."',category_board_h1='".clear($_POST["h1"])."',category_board_auto_title='".intval($_POST["auto_title"])."',category_board_auto_title_template='".clear($_POST["auto_title_template"])."',category_board_show_index='".intval($_POST["show_index"])."',category_board_marketplace='".intval($_POST["marketplace"])."' $parent WHERE category_board_id='$id'"); 
+  update("UPDATE uni_category_board SET category_board_name='".clear($_POST["name"])."',category_board_title='".clear($_POST["title"])."',category_board_alias='$alias',category_board_text='".urlencode($_POST["text"])."',category_board_description='".$_POST["desc"]."',category_board_visible='".intval($_POST["visible"])."',category_board_price='".round($_POST["price"],2)."',category_board_count_free='".intval($_POST["count_free"])."',category_board_status_paid='".intval($_POST["paid"])."',category_board_display_price='".intval($_POST["display_price"])."',category_board_variant_price_id='".intval($_POST["variant_price_id"])."',category_board_measures_price='".$measures_price."',category_board_auction='".intval($_POST["auction"])."',category_board_secure='".intval($_POST["secure"])."',category_board_image='".$getCategory["category_board_image"]."',category_board_online_view='".intval($_POST["online_view"])."',category_board_h1='".clear($_POST["h1"])."',category_board_auto_title='".intval($_POST["auto_title"])."',category_board_auto_title_template='".clear($_POST["auto_title_template"])."',category_board_show_index='".intval($_POST["show_index"])."',category_board_marketplace='".intval($_POST["marketplace"])."',category_board_booking='".intval($_POST["booking"])."',category_board_booking_variant='".intval($_POST["booking_variant"])."',category_board_rules='".$rules."' $parent WHERE category_board_id='$id'"); 
 
   if($_POST["subcategories"]){ 
 
      $nested_cat_ids = $CategoryBoard->idsBuild($id, $CategoryBoard->getCategories() );
+
      if($nested_cat_ids){
-       update("UPDATE uni_category_board SET category_board_price='".round($_POST["price"],2)."', category_board_count_free='".intval($_POST["count_free"])."', category_board_status_paid='".intval($_POST["paid"])."', category_board_display_price='".intval($_POST["display_price"])."',category_board_variant_price='".intval($_POST["variant_price"])."',category_board_measure_price='".intval($_POST["measure_price"])."',category_board_auction='".intval($_POST["auction"])."',category_board_secure='".intval($_POST["secure"])."',category_board_online_view='".intval($_POST["online_view"])."',category_board_marketplace='".intval($_POST["marketplace"])."' WHERE category_board_id IN(".$nested_cat_ids.")");
+       update("UPDATE uni_category_board SET category_board_price='".round($_POST["price"],2)."', category_board_count_free='".intval($_POST["count_free"])."', category_board_status_paid='".intval($_POST["paid"])."', category_board_display_price='".intval($_POST["display_price"])."',category_board_variant_price_id='".intval($_POST["variant_price_id"])."',category_board_measures_price='".$measures_price."',category_board_auction='".intval($_POST["auction"])."',category_board_secure='".intval($_POST["secure"])."',category_board_online_view='".intval($_POST["online_view"])."',category_board_marketplace='".intval($_POST["marketplace"])."',category_board_booking='".intval($_POST["booking"])."',category_board_booking_variant='".intval($_POST["booking_variant"])."',category_board_rules='".$rules."' WHERE category_board_id IN(".$nested_cat_ids.")");
      }
 
   }

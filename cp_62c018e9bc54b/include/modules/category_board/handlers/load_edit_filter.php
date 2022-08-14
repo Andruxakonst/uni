@@ -60,6 +60,7 @@ $cat_ids = $Filters->getCategory( ["id_filter"=>$id_filter] );
         <option value="select" <?php if($getFilter->ads_filters_type == "select"){ echo 'selected=""'; } ?> >Выпадающий список с одиночным выбором</option>
         <option value="select_multi" <?php if($getFilter->ads_filters_type == "select_multi"){ echo 'selected=""'; } ?> >Выпадающий список с множественным выбором</option>
         <option value="input" <?php if($getFilter->ads_filters_type == "input"){ echo 'selected=""'; } ?> >Поле ввода цифр</option>
+        <option value="input_text" <?php if($getFilter->ads_filters_type == "input_text"){ echo 'selected=""'; } ?> >Поле ввода текста</option>
       </select>
   </div>
 </div>
@@ -84,37 +85,39 @@ $cat_ids = $Filters->getCategory( ["id_filter"=>$id_filter] );
   </div>
 </div>
 
-<div class="form-group row d-flex mb-5">
-  <label class="col-lg-3 form-control-label"></label>
-  <div class="col-lg-9">
+<div class="box-value-filters" <?php if($getFilter->ads_filters_type == "input_text"){ echo 'style="display: none;"'; } ?> >
+  <div class="form-group row d-flex mb-5">
+    <label class="col-lg-3 form-control-label"></label>
+    <div class="col-lg-9">
 
-   <button class="btn btn-success btn-sm action-add-item-filter" ><i class="la la-plus" ></i> Добавить значение</button>
+     <button class="btn btn-success btn-sm action-add-item-filter" ><i class="la la-plus" ></i> Добавить значение</button>
 
-    <div class="alert alert-primary filter-slider-hint" style="margin-top: 15px; font-size: 12px;" role="alert">
-      Добавьте 2 поля. В первом укажите значение от, а во втором поле значение до
+      <div class="alert alert-primary filter-slider-hint" style="margin-top: 15px; font-size: 12px;" role="alert">
+        Добавьте 2 поля. В первом укажите значение от, а во втором поле значение до
+      </div>
+
+     <div class="list-podfilter" >
+       
+        <?php
+        
+          $items = getAll("SELECT * FROM uni_ads_filters_items WHERE ads_filters_items_id_filter=? order by ads_filters_items_sort asc", array($id_filter));
+            if(count($items)>0){
+             
+               foreach($items AS $item){ 
+
+                     ?>
+                     <div class="podfilter-item" ><input type="text" class="form-control" value="<?php echo $item["ads_filters_items_value"]; ?>" name="value_filter[edit][<?php echo $item["ads_filters_items_id"]; ?>]" /><i class="la la-arrows-v sort-move-podfilter" ></i><i class="la la-times delete-podfilter" ></i></div>
+                     <?php
+                 
+               }   
+            
+            }        
+        
+        ?>
+
+     </div>
+
     </div>
-
-   <div class="list-podfilter" >
-     
-      <?php
-      
-        $items = getAll("SELECT * FROM uni_ads_filters_items WHERE ads_filters_items_id_filter=? order by ads_filters_items_sort asc", array($id_filter));
-          if(count($items)>0){
-           
-             foreach($items AS $item){ 
-
-                   ?>
-                   <div class="podfilter-item" ><input type="text" class="form-control" value="<?php echo $item["ads_filters_items_value"]; ?>" name="value_filter[edit][<?php echo $item["ads_filters_items_id"]; ?>]" /><i class="la la-arrows-v sort-move-podfilter" ></i><i class="la la-times delete-podfilter" ></i></div>
-                   <?php
-               
-             }   
-          
-          }        
-      
-      ?>
-
-   </div>
-
   </div>
 </div>
 

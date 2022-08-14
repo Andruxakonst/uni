@@ -105,7 +105,7 @@ class Banners{
 
 
     function results( $param = [] ){
-        global $config,$route_name;
+        global $config,$route_name,$settings;
 
         $get = getOne("select * from  uni_advertising where advertising_banner_position=? and advertising_visible=? order by rand()", [$param["position_name"],1]);
 
@@ -329,7 +329,7 @@ class Banners{
             
         }else{
 
-          if( $_SESSION['cp_auth'][ $config["private_hash"] ] && in_array( $route_name, explode(",", $settings["advertising_pages"]) ) ){
+          if( $_SESSION['cp_auth'][ $config["private_hash"] ] && in_array( $route_name, explode(",", $settings["advertising_pages"]) ) && $settings['banner_markup'] ){
           ?>
 
             <a class="place-banner mt15" target="_blank" href="<?php echo $config["urlPath"] . "/" . $config["folder_admin"] . "/?route=add_advertising&position=".$param["position_name"]."&page=".$route_name; ?>" >

@@ -72,7 +72,8 @@ if(isAjax() == true){
    if($_POST["action"] == "load_chat"){
       
       $id_hash = clear($_POST["id"]);
-      echo json_encode( array( "dialog"=> $Profile->chatDialog($id_hash), "count_msg" => $Profile->getMessage()["total"] ) );
+      $support = (int)$_POST["support"];
+      echo json_encode( array( "dialog"=> $Profile->chatDialog($id_hash,$support), "count_msg" => $Profile->getMessage()["total"] ) );
 
    }
 
@@ -91,6 +92,7 @@ if(isAjax() == true){
    if($_POST["action"] == "send_chat"){
 
         $id_hash = clear($_POST["id"]);
+        $support = (int)$_POST["support"];
         $text = clear( urldecode($_POST["text"]) );
         $attach = $_POST["attach"] ? array_slice($_POST["attach"],0, 10) : [];
         $voice = clear($_POST["voice"]);
@@ -98,9 +100,13 @@ if(isAjax() == true){
 
         $getUser = getOne("select * from uni_chat_users where chat_users_id_hash=? and chat_users_id_user=?", array($id_hash,intval($_SESSION["profile"]["id"])) ); 
 
-        $Profile->sendChat( array( "id_ad" => $getUser["chat_users_id_ad"], "id_hash" => $id_hash, "text" => $text, "user_from" => intval($_SESSION["profile"]["id"]), "user_to" => $getUser["chat_users_id_interlocutor"], "attach" => $attach, 'voice' => $voice, 'duration' => $duration ) );
+        if(!$support){
+           $Profile->sendChat( array( "id_ad" => $getUser["chat_users_id_ad"], "id_hash" => $id_hash, "text" => $text, "user_from" => intval($_SESSION["profile"]["id"]), "user_to" => $getUser["chat_users_id_interlocutor"], "attach" => $attach, 'voice' => $voice, 'duration' => $duration ) );
+     	  }else{
+     	  	  $Profile->sendChat( array( "support" => 1, "id_hash" => $id_hash, "text" => $text, "user_from" => intval($_SESSION["profile"]["id"]), "user_to" => 0, "attach" => $attach ) );
+     	  }
 
-        echo json_encode( array( "dialog"=> $Profile->chatDialog($id_hash) ) );
+        echo json_encode( array( "dialog"=> $Profile->chatDialog($id_hash,$support) ) );
         
    }
 

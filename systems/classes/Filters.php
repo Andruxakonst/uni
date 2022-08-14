@@ -149,6 +149,12 @@ class Filters{
          unset($array["filter"]["online_view"]);
       }
 
+      if(intval($array["filter"]["booking"])){
+         $forming_multi_query["auction"] = "ads_booking='1'";
+         $param_search["query"]["bool"]["filter"][]["term"]["ads_booking"] = 1;
+         unset($array["filter"]["booking"]);
+      }
+
       if($param["map"]){
          $forming_multi_query["latlong"] = "ads_latitude!=0 and ads_longitude!=0";
          $param_search["query"]["bool"]["filter"][]["range"]["ads_latitude"] = [ "gte" => 0 ];
@@ -267,7 +273,7 @@ class Filters{
 
                if($getFilter){
 
-                 if($getFilter->ads_filters_type != "input"){
+                 if($getFilter->ads_filters_type != "input" && $getFilter->ads_filters_type != "input_text"){
 
                      foreach($filter_array AS $filter_key=>$filter_val){
         
@@ -303,7 +309,7 @@ class Filters{
             $query_ids_filter = " and ads_filters_variants_product_id IN(".implode(",", $ids_variants).")";
         }
 
-        $variants = getAll("SELECT ads_filters_variants_product_id, count(ads_filters_variants_product_id) AS cnt FROM `uni_ads_filters_variants` WHERE (".implode(" OR ",$forming_filters).") $query_ids_filter  GROUP BY ads_filters_variants_product_id HAVING COUNT(cnt)>=".$flCount);
+        $variants = getAll("SELECT ads_filters_variants_product_id, count(ads_filters_variants_product_id) AS cnt FROM `uni_ads_filters_variants` WHERE (".implode(" OR ",$forming_filters).") $query_ids_filter GROUP BY ads_filters_variants_product_id HAVING cnt >= ".$flCount);
 
          if(count($variants) > 0){
            foreach ($variants as $variant_value) {
@@ -335,7 +341,7 @@ class Filters{
           $binding_query = $binding_query . " and " . implode(" and ", $query) . $param["extra_query"];
       }
 
-      $return = $Ads->getAll( array("query"=>$binding_query, "sort"=>$sorting, "navigation"=>$param["navigation"], "page"=>$param["page"], "param_search"=>$param_search) );
+      $return = $Ads->getAll( array("query"=>$binding_query, "sort"=>$sorting, "navigation"=>$param["navigation"], "output"=>$param["output"], "page"=>$param["page"], "param_search"=>$param_search) );
 
       $return["query"] = $binding_query;
 
@@ -436,26 +442,24 @@ class Filters{
 
              $getItems = getAll("select * from uni_ads_filters_items where ads_filters_items_id_filter=? order by ads_filters_items_sort asc", array($value["ads_filters_id"]));
 
-             if( $getItems ){
-
              if($value["ads_filters_type"] == "select"){
 
-               if(count($getItems) > 0){
-                   foreach ($getItems as $item_key => $item_value) {
+               if(count($getItems)){
 
-                      $active = "";
-                      $checked = "";
+               foreach ($getItems as $item_key => $item_value) {
 
-                      if($getVariants["items"][$value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
-                        $active = 'class="uni-select-item-active"';
-                        $checked = 'checked=""';
-                      }
+                  $active = "";
+                  $checked = "";
 
-                      $items .= '
-                       <label '.$active.' > <input type="radio" '.$checked.' name="filter['.$value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$ULang->t( $item_value["ads_filters_items_value"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_items_value" ] ).'</span> <i class="la la-check"></i> </label>
-                      ';
+                  if($getVariants["items"][$value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
+                    $active = 'class="uni-select-item-active"';
+                    $checked = 'checked=""';
+                  }
 
-                   }
+                  $items .= '
+                   <label '.$active.' > <input type="radio" '.$checked.' name="filter['.$value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$ULang->t( $item_value["ads_filters_items_value"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_items_value" ] ).'</span> <i class="la la-check"></i> </label>
+                  ';
+
                }
 
                $return .= '
@@ -491,25 +495,27 @@ class Filters{
 
                ';
 
+                }
+
 
              }elseif($value["ads_filters_type"] == "select_multi" || $value["ads_filters_type"] == "checkbox"){
 
-               if(count($getItems) > 0){
-                   foreach ($getItems as $item_key => $item_value) {
+               if(count($getItems)){
 
-                      $active = "";
-                      $checked = "";
+               foreach ($getItems as $item_key => $item_value) {
 
-                      if($getVariants["items"][$value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
-                        $active = 'class="uni-select-item-active"';
-                        $checked = 'checked=""';
-                      }
+                  $active = "";
+                  $checked = "";
 
-                      $items .= '
-                       <label '.$active.' > <input type="checkbox" '.$checked.' name="filter['.$value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$ULang->t( $item_value["ads_filters_items_value"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_items_value" ] ).'</span> <i class="la la-check"></i> </label>
-                      ';
+                  if($getVariants["items"][$value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
+                    $active = 'class="uni-select-item-active"';
+                    $checked = 'checked=""';
+                  }
 
-                   }
+                  $items .= '
+                   <label '.$active.' > <input type="checkbox" '.$checked.' name="filter['.$value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$ULang->t( $item_value["ads_filters_items_value"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_items_value" ] ).'</span> <i class="la la-check"></i> </label>
+                  ';
+
                }
 
                $return .= '
@@ -544,10 +550,13 @@ class Filters{
                               
                ';
 
+                }
+
 
              }elseif($value["ads_filters_type"] == "slider" || $value["ads_filters_type"] == "input"){
 
 
+               if(count($getItems)){
                $return .= '
 
                    <div class="filter-items" id-filter="'.$value["ads_filters_id"].'" main-id-filter="0" data-ids="" >
@@ -569,12 +578,34 @@ class Filters{
                    </div>
                               
                ';
+                }
 
+
+             }elseif($value["ads_filters_type"] == "input_text"){
+
+               $return .= '
+
+                   <div class="filter-items" id-filter="'.$value["ads_filters_id"].'" main-id-filter="0" data-ids="" >
+
+                        <div class="row mb15" >
+                          <div class="col-lg-5"> <label>'.$ULang->t( $value["ads_filters_name"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_name" ] ).$always.'</label> </div>
+                          <div class="col-lg-7">
+
+                              <input type="text" maxlength="128" class="form-control" name="filter['.$value["ads_filters_id"].'][]" value="'.$getVariants["value"][$value["ads_filters_id"]][0]["ads_filters_variants_val"].'" />  
+
+                              <div class="msg-error" data-name="filter'.$value["ads_filters_id"].'" ></div> 
+
+                              '.$always_input.'
+
+                          </div>
+                        </div>
+
+
+                   </div>
+                              
+               ';
 
              }
-
-           }
-
 
           }
 
@@ -606,27 +637,24 @@ class Filters{
 
             $getItems = getAll("select * from uni_ads_filters_items where ads_filters_items_id_filter=? and ads_filters_items_id_item_parent=? order by ads_filters_items_sort asc", array($parent_value["ads_filters_id"],$id_item));
 
-            if( $getItems ){
-
              if($parent_value["ads_filters_type"] == "select"){
 
-               if(count($getItems) > 0){
+               if(count($getItems)){
 
-                   foreach ($getItems as $item_key => $item_value) {
+               foreach ($getItems as $item_key => $item_value) {
 
-                      $active = "";
-                      $checked = "";
+                  $active = "";
+                  $checked = "";
 
-                      if($getVariants["items"][$parent_value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
-                        $active = 'class="uni-select-item-active"';
-                        $checked = 'checked=""';
-                      }
+                  if($getVariants["items"][$parent_value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
+                    $active = 'class="uni-select-item-active"';
+                    $checked = 'checked=""';
+                  }
 
-                      $items .= '
-                       <label '.$active.' > <input type="radio" '.$checked.' name="filter['.$parent_value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$item_value["ads_filters_items_value"].'</span> <i class="la la-check"></i> </label>
-                      ';
+                  $items .= '
+                   <label '.$active.' > <input type="radio" '.$checked.' name="filter['.$parent_value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$item_value["ads_filters_items_value"].'</span> <i class="la la-check"></i> </label>
+                  ';
 
-                   }
                }
 
                $return .= '
@@ -660,26 +688,27 @@ class Filters{
                    </div>                              
                ';
 
+               }
+
 
              }elseif($parent_value["ads_filters_type"] == "select_multi" || $parent_value["ads_filters_type"] == "checkbox"){
 
-               if(count($getItems) > 0){
+               if(count($getItems)){
 
-                   foreach ($getItems as $item_key => $item_value) {
+               foreach ($getItems as $item_key => $item_value) {
 
-                      $active = "";
-                      $checked = "";
+                  $active = "";
+                  $checked = "";
 
-                      if($getVariants["items"][$parent_value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
-                        $active = 'class="uni-select-item-active"';
-                        $checked = 'checked=""';
-                      }
+                  if($getVariants["items"][$parent_value["ads_filters_id"]][$item_value["ads_filters_items_id"]]){
+                    $active = 'class="uni-select-item-active"';
+                    $checked = 'checked=""';
+                  }
 
-                      $items .= '
-                       <label '.$active.' > <input type="checkbox" '.$checked.' name="filter['.$parent_value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$ULang->t( $item_value["ads_filters_items_value"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_items_value" ] ).'</span> <i class="la la-check"></i> </label>
-                      ';
+                  $items .= '
+                   <label '.$active.' > <input type="checkbox" '.$checked.' name="filter['.$parent_value["ads_filters_id"].'][]" value="'.$item_value["ads_filters_items_id"].'" > <span>'.$ULang->t( $item_value["ads_filters_items_value"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_items_value" ] ).'</span> <i class="la la-check"></i> </label>
+                  ';
 
-                   }
                }
 
                $return .= '
@@ -711,9 +740,12 @@ class Filters{
                    </div>                              
                ';
 
+                }
+
 
              }elseif($parent_value["ads_filters_type"] == "slider" || $parent_value["ads_filters_type"] == "input"){
 
+               if(count($getItems)){
 
                $return .= '
 
@@ -736,13 +768,33 @@ class Filters{
                               
                ';
 
+               }
 
+
+             }elseif($parent_value["ads_filters_type"] == "input_text"){
+
+               $return .= '
+
+                   <div class="filter-items" id-filter="'.$parent_value["ads_filters_id"].'" main-id-filter="'.$id_filter.'" data-ids="" >
+
+                        <div class="row mb15" >
+                          <div class="col-lg-5"> <label>'.$ULang->t( $parent_value["ads_filters_name"] , [ "table" => "uni_ads_filters", "field" => "ads_filters_name" ] ).$always.'</label> </div>
+                          <div class="col-lg-7">
+
+                              <input type="text" class="form-control" name="filter['.$parent_value["ads_filters_id"].'][]" value="'.$getVariants["value"][$parent_value["ads_filters_id"]][0]["ads_filters_variants_val"].'" />  
+
+                              <div class="msg-error" data-name="filter'.$parent_value["ads_filters_id"].'" ></div>
+
+                              '.$always_input.'
+
+                          </div>
+                        </div>
+
+                   </div>
+                              
+               ';
 
              }
-
-            }
-
-             
 
           }
 
@@ -910,11 +962,13 @@ class Filters{
 
                   foreach($array AS $key=>$val){
 
-                    $filter = $getFilters["id"][intval($id_filter)];
+                     $filter = $getFilters["id"][intval($id_filter)];
 
                      if($val != "" && $val != "null") {
 
-                        $query[] = "('".intval($id_filter)."','".round($val,2)."','".intval($product_id)."')"; 
+                        if($filter['ads_filters_type'] != 'input_text') $val = round($val,2);
+
+                        $query[] = "('".intval($id_filter)."','".$val."','".intval($product_id)."')"; 
 
                      }
                      
@@ -982,7 +1036,7 @@ class Filters{
                   if($getFilter){
                       foreach($array AS $val => $result){
 
-                          if($getFilter->ads_filters_type == "input"){
+                          if($getFilter->ads_filters_type == "input" || $getFilter->ads_filters_type == "input_text"){
                              $value[] = $val;
                           }else{
                              $getItem = findOne("uni_ads_filters_items", "ads_filters_items_id=?", array($val));
@@ -1031,7 +1085,7 @@ class Filters{
                   if($getFilter){
                       foreach($array AS $val => $result){
 
-                          if($getFilter->ads_filters_type == "input"){
+                          if($getFilter->ads_filters_type == "input" || $getFilter->ads_filters_type == "input_text"){
                              $value[] = $val;
                           }else{
                              $getItem = findOne("uni_ads_filters_items", "ads_filters_items_id=?", array($val));
@@ -1194,19 +1248,19 @@ class Filters{
 
            $getFilter = findOne( "uni_ads_filters", "ads_filters_id=?", [ $id_filter ] );
 
-           if( $getFilter["ads_filters_type"] != "input" ){
+           if( $getFilter["ads_filters_type"] != "input" && $getFilter["ads_filters_type"] != "input_text" ){
 
                foreach ($nested as $value) {
                   
                   $getFilterItem = findOne( "uni_ads_filters_items", "ads_filters_items_id=?", [ $value ] );
                   if($getFilterItem){
-                     $tags[] = $getFilter["ads_filters_name"] . ":" . $getFilterItem["ads_filters_items_value"];
+                     $tags[] = $getFilterItem["ads_filters_items_value"];
                   }
                
                }
 
            }else{
-              if( $nested[0] ) $tags[] = $getFilter["ads_filters_name"] . ":" . $nested[0];
+              if( $nested[0] ) $tags[] = $nested[0];
            }
 
    
@@ -1217,6 +1271,34 @@ class Filters{
 
     }
 
+    function mapCountChangeFilters($params=[]){
+        unset($params['area']);
+        unset($params['metro']);
+        return count($params);
+    }
+
+    function outFormFilters($name,$params=[]){
+        global $config;
+        $ULang = new ULang();
+        $CategoryBoard = new CategoryBoard();
+        $Geo = new Geo();
+        $Ads = new Ads();
+        $Filters = new Filters();
+        $Main = new Main();
+        if($name == 'map'){
+            $data = $params['data'];
+            $getCategoryBoard = $params['categories'];
+            require $config['template_path'].'/include/form_filters/map.php';
+        }elseif($name == 'catalog'){
+            $data = $params['data'];
+            $getCategoryBoard = $params['categories'];
+            require $config['template_path'].'/include/form_filters/catalog.php';
+        }elseif($name == 'shop'){
+            $data = $params['data'];
+            $getCategoryBoard = $params['categories'];
+            require $config['template_path'].'/include/form_filters/shop.php';
+        }
+    }
 
 
 

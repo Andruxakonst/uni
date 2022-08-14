@@ -60,12 +60,12 @@ if( file_exists( $config["basePath"] . "/installment.php" ) ){
       <div class="widget widget-06 has-shadow widget-and-stat">
          <div class="widget-body">
 
-            <h1 class="clients-chart-count" ></h1>
-            <p>Пользователей</p>
+            <h1 class="traffic-chart-count" ></h1>
+            <p>Посетителей сегодня</p>
 
          </div>
          <div class="widget-body p-0">
-            <div id="clients-gain-chart" ></div>
+            <div id="traffic-gain-chart" ></div>
          </div>         
       </div>
    </div>
@@ -74,12 +74,12 @@ if( file_exists( $config["basePath"] . "/installment.php" ) ){
       <div class="widget widget-06 has-shadow widget-and-stat">
          <div class="widget-body">
 
-            <h1 class="subscribe-chart-count" ></h1>
-            <p>Подписчиков</p>
+            <h1 class="clients-chart-count" ></h1>
+            <p>Пользователей</p>
 
          </div>
          <div class="widget-body p-0">
-            <div id="subscribe-gain-chart" ></div>
+            <div id="clients-gain-chart" ></div>
          </div>         
       </div>
    </div>
@@ -116,16 +116,43 @@ if( file_exists( $config["basePath"] . "/installment.php" ) ){
 
 <div class="row">
 
+   <?php if($_SESSION['cp_control_chat']){ ?>
+   <div class="col-xl-3">
+      <div class="widget widget-06 has-shadow widget-custom">
+         <div class="widget-body data-list-log-action">
+
+         </div>         
+      </div>
+   </div>
+
+   <div class="col-xl-3">
+      <div class="widget widget-06 has-shadow widget-custom">
+         <div class="widget-body data-list-chat-messages">
+
+         </div>         
+      </div>
+   </div>
+
+   <div class="col-xl-3">
+      <div class="widget widget-06 has-shadow widget-custom">
+         <div class="widget-body data-list-ads">
+
+         </div>         
+      </div>
+   </div>
+
+   <div class="col-xl-3">
+      <div class="widget widget-06 has-shadow widget-custom">
+         <div class="widget-body data-list-users">
+
+         </div>         
+      </div>
+   </div>
+   <?php }else{ ?>
    <div class="col-xl-4">
-      <div class="widget widget-06 has-shadow widget-and-stat">
-         <div class="widget-body">
+      <div class="widget widget-06 has-shadow widget-custom">
+         <div class="widget-body data-list-log-action">
 
-            <h1 class="traffic-chart-count" ></h1>
-            <p>Посетителей сегодня</p>
-
-         </div>
-         <div class="widget-body p-0">
-            <div id="traffic-gain-chart" ></div>
          </div>         
       </div>
    </div>
@@ -144,25 +171,9 @@ if( file_exists( $config["basePath"] . "/installment.php" ) ){
 
          </div>         
       </div>
-   </div>
+   </div>      
+   <?php } ?>
 
-
-</div>
-
-<div class="row" >
-  <div class="col-lg-12" >
-
-    <div class="widget widget-06 has-shadow">
-       <div class="widget-body">
-
-            <div class="table-responsive data-list-log-action">
-
-            </div>
-
-       </div>         
-    </div>
-
-  </div>
 </div>
 
 <div class="row" >

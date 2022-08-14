@@ -1,5 +1,8 @@
 <?php if( !defined('unisitecms') ) exit;
 
+$variantsPrice = getAll('select * from uni_variants_price');
+$measuresPrice = json_decode($settings['measures_price'], true);
+
 include("fn.php");
 ?>
 
@@ -64,20 +67,21 @@ include("fn.php");
                 </div>
               </div>
               
-              <?php if($settings["functionality"]["marketplace"]){ ?>
-              <div class="form-group row d-flex align-items-center" >
-                <label class="col-lg-3 form-control-label">Маркетплейс</label>
-                <div class="col-lg-6">
-                    <label class="mb0">
-                      <input class="toggle-checkbox-sm toolbat-toggle" type="checkbox" name="marketplace" value="1" >
-                      <span><span></span></span>
-                    </label>
-                </div>
+              <div class="form-group row d-flex align-items-center">
+                  <label class="col-lg-3 form-control-label">Возможности</label>
+                  <div class="col-lg-2">
+
+                        <select class="selectpicker" name="rules[]" title="Не выбрано" multiple >
+                            <option value="free_price" >Отдать даром</option>
+                            <option value="accept_promo" >Применение акции</option>
+                            <option value="measure_booking" >Выбор измерения только для бронирования и аренды</option>
+                        </select>
+
+                  </div>
               </div>
-              <?php } ?>
 
               <div class="form-group row d-flex align-items-center" >
-                <label class="col-lg-3 form-control-label">Цена при подаче объявления</label>
+                <label class="col-lg-3 form-control-label">Цена</label>
                 <div class="col-lg-6">
                     <label  class="mb0">
                       <input class="toggle-checkbox-sm" type="checkbox" checked="" name="display_price" value="1" >
@@ -89,20 +93,111 @@ include("fn.php");
               <div class="category-block-variant-price" style="display: block;" >
                 
                 <div class="form-group row d-flex align-items-center">
-                  <label class="col-lg-3 form-control-label">Название поля</label>
+                  <label class="col-lg-3 form-control-label">Название поля "Цена"</label>
                   <div class="col-lg-7">
-                         <select name="variant_price" class="selectpicker" >
-                            <option value="0" selected="" >Цена</option>
-                            <option value="1" >Зарплата</option>
-                            <option value="2" >Стоимость услуги</option>
-                            <option value="3" >Арендная плата в месяц</option>
-                            <option value="4" >Арендная плата за сутки</option>
-                         </select>
-                         <div style="margin-top: 5px;" ><small>Отображается при подаче объявления и в каталоге</small></div>
+                     <div class="box-label-flex" >
+                         <div class="box1-label-flex" >
+                             <select name="variant_price_id" class="selectpicker" >
+                                <?php
+                                    if(count($variantsPrice)){
+                                        foreach ($variantsPrice as $value) {
+                                            ?>
+                                            <option value="<?php echo $value['variants_price_id']; ?>" ><?php echo $value['variants_price_name']; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                ?>                        
+                             </select>
+                         </div>
+                         <div class="box2-label-flex box2-label-flex-grow1" >
+                            <a href="#" data-toggle="modal" data-target="#modal-list-variants-prefix-price" class="btn btn-gradient-02" ><i class="la la-pencil" ></i></a>
+                         </div>
+                     </div>
+                     <div style="margin-top: 5px;" ><small>Отображается при подаче объявления и в каталоге</small></div>
                   </div>
                 </div>
                 
+                <div class="form-group row d-flex align-items-center">
+                  <label class="col-lg-3 form-control-label">Измерения</label>
+                  <div class="col-lg-7">
+
+                         <div class="box-label-flex" >
+                             <div class="box1-label-flex" >
+                                <select class="selectpicker" name="measures_price[]" title="Не выбрано" multiple >
+                                    <?php
+                                      if(count($measuresPrice)){
+                                         foreach ($measuresPrice as $key => $value) { 
+                                             ?>
+                                             <option value="<?php echo $key; ?>" ><?php echo $value; ?></option>
+                                             <?php
+                                         }
+                                      }
+                                    ?>
+                                </select>
+                             </div>
+                             <div class="box2-label-flex box2-label-flex-grow1" >
+                                <a href="#" data-toggle="modal" data-target="#modal-list-variants-measure-price" class="btn btn-gradient-02" ><i class="la la-pencil" ></i></a>
+                             </div>
+                         </div>
+
+                     <div style="margin-top: 5px;" ><small>Доступны при подаче объявления</small></div>
+                  </div>
+                </div>
+
+                <?php if($settings["functionality"]["booking"]){ ?>
+                    
+                  <div class="form-group row d-flex align-items-center">
+                    <label class="col-lg-3 form-control-label">Бронирование/Аренда</label>
+                    <div class="col-lg-6">
+                        <label class="mb0">
+                          <input class="toggle-checkbox-sm" type="checkbox" name="booking" value="1" >
+                          <span><span></span></span>
+                        </label>
+                    </div>
+                  </div>
+
+                  <div class="category-block-booking-options" >
+                    
+                      <div class="form-group row d-flex align-items-center">
+                        <label class="col-lg-3 form-control-label">Выбор измерения</label>
+                        <div class="col-lg-6">
+                            <label class="mb0">
+                              <input class="toggle-checkbox-sm" type="checkbox" name="measures_price_booking" value="1" >
+                              <span><span></span></span>
+                            </label>
+                            <div style="margin-top: 5px;" ><small>Выбор измерения доступен только при выборе бронирования или аренды</small></div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row d-flex align-items-center">
+                        <label class="col-lg-3 form-control-label">Вариант</label>
+                        <div class="col-lg-2">
+
+                            <select class="form-control" name="booking_variant" >
+                                <option value="0" >Бронирование</option>
+                                <option value="1" >Аренда</option>
+                            </select>
+
+                        </div>
+                      </div>
+
+                  </div>
+
+                <?php } ?>
+
                 <div class="category-block-conditional-function" >
+
+                <?php if($settings["functionality"]["marketplace"]){ ?>
+                  <div class="form-group row d-flex align-items-center" >
+                    <label class="col-lg-3 form-control-label">Маркетплейс</label>
+                    <div class="col-lg-6">
+                        <label class="mb0">
+                          <input class="toggle-checkbox-sm toolbat-toggle" type="checkbox" name="marketplace" value="1" >
+                          <span><span></span></span>
+                        </label>
+                    </div>
+                  </div>
+                <?php } ?>
 
                 <?php if($settings["functionality"]["auction"]){ ?>
                 <div class="form-group row d-flex align-items-center">
@@ -130,7 +225,9 @@ include("fn.php");
 
                 </div>
 
-                <div class="category-block-conditional-online-view" >
+              </div>
+
+              <div class="category-block-conditional-online-view" >
 
                 <div class="form-group row d-flex align-items-center">
                   <label class="col-lg-3 form-control-label">Онлайн-показ</label>
@@ -141,9 +238,6 @@ include("fn.php");
                       </label>
                   </div>
                 </div>
-
-                </div>
-
 
               </div>
 
@@ -264,6 +358,112 @@ include("fn.php");
 
       </div>
       
+   </div>
+</div>
+
+<div id="modal-list-variants-prefix-price" class="modal fade">
+   <div class="modal-dialog modal-md">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title">Список вариантов</h4>
+            <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">close</span>
+            </button>
+         </div>
+         <div class="modal-body">
+
+                <form class="list-variants-prefix-price-form" >
+                <?php
+                    if(count($variantsPrice)){
+                        foreach ($variantsPrice as $value) {
+                            ?>
+                            <div class="list-variants-prefix-price-item" id="variant-price<?php echo $value['variants_price_id']; ?>" >
+
+                                 <div class="box-label-flex box-label-flex-align-center" >
+                                     <div class="box1-label-flex box2-label-flex-grow1" >
+                                        <input type="text" name="list_variant_price[edit][<?php echo $value['variants_price_id']; ?>]" value="<?php echo $value['variants_price_name']; ?>" class="form-control" >
+                                     </div>
+                                     <div class="box2-label-flex" >
+                                        <span data-id="<?php echo $value['variants_price_id']; ?>" class="list-variants-prefix-price-delete" style="cursor: pointer;" ><i class="la la-trash" style="font-size: 16px;" ></i></span>
+                                     </div>
+                                 </div>
+
+                            </div>
+                            <?php
+                        }
+                    }
+                ?>
+                </form>
+
+                <div style="margin-top: 15px;" ><button type="button" class="btn btn-sm btn-success list-variants-prefix-price-add" >Добавить</button></div>
+
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-shadow" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary list-variants-prefix-price-save">Сохранить</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div id="modal-list-variants-measure-price" class="modal fade">
+   <div class="modal-dialog modal-md">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title">Список измерений</h4>
+            <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">close</span>
+            </button>
+         </div>
+         <div class="modal-body">
+
+                <form class="list-variants-measure-price-form" >
+                <?php
+                    if(count($measuresPrice)){
+                        foreach ($measuresPrice as $key => $value) {
+                            if($key === 'hour' || $key === 'day' || $key === 'daynight' || $key === 'week' || $key === 'month'){
+                            ?>
+                                <div class="list-variants-measure-price-item" >
+
+                                     <div class="box-label-flex box-label-flex-align-center" >
+                                         <div class="box1-label-flex box2-label-flex-grow1" >
+                                            <?php echo $value; ?>
+                                         </div>
+                                     </div>
+
+                                </div>
+                            <?php
+                            }else{
+                            ?>
+                                <div class="list-variants-measure-price-item" id="measure-price<?php echo $key; ?>" >
+
+                                     <div class="box-label-flex box-label-flex-align-center" >
+                                         <div class="box1-label-flex box2-label-flex-grow1" >
+                                            <input type="text" name="list_measure_price[]" value="<?php echo $value; ?>" class="form-control" >
+                                         </div>
+                                         <div class="box2-label-flex" >
+                                            <span data-id="<?php echo $key; ?>" class="list-variants-measure-price-delete" style="cursor: pointer;" ><i class="la la-trash" style="font-size: 16px;" ></i></span>
+                                         </div>
+                                     </div>
+
+                                </div>
+                            <?php                                
+                            }
+                        }
+                    }
+                ?>
+                </form>
+
+                <div style="margin-top: 15px;" ><button type="button" class="btn btn-sm btn-success list-variants-measure-price-add" >Добавить</button></div>
+
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-shadow" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary list-variants-measure-price-save">Сохранить</button>
+         </div>
+      </div>
    </div>
 </div>
 

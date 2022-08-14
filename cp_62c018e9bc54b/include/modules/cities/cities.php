@@ -182,6 +182,13 @@ if(!empty($_GET["search"])){
                 </div>
 
                 <div class="form-group row d-flex align-items-center mb-5">
+                  <label class="col-lg-3 form-control-label">Склонение</label>
+                  <div class="col-lg-9">
+                       <input type="text" class="form-control" value="" name="declination" >
+                  </div>
+                </div>
+
+                <div class="form-group row d-flex align-items-center mb-5">
                   <label class="col-lg-3 form-control-label">Алиас</label>
                   <div class="col-lg-9">
                        <input type="text" class="form-control outTranslate" value="" name="alias" >

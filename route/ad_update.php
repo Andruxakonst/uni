@@ -65,6 +65,35 @@ if($settings["ad_create_period"]){
 	}
 }
 
+if($data["ads_booking_additional_services"]){
+	$booking_additional_services = json_decode($data["ads_booking_additional_services"], true);
+	if($booking_additional_services){
+		foreach ($booking_additional_services as $key => $value) {
+			$data['booking_additional_services'] .= '
+		           <div class="booking-additional-services-item" >
+		                <div class="booking-additional-services-item-row" >
+		                    <div class="booking-additional-services-item-row1" >
+		                        <input type="text" name="booking_additional_services['.$key.'][name]" placeholder="'.$ULang->t("Название услуги").'" value="'.$value['name'].'" class="ads-create-input" >
+		                    </div>
+		                    <div class="booking-additional-services-item-row2" >
+		                        <div class="input-dropdown" >
+		                           <input type="text" name="booking_additional_services['.$key.'][price]" placeholder="'.$ULang->t("Цена").'" value="'.$value['price'].'" class="ads-create-input" maxlength="11" > 
+		                           <div class="input-dropdown-box">
+		                              <div class="uni-dropdown-align" >
+		                                 <span class="input-dropdown-name-display"> '.$settings["currency_main"]["sign"].' </span>
+		                              </div>
+		                           </div>
+		                        </div>
+		                    </div>
+		                    <div class="booking-additional-services-item-row3" >
+		                        <span class="booking-additional-services-item-delete" ><i class="las la-trash-alt"></i></span>
+		                    </div>                                                                
+		                </div>
+		           </div>
+			';
+		}
+	}
+}
 
 $load_filters_ad = $Filters->load_filters_ad($data["ads_id_cat"],$Filters->getVariants($data["ads_id"]));
 
@@ -218,149 +247,338 @@ if(!$settings["ad_create_currency"]){
 }
 
 
-$field_price_name = $Ads->variantPrice( $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_variant_price"] );
+$field_price_name = $Main->nameInputPrice($getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_variant_price_id"]);
 $getShop = $Shop->getUserShop( $_SESSION["profile"]["id"] );
 
 
-if( $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_display_price"] ){
+if($getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_display_price"]){
 
-  if($getShop && $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_variant_price"] != 1 && !$getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_auction"]){
 
-     $data["price"] .= '
-        <div class="ads-create-main-data-box-item" >
-            <p class="ads-create-subtitle" >'.$ULang->t("Акция").'</p>
-            <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Вы можете включить акцию для своего объявления. В каталоге объявлений будет показываться старая и новая цена. Акция работает только при активном магизине.").'</div>
-            <div class="custom-control custom-checkbox mt15">
-                <input type="checkbox" class="custom-control-input" '.($data["ads_price_old"] ? 'checked=""' : '').' name="stock" id="stock" value="1">
-                <label class="custom-control-label" for="stock">'.$ULang->t("Включить акцию").'</label>
-            </div>
-        </div>
-     ';
-
-  }
-
-  
   $data["price"] .= '
       <div class="ads-create-main-data-box-item" >
       <p class="ads-create-subtitle" >'.$field_price_name.'</p>
   ';
 
-  if( $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_auction"] ){
 
-      if( $data["ads_auction"] ){
+  if($data["ads_auction"]){
+
+       $price = '
+
+            <div class="ads-create-main-data-box-item" >
+
+                <p class="ads-create-subtitle" >'.$ULang->t("С какой цены начать торг?").'</p>
+
+                <div class="row" >
+                  <div class="col-lg-6" >
+                      <div class="input-dropdown" >
+                         <input type="text" name="price" class="ads-create-input inputNumber" value="'.number_format($data["ads_price"],0,"."," ").'" maxlength="11" > 
+                         '.$dropdown_currency.'
+                      </div>
+                      <div class="msg-error" data-name="price" ></div>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="ads-create-main-data-box-item" >
+
+                <p class="ads-create-subtitle" >'.$ULang->t("Цена продажи").'</p>
+                <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Укажите цену, за которую вы готовы сразу продать товар или оставьте это поле пустым если у аукциона нет ограничений по цене.").'</div>
+
+                <div class="mt15" ></div>
+
+                <div class="row" >
+                  <div class="col-lg-6" >
+                      <div class="input-dropdown" >
+                         <input type="text" name="auction_price_sell" class="ads-create-input inputNumber" value="'.number_format($data["ads_auction_price_sell"],0,"."," ").'" maxlength="11" > 
+                         <div class="input-dropdown-box">
+                            <div class="uni-dropdown-align" >
+                               <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_data"][ $data["ads_currency"] ]["sign"].' </span>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="msg-error" data-name="auction_price_sell" ></div>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="ads-create-main-data-box-item" >
+
+                <p class="ads-create-subtitle" >'.$ULang->t("Длительность торгов").'</p>
+                <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Укажите срок действия аукциона от 1-го до 30-ти дней.").'</div>
+
+                <div class="mt15" ></div>
+
+                <div class="row" >
+                  <div class="col-lg-3" >
+                      <input type="text" name="auction_duration_day" value="'.$data["ads_auction_day"].'" class="ads-create-input" maxlength="2" value="1" > 
+                      <div class="msg-error" data-name="auction_duration_day" ></div>
+                  </div>
+                </div>
+
+            </div>
+
+       ';
+
+	   $data["price"] .= '
+	       <div class="row" >
+	           <div class="col-lg-4" >
+	              <div data-var="fix" class="ads-create-main-data-price-variant" >
+	                 <div>
+	                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
+	                 </div>
+	              </div>
+	           </div>
+	           <div class="col-lg-4" >
+	              <div data-var="from" class="ads-create-main-data-price-variant" >
+	                 <div>
+	                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+	                 </div>
+	              </div>
+	           </div>               
+	           <div class="col-lg-4" >
+	              <div data-var="auction" class="ads-create-main-data-price-variant ads-create-main-data-price-variant-active" >
+	                 <div>
+	                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Аукцион").'</span>
+	                 </div>                          
+	              </div>
+	           </div>                     
+	       </div>
+	       <div class="mb25" ></div>
+	       <div class="ads-create-main-data-stock-container" >'.$stock.'</div>
+	       <div class="ads-create-main-data-price-container" >'.$price.'</div>
+	   ';
+
+  }else{
+
+       if($getShop && $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_rules"]["accept_promo"]){
+
+         $stock = '
+            <div class="ads-create-main-data-box-item" style="margin-bottom: 25px;" >
+                <p class="ads-create-subtitle" >Акция</p>
+                <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Вы можете включить акцию для своего объявления. В каталоге объявлений будет показываться старая и новая цена. Акция работает только при активном магизине.").'</div>
+                <div class="custom-control custom-checkbox mt15">
+                    <input type="checkbox" class="custom-control-input" name="stock" '.($data["ads_price_old"] ? 'checked=""' : '').' id="stock" value="1">
+                    <label class="custom-control-label" for="stock">'.$ULang->t("Включить акцию").'</label>
+                </div>
+            </div>
+         ';
+
+       }  
+
+       if($getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_measures_price"]){
+
+            $measuresPrice = json_decode($getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_measures_price"], true);
+
+            if($measuresPrice){
+
+                foreach ($measuresPrice as $value) {
+
+                   if($value == $data["ads_price_measure"]){
+                   	  $activeMeasure = 'class="uni-select-item-active"';
+                   	  $checkedMeasure = 'checked=""';
+                   }else{
+                   	  $activeMeasure = '';
+                   	  $checkedMeasure = '';
+                   }
+
+                   $listMeasures .= '<label '.$activeMeasure.' > <input type="radio" '.$checkedMeasure.' name="measure" value="'.$value.'" > <span>'.getNameMeasuresPrice($value).'</span> <i class="la la-check"></i> </label>';
+                }
+
+                $measures = '
+                    <div class="col-lg-6" >
+                        <div class="uni-select" data-status="0" >
+
+                             <div class="uni-select-name" data-name="'.$ULang->t("Не выбрано").'" value="1" > <span>'.$ULang->t("Не выбрано").'</span> <i class="la la-angle-down"></i> </div>
+                             <div class="uni-select-list" >
+                                 '.$listMeasures.'
+                             </div>
+                        
+                        </div> 
+                        <div class="msg-error" data-name="measure" ></div>
+                    </div>
+                ';
+
+                $measures_lg4 = '
+                    <div class="col-lg-4" >
+                        <div class="uni-select" data-status="0" >
+
+                             <div class="uni-select-name" data-name="'.$ULang->t("Не выбрано").'" > <span>'.$ULang->t("Не выбрано").'</span> <i class="la la-angle-down"></i> </div>
+                             <div class="uni-select-list" >
+                                 <label> <input type="radio" name="measure" value="1" > <span>'.$ULang->t("Не выбрано").'</span> <i class="la la-check"></i> </label>
+                                 '.$listMeasures.'
+                             </div>
+                        
+                        </div> 
+                        <div class="msg-error" data-name="measure" ></div>
+                    </div>
+                ';
+
+            }
+
+       }
+
+       if($data["ads_price_from"]){
 
            $price = '
+              <div class="ads-create-main-data-box-item" >
+              <div class="row" >
 
-                <div class="ads-create-main-data-box-item" >
+                <div class="col-lg-6" >
 
-                    <p class="ads-create-subtitle" >'.$ULang->t("С какой цены начать торг?").'</p>
-
-                    <div class="row" >
-                      <div class="col-lg-6" >
-                          <div class="input-dropdown" >
-                             <input type="text" name="price" class="ads-create-input inputNumber" value="'.number_format($data["ads_price"],0,"."," ").'" maxlength="11" > 
-                             '.$dropdown_currency.'
-                          </div>
-                          <div class="msg-error" data-name="price" ></div>
-                      </div>
+                    <div class="ads-create-main-data-box-item-flex" >
+                        <div class="ads-create-main-data-box-item-flex1" >
+                            <span>'.$ULang->t("От").'</span>
+                        </div>
+                        <div class="ads-create-main-data-box-item-flex2" >
+                            <div class="input-dropdown" >
+                               <input type="text" name="price" placeholder="'.$field_price_name.'" value="'.number_format($data["ads_price"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
+                               '.$dropdown_currency.'
+                            </div>
+                            <div class="msg-error" data-name="price" ></div>
+                        </div>                        
                     </div>
 
                 </div>
 
-                <div class="ads-create-main-data-box-item" >
+                '.$measures.'
 
-                    <p class="ads-create-subtitle" >'.$ULang->t("Цена продажи").'</p>
-                    <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Укажите цену, за которую вы готовы сразу продать товар или оставьте это поле пустым если у аукциона нет ограничений по цене.").'</div>
-
-                    <div class="mt15" ></div>
-
-                    <div class="row" >
-                      <div class="col-lg-6" >
-                          <div class="input-dropdown" >
-                             <input type="text" name="auction_price_sell" class="ads-create-input inputNumber" value="'.number_format($data["ads_auction_price_sell"],0,"."," ").'" maxlength="11" > 
-                             <div class="input-dropdown-box">
-                                <div class="uni-dropdown-align" >
-                                   <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_data"][ $data["ads_currency"] ]["sign"].' </span>
-                                </div>
-                             </div>
-                          </div>
-                          <div class="msg-error" data-name="auction_price_sell" ></div>
-                      </div>
-                    </div>
-
-                </div>
-
-                <div class="ads-create-main-data-box-item" >
-
-                    <p class="ads-create-subtitle" >'.$ULang->t("Длительность торгов").'</p>
-                    <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Укажите срок действия аукциона от 1-го до 30-ти дней.").'</div>
-
-                    <div class="mt15" ></div>
-
-                    <div class="row" >
-                      <div class="col-lg-3" >
-                          <input type="text" name="auction_duration_day" value="'.$data["ads_auction_day"].'" class="ads-create-input" maxlength="2" value="1" > 
-                          <div class="msg-error" data-name="auction_duration_day" ></div>
-                      </div>
-                    </div>
-
-                </div>
-
+              </div> 
+              </div>
            ';
+           
+           if($getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_auction"]){    	 
+			   
+			   $data["price"] .= '
+			       <div class="row" >
+			           <div class="col-lg-4" >
+			              <div data-var="fix" class="ads-create-main-data-price-variant" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>
+			           <div class="col-lg-4" >
+			              <div data-var="from" class="ads-create-main-data-price-variant ads-create-main-data-price-variant-active" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>               
+			           <div class="col-lg-4" >
+			              <div data-var="auction" class="ads-create-main-data-price-variant" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Аукцион").'</span>
+			                 </div>                          
+			              </div>
+			           </div>                     
+			       </div>
+			       <div class="mb25" ></div>
+			       <div class="ads-create-main-data-stock-container" ></div>
+			       <div class="ads-create-main-data-price-container" >'.$price.'</div>
+			   ';
 
-      }else{
+		   }else{
 
-           if($getShop){
+			   $data["price"] .= '
+			       <div class="row" >
+			           <div class="col-lg-6" >
+			              <div data-var="fix" class="ads-create-main-data-price-variant" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>
+			           <div class="col-lg-6" >
+			              <div data-var="from" class="ads-create-main-data-price-variant ads-create-main-data-price-variant-active" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>                                    
+			       </div>
+			       <div class="mb25" ></div>
+			       <div class="ads-create-main-data-stock-container" ></div>
+			       <div class="ads-create-main-data-price-container" >'.$price.'</div>
+			   ';
 
-             $stock = '
-                <div class="ads-create-main-data-box-item" style="margin-bottom: 25px;" >
-                    <p class="ads-create-subtitle" >Акция</p>
-                    <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Вы можете включить акцию для своего объявления. В каталоге объявлений будет показываться старая и новая цена. Акция работает только при активном магизине.").'</div>
-                    <div class="custom-control custom-checkbox mt15">
-                        <input type="checkbox" class="custom-control-input" name="stock" '.($data["ads_price_old"] ? 'checked=""' : '').' id="stock" value="1">
-                        <label class="custom-control-label" for="stock">'.$ULang->t("Включить акцию").'</label>
-                    </div>
-                </div>
-             ';
+		   }
 
-           }  
+       }else{
 
+	       if( $data["ads_price_old"] ){    
 
-           if( $data["ads_price_old"] ){    
+	       	   if($data["ads_price_measure"]){
 
-	           $price = '
+		           $price = '
 
-		           <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
-		              <div class="row" >
-		                <div class="col-lg-6" >
+			           <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
+			              <div class="row" >
+			                <div class="col-lg-4" >
 
-		                    <div class="input-dropdown" >
-		                       <input type="text" name="price" placeholder="'.$ULang->t("Старая цена").'" value="'.number_format($data["ads_price_old"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
-		                       '.$dropdown_currency.'
-		                    </div>
-		                    <div class="msg-error" data-name="price" ></div>
+			                    <div class="input-dropdown" >
+			                       <input type="text" name="price" placeholder="'.$ULang->t("Старая цена").'" value="'.number_format($data["ads_price_old"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
+			                       '.$dropdown_currency.'
+			                    </div>
+			                    <div class="msg-error" data-name="price" ></div>
 
-		                </div>
-		                <div class="col-lg-6" >
+			                </div>
+			                <div class="col-lg-4" >
 
-		                    <div class="input-dropdown" >
-		                       <input type="text" name="stock_price" placeholder="'.$ULang->t("Новая цена").'" value="'.number_format($data["ads_price"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
-		                       <div class="input-dropdown-box">
-		                          <div class="uni-dropdown-align" >
-		                             <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_data"][ $data["ads_currency"] ]["sign"].' </span>
-		                          </div>
-		                       </div>
-		                    </div>
+			                    <div class="input-dropdown" >
+			                       <input type="text" name="stock_price" placeholder="'.$ULang->t("Новая цена").'" value="'.number_format($data["ads_price"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
+			                       <div class="input-dropdown-box">
+			                          <div class="uni-dropdown-align" >
+			                             <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_data"][ $data["ads_currency"] ]["sign"].' </span>
+			                          </div>
+			                       </div>
+			                    </div>
 
-		                </div>                
-		              </div>
-		           </div>
+			                </div> 
+			                '.$measures_lg4.'               
+			              </div>
+			           </div>
 
-	           ';     
+		           ';
 
-           }else{
+	       	   }else{
 
-	           $price .= '
+		           $price = '
+
+			           <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
+			              <div class="row" >
+			                <div class="col-lg-6" >
+
+			                    <div class="input-dropdown" >
+			                       <input type="text" name="price" placeholder="'.$ULang->t("Старая цена").'" value="'.number_format($data["ads_price_old"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
+			                       '.$dropdown_currency.'
+			                    </div>
+			                    <div class="msg-error" data-name="price" ></div>
+
+			                </div>
+			                <div class="col-lg-6" >
+
+			                    <div class="input-dropdown" >
+			                       <input type="text" name="stock_price" placeholder="'.$ULang->t("Новая цена").'" value="'.number_format($data["ads_price"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
+			                       <div class="input-dropdown-box">
+			                          <div class="uni-dropdown-align" >
+			                             <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_data"][ $data["ads_currency"] ]["sign"].' </span>
+			                          </div>
+			                       </div>
+			                    </div>
+
+			                </div>                
+			              </div>
+			           </div>
+
+		           ';
+
+	       	   }     
+
+	       }else{
+
+	            $price .= '
 	              <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
 	              <div class="row" >
 
@@ -373,9 +591,11 @@ if( $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_
 	                    <div class="msg-error" data-name="price" ></div>
 
 	                </div>
-	           ';
-	                
-	            if( $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_variant_price"] == 0 ){
+	            ';
+
+	            $price .= $measures;
+
+	            if($getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_rules"]["free_price"]){
 
 	                $price .= '
 	                <div class="col-lg-6" >
@@ -395,110 +615,70 @@ if( $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_
 	              </div>          
 	           ';         
 
-           }
+	       }
 
-      }
+	       if($getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_auction"]){
+			   
+			   $data["price"] .= '
+			       <div class="row" >
+			           <div class="col-lg-4" >
+			              <div data-var="fix" class="ads-create-main-data-price-variant ads-create-main-data-price-variant-active" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>
+			           <div class="col-lg-4" >
+			              <div data-var="from" class="ads-create-main-data-price-variant" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>               
+			           <div class="col-lg-4" >
+			              <div data-var="auction" class="ads-create-main-data-price-variant" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Аукцион").'</span>
+			                 </div>                          
+			              </div>
+			           </div>                     
+			       </div>
+			       <div class="mb25" ></div>
+			       <div class="ads-create-main-data-stock-container" >'.$stock.'</div>
+			       <div class="ads-create-main-data-price-container" >'.$price.'</div>
+			   ';
 
-      $data["price"] .= '
-           <div class="row" >
-               <div class="col-lg-6" >
-                  <div data-var="fix" class="ads-create-main-data-price-variant '.(!$data["ads_auction"] ? 'ads-create-main-data-price-variant-active' : '').'" >
-                     <div >
-                       <i class="las la-money-bill-wave"></i>
-                       <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-6" >
-                  <div data-var="auction" class="ads-create-main-data-price-variant '.($data["ads_auction"] ? 'ads-create-main-data-price-variant-active' : '').'" >
-                     <div >
-                       <i class="las la-gavel"></i>
-                       <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Аукцион").'</span>
-                     </div>                          
-                  </div>
-               </div>                     
-           </div>
-           <div class="mb25" ></div>
-           <div class="ads-create-main-data-stock-container" >'.$stock.'</div>
-           <div class="ads-create-main-data-price-container" >'.$price.'</div>
-      ';
+			}else{
 
-  }else{
+			   $data["price"] .= '
+			       <div class="row" >
+			           <div class="col-lg-6" >
+			              <div data-var="fix" class="ads-create-main-data-price-variant ads-create-main-data-price-variant-active" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>
+			           <div class="col-lg-6" >
+			              <div data-var="from" class="ads-create-main-data-price-variant" >
+			                 <div>
+			                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+			                 </div>
+			              </div>
+			           </div>                                    
+			       </div>
+			       <div class="mb25" ></div>
+			       <div class="ads-create-main-data-stock-container" >'.$stock.'</div>
+			       <div class="ads-create-main-data-price-container" >'.$price.'</div>
+			   ';
 
-      if( $data["ads_price_old"] ){    
+			}
 
-         $data["price"] .= '
+       }
 
-            <div class="ads-create-main-data-price-container" >
-               <div class="row" >
-               <div class="col-lg-6" >
-
-                     <div class="input-dropdown" >
-                        <input type="text" name="price" placeholder="'.$ULang->t("Старая цена").'" value="'.number_format($data["ads_price_old"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
-                        '.$dropdown_currency.'
-                     </div>
-                     <div class="msg-error" data-name="price" ></div>
-
-               </div>
-               <div class="col-lg-6" >
-
-                     <div class="input-dropdown" >
-                        <input type="text" name="stock_price" placeholder="'.$ULang->t("Новая цена").'" value="'.number_format($data["ads_price"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
-                        <div class="input-dropdown-box">
-                           <div class="uni-dropdown-align" >
-                              <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_data"][ $data["ads_currency"] ]["sign"].' </span>
-                           </div>
-                        </div>
-                     </div>
-
-               </div>                
-               </div>
-            </div>
-
-         ';     
-
-      }else{
-
-         $data["price"] .= '
-            <div class="ads-create-main-data-price-container" >
-            <div class="row" >
-
-            <div class="col-lg-6" >
-
-                  <div class="input-dropdown" >
-                     <input type="text" name="price" '.($data["ads_price_free"] ? 'disabled=""' : '').' placeholder="'.$field_price_name.'" value="'.number_format($data["ads_price"],0,"."," ").'" class="ads-create-input inputNumber" maxlength="11" > 
-                     '.$dropdown_currency.'
-                  </div>
-                  <div class="msg-error" data-name="price" ></div>
-
-            </div>
-         ';
-            
-         if( $getCategoryBoard["category_board_id"][$data["ads_id_cat"]]["category_board_variant_price"] == 0 ){
-
-            $data["price"] .= '
-            <div class="col-lg-6" >
-
-                  <div class="custom-control custom-checkbox mt10">
-                     <input type="checkbox" class="custom-control-input" '.($data["ads_price_free"] ? 'checked=""' : '').' name="price_free" id="price_free" value="1">
-                     <label class="custom-control-label" for="price_free">'.$ULang->t("Отдам даром").'</label>
-                  </div>
-
-            </div> 
-            ';
-
-         }
-
-         $data["price"] .= '
-            </div> 
-            </div>          
-         ';         
-
-      }
-
-            
   }
-   
+
+
  $data["price"] .= '
     </div>             
  ';               

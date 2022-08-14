@@ -10,6 +10,7 @@ $Ads = new Ads();
 $Main = new Main();
 $Geo = new Geo();
 $Profile = new Profile();
+$ULang = new Ulang();
 
 $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true);
 $user_data = [];
@@ -133,6 +134,50 @@ if($_GET["network"] == "vk"){
 	}
 
 
+}elseif($_GET["network"] == "yandex"){
+
+	if (!empty($_GET['code'])) {
+
+		$params = array(
+			'grant_type'    => 'authorization_code',
+			'code'          => $_GET['code'],
+			'client_id'     => $social_auth_params["yandex"]["id_app"],
+			'client_secret' => $social_auth_params["yandex"]["key"],
+		);
+		
+		$ch = curl_init('https://oauth.yandex.ru/token');
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $params); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		$data = curl_exec($ch);
+		curl_close($ch);	
+				 
+		$data = json_decode($data, true);
+		if (!empty($data['access_token'])) {
+			$ch = curl_init('https://login.yandex.ru/info');
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, array('format' => 'json')); 
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: OAuth ' . $data['access_token']));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_HEADER, false);
+			$info = curl_exec($ch);
+			curl_close($ch);
+	 
+			$info = json_decode($info, true);
+
+			$user_data["email"] = $info['default_email'];
+			$user_data["name"] = $info['first_name'];
+			$user_data["surname"] = $info['last_name'];
+			$user_data["photo"] =  !$info['is_avatar_empty'] ? 'https://avatars.yandex.net/get-yapic/'.$info['default_avatar_id'].'/islands-retina-50' : '';
+
+		}else{
+			header("Location: " . _link("auth") );
+		}
+	}
+
 }
 
 if($user_data){
@@ -149,10 +194,10 @@ if($user_data){
 	   }else{
 	      if($result["status_user"]){
 		   $content = '
-		       <h4 class="mt50" ><strong>Ваш аккаунт заблокирован или удален</strong></h4> 
-		       <p>Если вы не согласны с нашим решением — напишите в службу поддержки</p> 
+		       <h4 class="mt50" ><strong>'.$ULang->t('Ваш аккаунт заблокирован или удален').'</strong></h4> 
+		       <p>'.$ULang->t('Если вы не согласны с нашим решением — напишите в службу поддержки').'</p> 
 		       <br>
-		       <a class="btn-custom btn-color-blue" style="display: inline-block;" href="'._link("feedback").'">Написать в поддержку</a>
+		       <a class="btn-custom btn-color-blue" style="display: inline-block;" href="'._link("feedback").'">'.$ULang->t('Написать в поддержку').'</a>
 		   ';
 	        include $config["template_path"] . "/oauth.tpl";
 	      }
@@ -160,10 +205,10 @@ if($user_data){
 
 	}else{
 	   $content = '
-	       <h4 class="mt50" ><strong>Для регистрации требуется e-mail адрес!</strong></h4> 
-	       <p>Для авторизации/регистрации на нашем сайте перейдите на страницу входа и укажите данные</p> 
+	       <h4 class="mt50" ><strong>'.$ULang->t('Для регистрации требуется e-mail адрес!').'</strong></h4> 
+	       <p>'.$ULang->t('Для авторизации/регистрации на нашем сайте перейдите на страницу входа и укажите данные').'</p> 
 	       <br>
-	       <a class="btn-custom btn-color-blue" style="display: inline-block;" href="'._link("auth").'">Перейти на страницу входа</a>
+	       <a class="btn-custom btn-color-blue" style="display: inline-block;" href="'._link("auth").'">'.$ULang->t('Перейти на страницу входа').'</a>
 	   ';
 	   include $config["template_path"] . "/oauth.tpl";
 	}

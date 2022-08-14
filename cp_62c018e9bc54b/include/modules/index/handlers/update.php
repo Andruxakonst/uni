@@ -36,9 +36,6 @@ if(isAjax() == true){
        $getClients = getOne("select count(*) as total from uni_clients where clients_status!='3' and date(clients_datetime_add) = '".$value."'");
        $data_clients[] = array( $value ,intval($getClients["total"]) );
 
-       $getSubscribe = getOne("select count(*) as total from uni_subscription where date(subscription_datetime_add) = '".$value."'");
-       $data_subscribe[] = array( $value ,intval($getSubscribe["total"]) );
-
        $getAds = getOneCache("select count(*) as total from uni_ads where ads_status!='8' and date(ads_datetime_add) = '".$value."'");
        $data_ads[] = array( $value ,intval($getAds["total"]) );
 
@@ -82,13 +79,29 @@ if(isAjax() == true){
     require __dir__ . "/include/list-log-action.php";
     $list_log_action = ob_get_clean();
 
+    $chatMessages = [];
+
+    if($_SESSION['cp_control_chat']){
+      $getActiveDialog = getAll('select * from uni_chat_users where chat_users_id_user=? or chat_users_id_interlocutor=? group by chat_users_id_hash order by chat_users_id desc limit 3', [0,0]);
+
+      if(count($getActiveDialog)){
+         foreach ($getActiveDialog as $value) {
+            $getMessage = findOne('uni_chat_messages', 'chat_messages_id_hash=? and chat_messages_status=? and chat_messages_id_user!=? order by chat_messages_date desc', [$value['chat_users_id_hash'],0,0]);
+            if($getMessage) $chatMessages[] = $getMessage;
+         }
+      }
+    }
+
+    ob_start();
+    require __dir__ . "/include/list-chat-messages.php";
+    $list_chat_messages = ob_get_clean();
+
     if($settings["statistics_variant"] == 1){
   
       echo json_encode( 
                   array( 
 
                     "clients" => array( "count" => (int)getOne("select count(*) as total from uni_clients where clients_status!='3'")["total"], "data" => $data_clients ), 
-                    "subscribe" => array( "count" => (int)getOne("select count(*) as total from uni_subscription")["total"], "data" => $data_subscribe ), 
                     "ads" => array( "count" => (int)getOneCache("select count(*) as total from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status!='8' and clients_status!='3'")["total"], "data" => $data_ads ), 
                     "orders" => array( "count" => $Main->price(getOne("select sum(orders_price) as total from uni_orders where orders_status_pay=1")["total"]) , "data" => $data_orders ), 
                     "traffic" => array( "count" => (int)getOne("select count(*) as total from uni_metrics where date(date_view) = '$now'")["total"] , "data" => $data_traffic ), 
@@ -96,6 +109,7 @@ if(isAjax() == true){
                     "list_users" => $list_users,
                     "list_traffic" => $list_traffic,
                     "list_log_action" => $list_log_action,
+                    "list_chat_messages" => $list_chat_messages,
 
                   ) 
       );
@@ -106,7 +120,6 @@ if(isAjax() == true){
                   array( 
 
                     "clients" => array( "count" => (int)getOne("select count(*) as total from uni_clients where clients_status!='3' and date(clients_datetime_add)='$now'")["total"], "data" => $data_clients ), 
-                    "subscribe" => array( "count" => (int)getOne("select count(*) as total from uni_subscription where date(subscription_datetime_add)='$now'")["total"], "data" => $data_subscribe ), 
                     "ads" => array( "count" => (int)getOneCache("select count(*) as total from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status!='8' and clients_status!='3' and date(ads_datetime_add)='$now'")["total"], "data" => $data_ads ), 
                     "orders" => array( "count" => $Main->price(getOne("select sum(orders_price) as total from uni_orders where orders_status_pay=1 and date(orders_date)='$now'")["total"]) , "data" => $data_orders ), 
                     "traffic" => array( "count" => (int)getOne("select count(*) as total from uni_metrics where date(date_view) = '$now'")["total"] , "data" => $data_traffic ), 
@@ -114,6 +127,7 @@ if(isAjax() == true){
                     "list_users" => $list_users,
                     "list_traffic" => $list_traffic,
                     "list_log_action" => $list_log_action,
+                    "list_chat_messages" => $list_chat_messages,
 
                   ) 
       );

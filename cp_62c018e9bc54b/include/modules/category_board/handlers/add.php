@@ -47,18 +47,25 @@ if(!$_POST["h1"]){
 }
 
 if(!$_POST["display_price"]){
-    $_POST["auction"] = 0;
-    $_POST["variant_price"] = 0;
-    $_POST["secure"] = 0;
-}
-
-if( $_POST["variant_price"] != 0 && $_POST["variant_price"] !=2 ){
+    $_POST["variant_price_id"] = 0;
+    $_POST["booking"] = 0;
     $_POST["auction"] = 0;
     $_POST["secure"] = 0;
+    $_POST["marketplace"] = 0;
 }
 
-if( $_POST["variant_price"] == 1 || $_POST["variant_price"] == 2 ){
-    $_POST["online_view"] = 0;
+if($_POST["booking"]){
+    if($_POST["auction"] || $_POST["secure"]){
+        $error[] = "Бронирование/Аренда доступны без аукционов и безопасных сделок";
+    }
+}
+
+if($_POST["measures_price"]){
+    $measures_price = json_encode($_POST["measures_price"],JSON_UNESCAPED_UNICODE);
+}
+
+if($_POST["rules"]){
+    $rules = json_encode($_POST["rules"],JSON_UNESCAPED_UNICODE);
 }
 
 if( !$_POST["image_delete"] ){
@@ -74,7 +81,7 @@ if( !$_POST["image_delete"] ){
 
 if (count($error) == 0) {
 
-      $insert = insert("INSERT INTO uni_category_board(category_board_name,category_board_title,category_board_alias,category_board_description,category_board_id_parent,category_board_image,category_board_text,category_board_visible,category_board_price,category_board_count_free,category_board_status_paid,category_board_display_price,category_board_variant_price,category_board_measure_price,category_board_auction,category_board_secure,category_board_online_view,category_board_h1,category_board_show_index,category_board_marketplace)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array(clear($_POST["name"]),clear($_POST["title"]),$alias,$_POST["desc"],$_POST["id_cat"],$image["name"],urlencode($_POST["text"]),intval($_POST["visible"]),round($_POST["price"],2),intval($_POST["count_free"]),intval($_POST["paid"]),intval($_POST["display_price"]),intval($_POST["variant_price"]),intval($_POST["measure_price"]),intval($_POST["auction"]),intval($_POST["secure"]),intval($_POST["online_view"]),clear($_POST["h1"]),intval($_POST["show_index"]),intval($_POST["marketplace"])));        
+      $insert = insert("INSERT INTO uni_category_board(category_board_name,category_board_title,category_board_alias,category_board_description,category_board_id_parent,category_board_image,category_board_text,category_board_visible,category_board_price,category_board_count_free,category_board_status_paid,category_board_display_price,category_board_variant_price_id,category_board_measures_price,category_board_auction,category_board_secure,category_board_online_view,category_board_h1,category_board_show_index,category_board_marketplace,category_board_booking,category_board_booking_variant,category_board_rules)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array(clear($_POST["name"]),clear($_POST["title"]),$alias,$_POST["desc"],$_POST["id_cat"],$image["name"],urlencode($_POST["text"]),intval($_POST["visible"]),round($_POST["price"],2),intval($_POST["count_free"]),intval($_POST["paid"]),intval($_POST["display_price"]),intval($_POST["variant_price_id"]),$measures_price,intval($_POST["auction"]),intval($_POST["secure"]),intval($_POST["online_view"]),clear($_POST["h1"]),intval($_POST["show_index"]),intval($_POST["marketplace"]),intval($_POST["booking"]),intval($_POST["booking_variant"]),$rules));        
         
       $_SESSION["CheckMessage"]["success"] = "Действие успешно выполнено!";
       echo true;  

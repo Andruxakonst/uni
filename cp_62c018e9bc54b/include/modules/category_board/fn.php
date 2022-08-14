@@ -53,6 +53,12 @@ function outCategory($id_parent = 0, $level = 0) {
               }else{ $status_marketplace = '<td><span class="status-times-circle" ><i class="la la-times"></i><span></td>'; }
             }
 
+            if($settings["functionality"]["booking"]){
+              if($value["category_board_booking"]){
+                 $status_booking = '<td><span class="status-check-circle" ><i class="la la-check"></i><span></td>';
+              }else{ $status_booking = '<td><span class="status-times-circle" ><i class="la la-times"></i><span></td>'; }
+            }
+
             if($value["category_board_show_index"]){
               $status_show_index = '<td><span class="status-check-circle" ><i class="la la-check"></i><span></td>';
             }else{ $status_show_index = '<td><span class="status-times-circle" ><i class="la la-times"></i><span></td>'; }
@@ -63,7 +69,8 @@ function outCategory($id_parent = 0, $level = 0) {
                '.$status_paid.'
                '.$status_secure.'                         
                '.$status_auction.'     
-               '.$status_marketplace.'                   
+               '.$status_marketplace.' 
+               '.$status_booking.'                  
                '.$status_show_index.'                        
                <td class="td-actions" style="text-align: right;" >
                 <a href="?route=edit_category_board&id='.$value['category_board_id'].'"><i class="la la-edit edit"></i></a>

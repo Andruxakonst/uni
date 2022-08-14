@@ -15,6 +15,7 @@ $Main = new Main();
 $Admin = new Admin();
 $CategoryBoard = new CategoryBoard();
 $Geo = new Geo();
+$Seo = new Seo();
 $Filters = new Filters();
 $Banners = new Banners();
 $Elastic = new Elastic();
@@ -27,7 +28,7 @@ $Cart = new Cart();
 
 $Profile->checkAuth();
 
-verify_auth(['confirm_transfer_goods','remove_publication','ads_status_sell','ads_publication','ads_delete','auction_cancel_rate','confirm_receive_goods','order_cancel_deal','order_cancel_deal_marketplace','order_delete_marketplace','order_change_status','add_disputes','auction_accept_order_reservation','create_accept_phone']);
+verify_auth(['confirm_transfer_goods','remove_publication','ads_status_sell','ads_publication','ads_delete','auction_cancel_rate','confirm_receive_goods','order_cancel_deal','order_cancel_deal_marketplace','order_delete_marketplace','order_change_status','add_disputes','auction_accept_order_reservation','create_accept_phone','load_booking','add_order_booking','order_delete_booking','order_confirm_booking','order_prepayment_booking','order_cancel_booking']);
 
 if(isAjax() == true){
 
@@ -112,7 +113,7 @@ if(isAjax() == true){
 
              $data["online_view"] = '
                  <div class="ads-create-main-data-box-item" >
-                    <p class="ads-create-subtitle" >'.$ULang->t("Возможен онлайн-показ").'</p>
+                    <p class="ads-create-subtitle" >'.$ULang->t("Онлайн-показ").'</p>
                     <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Выберите, если готовы показать товар/объект с помощью видео-звонка — например, через WhatsApp, Viber, Skype или другой сервис").'</div>
                     <div class="custom-control custom-checkbox mt15">
                         <input type="checkbox" class="custom-control-input" name="online_view" id="online_view" value="1">
@@ -123,6 +124,37 @@ if(isAjax() == true){
 
           }
 
+          if( $getCategories["category_board_id"][$id]["category_board_booking"] ){
+
+             if($getCategories["category_board_id"][$id]["category_board_booking_variant"] == 0){
+
+                 $data["booking"] = '
+                     <div class="ads-create-main-data-box-item" >
+                        <p class="ads-create-subtitle" >'.$ULang->t("Онлайн-бронирование").'</p>
+                        <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Выберите, если хотите сдавать объект в аренду. Пользователи смогут бронировать онлайн.").'</div>
+                        <div class="custom-control custom-checkbox mt15">
+                            <input type="checkbox" class="custom-control-input" name="booking" id="booking" value="1">
+                            <label class="custom-control-label" for="booking">'.$ULang->t("Онлайн-бронирование").'</label>
+                        </div>
+                     </div>
+                 ';
+
+             }elseif($getCategories["category_board_id"][$id]["category_board_booking_variant"] == 1){
+                
+                 $data["booking"] = '
+                     <div class="ads-create-main-data-box-item" >
+                        <p class="ads-create-subtitle" >'.$ULang->t("Онлайн-аренда").'</p>
+                        <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Выберите, если хотите сдавать товар/объект в аренду. Пользователи смогут брать в аренду онлайн.").'</div>
+                        <div class="custom-control custom-checkbox mt15">
+                            <input type="checkbox" class="custom-control-input" name="booking" id="booking" value="1">
+                            <label class="custom-control-label" for="booking">'.$ULang->t("Онлайн-аренда").'</label>
+                        </div>
+                     </div>
+                 ';
+
+             }
+
+          }
 
           if( $Cart->modeAvailableCart($getCategories,$id,$_SESSION["profile"]["id"]) ){
 
@@ -192,47 +224,33 @@ if(isAjax() == true){
 
           if( $getCategories["category_board_id"][$id]["category_board_display_price"] ){
 
-              $field_price_name = $Ads->variantPrice( $getCategories["category_board_id"][$id]["category_board_variant_price"] );
+              $field_price_name = $Main->nameInputPrice($getCategories["category_board_id"][$id]["category_board_variant_price_id"]);
 
-              $getShop = $Shop->getUserShop( $_SESSION["profile"]["id"] );
-
-              if($getShop && $getCategories["category_board_id"][$id]["category_board_variant_price"] != 1 && !$getCategories["category_board_id"][$id]["category_board_auction"]){
-
-                 $data["price"] .= '
-                    <div class="ads-create-main-data-box-item" >
-                        <p class="ads-create-subtitle" >'.$ULang->t("Акция").'</p>
-                        <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Вы можете включить акцию для своего объявления. В каталоге объявлений будет показываться старая и новая цена. Акция работает только при активном магизине.").'</div>
-                        <div class="custom-control custom-checkbox mt15">
-                            <input type="checkbox" class="custom-control-input" name="stock" id="stock" value="1">
-                            <label class="custom-control-label" for="stock">'.$ULang->t("Включить акцию").'</label>
-                        </div>
-                    </div>
-                 ';
-
-              }
-
-              
               $data["price"] .= '
                   <div class="ads-create-main-data-box-item" >
                   <p class="ads-create-subtitle" >'.$field_price_name.'</p>
               ';
 
               if( $getCategories["category_board_id"][$id]["category_board_auction"] ){
-                  
                   $data["price"] .= '
                        <div class="row" >
-                           <div class="col-lg-6" >
+                           <div class="col-lg-4" >
                               <div data-var="fix" class="ads-create-main-data-price-variant" >
-                                 <div >
-                                   <i class="las la-money-bill-wave"></i>
+                                 <div>
                                    <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
                                  </div>
                               </div>
                            </div>
-                           <div class="col-lg-6" >
+                           <div class="col-lg-4" >
+                              <div data-var="from" class="ads-create-main-data-price-variant" >
+                                 <div>
+                                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+                                 </div>
+                              </div>
+                           </div>                           
+                           <div class="col-lg-4" >
                               <div data-var="auction" class="ads-create-main-data-price-variant" >
-                                 <div >
-                                   <i class="las la-gavel"></i>
+                                 <div>
                                    <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Аукцион").'</span>
                                  </div>                          
                               </div>
@@ -242,78 +260,31 @@ if(isAjax() == true){
                        <div class="ads-create-main-data-stock-container" ></div>
                        <div class="ads-create-main-data-price-container" ></div>
                   ';
-
               }else{
-
-                  if(!$settings["ad_create_currency"]){
-                    
-                    $dropdown_currency = '
-                          <div class="input-dropdown-box">
-                            <div class="uni-dropdown-align" >
-                               <span class="input-dropdown-name-display"> '.$settings["currency_main"]["sign"].' </span>
-                            </div>
-                          </div>
-                    ';
-
-                  }else{
-
-                    $getCurrency = getAll("select * from uni_currency order by id_position asc");
-                    if ($getCurrency) {
-                      foreach ($getCurrency as $key => $value) {
-                         $list_currency .= '<span data-value="'.$value["code"].'" data-name="'.$value["sign"].'" data-input="currency" >'.$value["name"].' ('.$value["sign"].')</span>';
-                      }
-                    }
-
-                    $dropdown_currency = '
-                        <div class="input-dropdown-box">
-                          
-                            <span class="uni-dropdown-bg">
-                             <div class="uni-dropdown uni-dropdown-align" >
-                                <span class="uni-dropdown-name" > <span>'.$settings["currency_main"]["sign"].'</span> <i class="las la-angle-down"></i> </span>
-                                <div class="uni-dropdown-content" >
-                                   '.$list_currency.'
-                                </div>
-                             </div>
-                            </span>
-
-                        </div>
-                    ';
-
-                  }
-
-                   $data["price"] .= '
-                      <div class="ads-create-main-data-price-container" >
-                      <div class="row" >
-                        <div class="col-lg-6" >
-                        <div class="input-dropdown" >
-                           <input type="text" name="price" placeholder="'.$field_price_name.'" class="ads-create-input inputNumber" maxlength="11" > 
-                           '.$dropdown_currency.'
-                        </div>
-                        <div class="msg-error" data-name="price" ></div>
-                        </div>
-                        ';
-                        
-                        if( $getCategories["category_board_id"][$id]["category_board_variant_price"] == 0 ){
-
-                            $data["price"] .= '
-                            <div class="col-lg-6" >
-
-                                <div class="custom-control custom-checkbox mt10">
-                                    <input type="checkbox" class="custom-control-input" name="price_free" id="price_free" value="1">
-                                    <label class="custom-control-label" for="price_free">'.$ULang->t("Отдам даром").'</label>
-                                </div>
-
-                            </div> 
-                            ';
-
-                        }
-
-                   $data["price"] .= '
-                      </div>
-                      </div>             
-                   ';
-                        
+                  $data["price"] .= '
+                       <div class="row" >
+                           <div class="col-lg-6" >
+                              <div data-var="fix" class="ads-create-main-data-price-variant" >
+                                 <div>
+                                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-lg-6" >
+                              <div data-var="from" class="ads-create-main-data-price-variant" >
+                                 <div>
+                                   <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+                                 </div>
+                              </div>
+                           </div>                                                
+                       </div>
+                       <div class="mb25" ></div>
+                       <div class="ads-create-main-data-stock-container" ></div>
+                       <div class="ads-create-main-data-price-container" ></div>
+                  ';                
               }
+
+              
                
              $data["price"] .= '
                 </div>             
@@ -331,9 +302,11 @@ if(isAjax() == true){
 
       $id = (int)$_POST["id"];
       $variant = clear($_POST["variant"]);
-      $data["stock"] = '';
+      $booking = $_POST["booking"] == 'true' ? 1 : 0;
 
       $getCategories = $CategoryBoard->getCategories("where category_board_visible=1");
+
+      $field_price_name = $Main->nameInputPrice($getCategories["category_board_id"][$id]["category_board_variant_price_id"]);
 
       if(!$settings["ad_create_currency"]){
         
@@ -371,26 +344,70 @@ if(isAjax() == true){
 
       }
 
-      if( $variant == "fix" ){
+      $getShop = $Shop->getUserShop( $_SESSION["profile"]["id"] );
 
-           $field_price_name = $Ads->variantPrice( $getCategories["category_board_id"][$id]["category_board_variant_price"] );
+      if($getShop && $getCategories["category_board_id"][$id]["category_board_rules"]["accept_promo"]){
 
-           $getShop = $Shop->getUserShop( $_SESSION["profile"]["id"] );
-
-           if($getShop){
-
-             $data["stock"] = '
-                <div class="ads-create-main-data-box-item" style="margin-bottom: 25px;" >
-                    <p class="ads-create-subtitle" >Акция</p>
-                    <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Вы можете включить акцию для своего объявления. В каталоге объявлений будет показываться старая и новая цена. Акция работает только при активном магизине.").'</div>
-                    <div class="custom-control custom-checkbox mt15">
-                        <input type="checkbox" class="custom-control-input" name="stock" id="stock" value="1">
-                        <label class="custom-control-label" for="stock">'.$ULang->t("Включить акцию").'</label>
-                    </div>
+         $data["stock"] = '
+            <div class="ads-create-main-data-box-item" style="margin-bottom: 25px;" >
+                <p class="ads-create-subtitle" >Акция</p>
+                <div class="create-info" ><i class="las la-question-circle"></i> '.$ULang->t("Вы можете включить акцию для своего объявления. В каталоге объявлений будет показываться старая и новая цена. Акция работает только при активном магизине.").'</div>
+                <div class="custom-control custom-checkbox mt15">
+                    <input type="checkbox" class="custom-control-input" name="stock" id="stock" value="1">
+                    <label class="custom-control-label" for="stock">'.$ULang->t("Включить акцию").'</label>
                 </div>
-             ';
+            </div>
+         ';
 
-           }
+      }
+
+      if($getCategories["category_board_id"][$id]["category_board_measures_price"]){
+
+            $measuresPrice = json_decode($getCategories["category_board_id"][$id]["category_board_measures_price"], true);
+
+            if($measuresPrice){
+
+                foreach ($measuresPrice as $value) {
+                   $listMeasures .= '<label> <input type="radio" name="measure" value="'.$value.'" > <span>'.getNameMeasuresPrice($value).'</span> <i class="la la-check"></i> </label>';
+                }
+
+                $measures = '
+                    <div class="col-lg-6" >
+                        <div class="uni-select" data-status="0" >
+
+                             <div class="uni-select-name" data-name="'.$ULang->t("Не выбрано").'" > <span>'.$ULang->t("Не выбрано").'</span> <i class="la la-angle-down"></i> </div>
+                             <div class="uni-select-list" >
+                                 '.$listMeasures.'
+                             </div>
+                        
+                        </div>
+                        <div class="msg-error" data-name="measure" ></div> 
+                    </div>
+                ';
+
+                $measures_lg4 = '
+                    <div class="col-lg-4" >
+                        <div class="uni-select" data-status="0" >
+
+                             <div class="uni-select-name" data-name="'.$ULang->t("Не выбрано").'" > <span>'.$ULang->t("Не выбрано").'</span> <i class="la la-angle-down"></i> </div>
+                             <div class="uni-select-list" >
+                                 '.$listMeasures.'
+                             </div>
+                        
+                        </div> 
+                        <div class="msg-error" data-name="measure" ></div>
+                    </div>
+                ';
+
+            }
+
+      }
+
+      if($getCategories["category_board_id"][$id]["category_board_rules"]["measure_booking"]){
+         if(!$booking) $measures = '';
+      }
+
+      if( $variant == "fix" ){
 
            $data["price"] .= '
               <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
@@ -406,8 +423,10 @@ if(isAjax() == true){
 
                 </div>
            ';
+
+            $data["price"] .= $measures;
                 
-            if( $getCategories["category_board_id"][$id]["category_board_variant_price"] == 0 ){
+            if( $getCategories["category_board_id"][$id]["category_board_rules"]["free_price"] ){
 
                 $data["price"] .= '
                 <div class="col-lg-6" >
@@ -428,6 +447,8 @@ if(isAjax() == true){
            ';
 
       }elseif( $variant == "auction" ){
+
+           $data["stock"] = '';
 
            $data["price"] .= '
                 
@@ -491,35 +512,265 @@ if(isAjax() == true){
 
       }elseif( $variant == "stock" ){
 
+           if($measures){
+
+               $data["price"] .= '
+               <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
+                  <div class="row" >
+                    <div class="col-lg-4" >
+
+                        <div class="input-dropdown" >
+                           <input type="text" name="price" placeholder="'.$ULang->t("Старая цена").'" class="ads-create-input inputNumber" maxlength="11" > 
+                           '.$dropdown_currency.'
+                        </div>
+                        <div class="msg-error" data-name="price" ></div>
+
+                    </div>
+                    <div class="col-lg-4" >
+
+                        <div class="input-dropdown" >
+                           <input type="text" name="stock_price" placeholder="'.$ULang->t("Новая цена").'" class="ads-create-input inputNumber" maxlength="11" > 
+                           <div class="input-dropdown-box">
+                              <div class="uni-dropdown-align" >
+                                 <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_main"]["sign"].' </span>
+                              </div>
+                           </div>
+                        </div>
+
+                    </div> 
+                    '.$measures_lg4.'               
+                  </div>
+               </div>
+               ';
+
+           }else{
+
+               $data["price"] .= '
+               <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
+                  <div class="row" >
+                    <div class="col-lg-6" >
+
+                        <div class="input-dropdown" >
+                           <input type="text" name="price" placeholder="'.$ULang->t("Старая цена").'" class="ads-create-input inputNumber" maxlength="11" > 
+                           '.$dropdown_currency.'
+                        </div>
+                        <div class="msg-error" data-name="price" ></div>
+
+                    </div>
+                    <div class="col-lg-6" >
+
+                        <div class="input-dropdown" >
+                           <input type="text" name="stock_price" placeholder="'.$ULang->t("Новая цена").'" class="ads-create-input inputNumber" maxlength="11" > 
+                           <div class="input-dropdown-box">
+                              <div class="uni-dropdown-align" >
+                                 <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_main"]["sign"].' </span>
+                              </div>
+                           </div>
+                        </div>
+
+                    </div>                
+                  </div>
+               </div>
+               ';
+
+           }
+
+    
+      }elseif( $variant == "from" ){
+
            $data["price"] .= '
-           <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
+              <div class="ads-create-main-data-box-item" style="margin-top: 0px;" >
               <div class="row" >
+
                 <div class="col-lg-6" >
 
-                    <div class="input-dropdown" >
-                       <input type="text" name="price" placeholder="'.$ULang->t("Старая цена").'" class="ads-create-input inputNumber" maxlength="11" > 
-                       '.$dropdown_currency.'
+                    <div class="ads-create-main-data-box-item-flex" >
+                        <div class="ads-create-main-data-box-item-flex1" >
+                            <span>'.$ULang->t("От").'</span>
+                        </div>
+                        <div class="ads-create-main-data-box-item-flex2" >
+                            <div class="input-dropdown" >
+                               <input type="text" name="price" placeholder="'.$field_price_name.'" class="ads-create-input inputNumber" maxlength="11" > 
+                               '.$dropdown_currency.'
+                            </div>
+                            <div class="msg-error" data-name="price" ></div>
+                        </div>                        
                     </div>
-                    <div class="msg-error" data-name="price" ></div>
 
                 </div>
-                <div class="col-lg-6" >
+           ';
 
-                    <div class="input-dropdown" >
-                       <input type="text" name="stock_price" placeholder="'.$ULang->t("Новая цена").'" class="ads-create-input inputNumber" maxlength="11" > 
-                       <div class="input-dropdown-box">
-                          <div class="uni-dropdown-align" >
-                             <span class="input-dropdown-name-display static-currency-sign"> '.$settings["currency_main"]["sign"].' </span>
+           $data["price"] .= $measures;
+                
+           $data["price"] .= '
+              </div> 
+              </div>          
+           ';
+
+      }elseif( $variant == "booking_measure" ){
+
+           if($getCategories["category_board_id"][$id]["category_board_booking_variant"] == 0){
+
+               $data["booking_options"] = '
+                   <div class="ads-create-main-data-box-item" >
+
+                       <p class="ads-create-subtitle" >'.$ULang->t("Предоплата").'</p>
+
+                       <div class="create-info"><i class="las la-question-circle"></i> '.$ULang->t("Оставьте это поле пустым если предоплата не требуется.").'</div>
+
+                       <div class="mb15" ></div>
+
+                       <div class="row" >
+                        
+                        <div class="col-lg-6" >
+                            <div class="input-dropdown" >
+                               <input type="number" name="booking_prepayment_percent" placeholder="'.$ULang->t("Процент предоплаты").'" class="ads-create-input" maxlength="3" > 
+                               <div class="input-dropdown-box">
+                                  <div class="uni-dropdown-align" >
+                                     <span class="input-dropdown-name-display">%</span>
+                                  </div>
+                               </div>
+                            </div>
+                        </div>
+                         
+                       </div>
+
+                       <div class="mb25" ></div>
+
+                       <p class="ads-create-subtitle" >'.$ULang->t("Максимальное количество гостей").'</p>
+
+                       <div class="row" >
+                        
+                        <div class="col-lg-6" >
+                            <input type="number" name="booking_max_guests" class="ads-create-input" maxlength="11" value="3" >
+                        </div>
+                         
+                       </div>
+
+                       <div class="mb25" ></div>
+
+                       <div class="create-info"><i class="las la-question-circle"></i> '.$ULang->t("Оставьте эти поля пустыми если ограничений нет.").'</div>
+
+                       <div class="mb15" ></div>
+
+                       <p class="ads-create-subtitle" >'.$ULang->t("Минимум дней аренды").'</p>
+
+                       <div class="row" >
+                        
+                        <div class="col-lg-6" >
+                            <input type="number" name="booking_min_days" class="ads-create-input" maxlength="11" >
+                        </div>
+                         
+                       </div>
+
+                       <div class="mb25" ></div>
+
+                       <p class="ads-create-subtitle" >'.$ULang->t("Максимум дней аренды").'</p>
+
+                       <div class="row" >
+                        
+                        <div class="col-lg-6" >
+                            <input type="number" name="booking_max_days" class="ads-create-input" maxlength="11" >
+                        </div>
+                         
+                       </div>
+
+                       <div class="mb25" ></div>
+
+                       <p class="ads-create-subtitle data-count-services" data-count-services="'.$settings['count_add_booking_additional_services'].'" >'.$ULang->t("Дополнительные услуги").' <span class="booking-additional-services-item-add btn-custom-mini btn-custom-mini-icon btn-color-blue-light" ><i class="las la-plus"></i></span></p>
+
+                       <div class="booking-additional-services-container" ></div>
+
+                       <div class="mb25" ></div>
+                   </div>           
+               ';
+
+           }elseif($getCategories["category_board_id"][$id]["category_board_booking_variant"] == 1){
+
+               $data["booking_options"] = '
+                   <div class="ads-create-main-data-box-item" >
+
+                       <p class="ads-create-subtitle" >'.$ULang->t("Предоплата").'</p>
+
+                       <div class="create-info"><i class="las la-question-circle"></i> '.$ULang->t("Оставьте это поле пустым если предоплата не требуется.").'</div>
+
+                       <div class="mb15" ></div>
+
+                       <div class="row" >
+                        
+                        <div class="col-lg-6" >
+                            <div class="input-dropdown" >
+                               <input type="number" name="booking_prepayment_percent" placeholder="'.$ULang->t("Процент предоплаты").'" class="ads-create-input" maxlength="3" > 
+                               <div class="input-dropdown-box">
+                                  <div class="uni-dropdown-align" >
+                                     <span class="input-dropdown-name-display">%</span>
+                                  </div>
+                               </div>
+                            </div>
+                        </div>
+                         
+                       </div>
+
+                       <div class="mb25" ></div>
+
+                       <p class="ads-create-subtitle" >'.$ULang->t("Доступно").'</p>
+
+                       <div class="create-info"><i class="las la-question-circle"></i> '.$ULang->t("Укажите сколько единиц доступно для аренды. По истечению лимита аренда будет недоступна. Система автоматически вернет возможность аренды после того, как у пользователя закончится выбранный срок.").'</div>
+
+                       <div class="mb15" ></div>
+
+                       <div class="row" >
+                        
+                        <div class="col-lg-6" >
+                            <input type="number" name="booking_available" placeholder="'.$ULang->t("Доступно").'" class="ads-create-input" maxlength="3" >
+                        </div>
+                         
+                        <div class="col-lg-6" >
+                            <div class="custom-control custom-checkbox mt10">
+                                <input type="checkbox" class="custom-control-input" name="booking_available_unlimitedly" id="booking_available_unlimitedly" value="1" >
+                                <label class="custom-control-label" for="booking_available_unlimitedly">'.$ULang->t("Неограниченно").'</label>
+                            </div>                                                
+                        </div>
+
+                       </div>
+
+                       <div class="mb25" ></div>
+
+                       <p class="ads-create-subtitle data-count-services" data-count-services="'.$settings['count_add_booking_additional_services'].'" >'.$ULang->t("Дополнительные услуги").' <span class="booking-additional-services-item-add btn-custom-mini btn-custom-mini-icon btn-color-blue-light" ><i class="las la-plus"></i></span></p>
+
+                       <div class="booking-additional-services-container" ></div>
+
+                       <div class="mb25" ></div>
+                   </div>           
+               ';
+
+           }
+
+           $data["price"] .= '
+               <div class="ads-create-main-data-box-item" >
+                   <p class="ads-create-subtitle" >'.$field_price_name.'</p>           
+                   <div class="row" >
+                       <div class="col-lg-6" >
+                          <div data-var="fix" class="ads-create-main-data-price-variant" >
+                             <div>
+                               <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Фиксированная").'</span>
+                             </div>
                           </div>
                        </div>
-                    </div>
-
-                </div>                
-              </div>
-           </div>
+                       <div class="col-lg-6" >
+                          <div data-var="from" class="ads-create-main-data-price-variant" >
+                             <div>
+                               <span class="ads-create-main-data-price-variant-name" >'.$ULang->t("Не фиксированная").'</span>
+                             </div>
+                          </div>
+                       </div>                                    
+                   </div>
+                   <div class="mb25" ></div>
+                   <div class="ads-create-main-data-stock-container" ></div>
+                   <div class="ads-create-main-data-price-container" ></div>
+               </div>
            ';
-                
-
+ 
       }
 
       echo json_encode( $data );
@@ -527,9 +778,37 @@ if(isAjax() == true){
 
   }
 
+  if($_POST["action"] == "create_load_booking_options"){
+
+      $rand_id = mt_rand(10000, 90000);
+
+      echo '
+           <div class="booking-additional-services-item" >
+                <div class="booking-additional-services-item-row" >
+                    <div class="booking-additional-services-item-row1" >
+                        <input type="text" name="booking_additional_services['.$rand_id.'][name]" placeholder="'.$ULang->t("Название услуги").'" class="ads-create-input" >
+                    </div>
+                    <div class="booking-additional-services-item-row2" >
+                        <div class="input-dropdown" >
+                           <input type="text" name="booking_additional_services['.$rand_id.'][price]" placeholder="'.$ULang->t("Цена").'" class="ads-create-input" maxlength="11" > 
+                           <div class="input-dropdown-box">
+                              <div class="uni-dropdown-align" >
+                                 <span class="input-dropdown-name-display"> '.$settings["currency_main"]["sign"].' </span>
+                              </div>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="booking-additional-services-item-row3" >
+                        <span class="booking-additional-services-item-delete" ><i class="las la-trash-alt"></i></span>
+                    </div>                                                                
+                </div>
+           </div>
+      ';
+
+  }
 
   if($_POST["action"] == "ad-update"){
-        
+
         $id_ad = (int)$_POST["id_ad"];
 
         if(!$_SESSION['cp_auth'][ $config["private_hash"] ] && !$_SESSION['cp_control_board']){
@@ -566,6 +845,16 @@ if(isAjax() == true){
           }
         }else{
           $_POST["area"] = [];
+        }
+
+        if(abs($_POST["booking_prepayment_percent"])){
+            if(abs($_POST["booking_prepayment_percent"]) > 100){
+                $_POST["booking_prepayment_percent"] = 100;
+            }else{
+                $_POST["booking_prepayment_percent"] = abs($_POST["booking_prepayment_percent"]);
+            }
+        }else{
+            $_POST["booking_prepayment_percent"] = 0;
         }
         
         $getCategories = (new CategoryBoard())->getCategories("where category_board_visible=1");
@@ -619,7 +908,9 @@ if(isAjax() == true){
 
         $price_sell = 0; $duration_day = 0; $auction = 0; $stock_price = 0; $price = round(preg_replace('/\s/', '', $_POST["price"]),2);
 
-        if( $_POST["var_price"] == "auction" ){
+        if($_POST["var_price"] == "auction"){
+
+           $_POST["measure"] = '';
 
            $price = round(preg_replace('/\s/', '', $_POST["price"]),2);
            $price_sell = round(preg_replace('/\s/', '', $_POST["auction_price_sell"]),2);
@@ -638,6 +929,10 @@ if(isAjax() == true){
            $auction = 1;
            $auction_duration = date("Y-m-d H:i:s", time() + ($duration_day * 86400) );
 
+        }elseif($_POST["var_price"] == "from"){
+
+           $ads_price_from = 1;
+           
         }else{
 
             if( $_POST["stock"] ){
@@ -695,6 +990,21 @@ if(isAjax() == true){
             $_POST["available_unlimitedly"] = 1;
         }
 
+        if($_POST["measure"]){
+            $measuresPrice = json_decode($getCategories["category_board_id"][$_POST["c_id"]]["category_board_measures_price"], true);
+            if(!in_array($_POST["measure"], $measuresPrice)){
+                unset($_POST["measure"]);
+            }
+        }
+
+        $booking_additional_services = [];
+
+        if($_POST["booking_additional_services"] && $_POST["booking"]){
+            foreach (array_slice($_POST["booking_additional_services"],0,$settings['count_add_booking_additional_services']) as $value) {
+                if($value['name']) $booking_additional_services[] = ['name'=>$value['name'], 'price'=>round($value['price'],2)];
+            }
+        }
+
         if($getAd){
 
           if(count($error) == 0){
@@ -713,7 +1023,7 @@ if(isAjax() == true){
                 $ads_period_publication = $getAd["ads_period_publication"];                
             }
 
-            update("UPDATE uni_ads SET ads_title=?,ads_alias=?,ads_text=?,ads_id_cat=?,ads_price=?,ads_city_id=?,ads_region_id=?,ads_country_id=?,ads_address=?,ads_latitude=?,ads_longitude=?,ads_status=?,ads_images=?,ads_metro_ids=?,ads_currency=?,ads_auction=?,ads_auction_duration=?,ads_auction_price_sell=?,ads_auction_day=?,ads_area_ids=?,ads_video=?,ads_online_view=?,ads_price_old=?,ads_filter_tags=?,ads_update=?,ads_period_day=?,ads_period_publication=?,ads_price_free=?,ads_available=?,ads_available_unlimitedly=?,ads_auto_renewal=? WHERE ads_id=?", [$title,translite($title),$text,intval($_POST["c_id"]),$price,$getCity["city_id"],$getCity["region_id"],$getCity["country_id"],clear($_POST["address"]),clear($_POST["map_lat"]),clear($_POST["map_lon"]),$ads_status,json_encode($gallery),implode(",", $_POST["metro"]),$currency,$auction,$auction_duration,$price_sell,$duration_day,implode(",", $_POST["area"]),videoLink($_POST["video"]),intval($_POST["online_view"]),$stock_price,$Filters->buildTags($_POST["filter"]),date("Y-m-d H:i:s"),$ads_period_day,$ads_period_publication,intval($_POST["price_free"]),abs($_POST["available"]),intval($_POST["available_unlimitedly"]),intval($_POST['renewal']),$id_ad], true);
+            update("UPDATE uni_ads SET ads_title=?,ads_alias=?,ads_text=?,ads_id_cat=?,ads_price=?,ads_city_id=?,ads_region_id=?,ads_country_id=?,ads_address=?,ads_latitude=?,ads_longitude=?,ads_status=?,ads_images=?,ads_metro_ids=?,ads_currency=?,ads_auction=?,ads_auction_duration=?,ads_auction_price_sell=?,ads_auction_day=?,ads_area_ids=?,ads_video=?,ads_online_view=?,ads_price_old=?,ads_filter_tags=?,ads_update=?,ads_period_day=?,ads_period_publication=?,ads_price_free=?,ads_available=?,ads_available_unlimitedly=?,ads_auto_renewal=?,ads_booking=?,ads_price_measure=?,ads_price_from=?,ads_booking_additional_services=?,ads_booking_prepayment_percent=?,ads_booking_max_guests=?,ads_booking_min_days=?,ads_booking_max_days=?,ads_booking_available=?,ads_booking_available_unlimitedly=? WHERE ads_id=?", [$title,translite($title),$text,intval($_POST["c_id"]),$price,$getCity["city_id"],$getCity["region_id"],$getCity["country_id"],clear($_POST["address"]),clear($_POST["map_lat"]),clear($_POST["map_lon"]),$ads_status,json_encode($gallery),implode(",", $_POST["metro"]),$currency,$auction,$auction_duration,$price_sell,$duration_day,implode(",", $_POST["area"]),videoLink($_POST["video"]),intval($_POST["online_view"]),$stock_price,$Filters->buildTags($_POST["filter"]),date("Y-m-d H:i:s"),$ads_period_day,$ads_period_publication,intval($_POST["price_free"]),abs($_POST["available"]),intval($_POST["available_unlimitedly"]),intval($_POST['renewal']),intval($_POST['booking']),clear($_POST["measure"]),intval($ads_price_from),json_encode($booking_additional_services,JSON_UNESCAPED_UNICODE),$_POST["booking_prepayment_percent"],intval($_POST["booking_max_guests"]),intval($_POST["booking_min_days"]),intval($_POST["booking_max_days"]),intval($_POST["booking_available"]),intval($_POST["booking_available_unlimitedly"]),$id_ad], true);
 
             $Ads->addMetroVariants($_POST["metro"],$id_ad);
             $Ads->addAreaVariants($_POST["area"],$id_ad);
@@ -764,6 +1074,16 @@ if(isAjax() == true){
           $_POST["area"] = [];
         }
 
+        if(abs($_POST["booking_prepayment_percent"])){
+            if(abs($_POST["booking_prepayment_percent"]) > 100){
+                $_POST["booking_prepayment_percent"] = 100;
+            }else{
+                $_POST["booking_prepayment_percent"] = abs($_POST["booking_prepayment_percent"]);
+            }
+        }else{
+            $_POST["booking_prepayment_percent"] = 0;
+        }
+
         $getCategories = (new CategoryBoard())->getCategories("where category_board_visible=1");
 
         $error = $Ads->validationAdForm($_POST, ["categories"=>$getCategories] );
@@ -794,7 +1114,9 @@ if(isAjax() == true){
 
         $price_sell = 0; $duration_day = 0; $auction = 0; $stock_price = 0; $price = round(preg_replace('/\s/', '', $_POST["price"]),2);
 
-        if( $_POST["var_price"] == "auction" ){
+        if($_POST["var_price"] == "auction"){
+
+           $_POST["measure"] = '';
 
            $price = round(preg_replace('/\s/', '', $_POST["price"]),2);
            $price_sell = round(preg_replace('/\s/', '', $_POST["auction_price_sell"]),2);
@@ -813,6 +1135,10 @@ if(isAjax() == true){
            $auction = 1;
            $auction_duration = date("Y-m-d H:i:s", time() + ($duration_day * 86400) );
 
+        }elseif($_POST["var_price"] == "from"){
+
+           $ads_price_from = 1;
+           
         }else{
 
             if( $_POST["stock"] ){
@@ -872,6 +1198,21 @@ if(isAjax() == true){
            }
         }
 
+        if($_POST["measure"]){
+            $measuresPrice = json_decode($getCategories["category_board_id"][$_POST["c_id"]]["category_board_measures_price"], true);
+            if(!in_array($_POST["measure"], $measuresPrice)){
+                unset($_POST["measure"]);
+            }
+        }
+
+        $booking_additional_services = [];
+
+        if($_POST["booking_additional_services"] && $_POST["booking"]){
+            foreach (array_slice($_POST["booking_additional_services"],0,$settings['count_add_booking_additional_services']) as $value) {
+                if($value['name']) $booking_additional_services[] = ['name'=>$value['name'], 'price'=>round($value['price'],2)];
+            }
+        }
+
         if(count($error) == 0){
 
           verify_mass_requests();
@@ -888,7 +1229,7 @@ if(isAjax() == true){
             $getCity = $Geo->getCity($_POST["city_id"]);
           }
 
-          $insert_id = insert("INSERT INTO uni_ads(ads_title,ads_alias,ads_text,ads_id_cat,ads_id_user,ads_price,ads_city_id,ads_region_id,ads_country_id,ads_address,ads_latitude,ads_longitude,ads_period_publication,ads_status,ads_note,ads_images,ads_metro_ids,ads_currency,ads_period_day,ads_datetime_add,ads_auction,ads_auction_duration,ads_auction_price_sell,ads_auction_day,ads_area_ids,ads_video,ads_online_view,ads_price_old,ads_filter_tags,ads_price_free,ads_available,ads_available_unlimitedly,ads_auto_renewal)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array( $title,translite($title),$text,intval($_POST["c_id"]),intval($_SESSION["profile"]["id"]),$price,$getCity["city_id"],$getCity["region_id"],$getCity["country_id"],clear($_POST["address"]),clear($_POST["map_lat"]),clear($_POST["map_lon"]),$period["date"],$status["status"],$status["message"],json_encode($gallery),implode(",", $_POST["metro"]),$currency,$period["days"], date("Y-m-d H:i:s"),$auction,$auction_duration,$price_sell,$duration_day,implode(",",$_POST["area"]),videoLink($_POST["video"]),intval($_POST["online_view"]), $stock_price, $Filters->buildTags($_POST["filter"]),intval($_POST["price_free"]),abs($_POST["available"]),intval($_POST["available_unlimitedly"]),intval($renewal) ));
+          $insert_id = insert("INSERT INTO uni_ads(ads_title,ads_alias,ads_text,ads_id_cat,ads_id_user,ads_price,ads_city_id,ads_region_id,ads_country_id,ads_address,ads_latitude,ads_longitude,ads_period_publication,ads_status,ads_note,ads_images,ads_metro_ids,ads_currency,ads_period_day,ads_datetime_add,ads_auction,ads_auction_duration,ads_auction_price_sell,ads_auction_day,ads_area_ids,ads_video,ads_online_view,ads_price_old,ads_filter_tags,ads_price_free,ads_available,ads_available_unlimitedly,ads_auto_renewal,ads_booking,ads_price_measure,ads_price_from,ads_booking_additional_services,ads_booking_prepayment_percent,ads_booking_max_guests,ads_booking_min_days,ads_booking_max_days,ads_booking_available,ads_booking_available_unlimitedly)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array( $title,translite($title),$text,intval($_POST["c_id"]),intval($_SESSION["profile"]["id"]),$price,$getCity["city_id"],$getCity["region_id"],$getCity["country_id"],clear($_POST["address"]),clear($_POST["map_lat"]),clear($_POST["map_lon"]),$period["date"],$status["status"],$status["message"],json_encode($gallery),implode(",", $_POST["metro"]),$currency,$period["days"], date("Y-m-d H:i:s"),$auction,$auction_duration,$price_sell,$duration_day,implode(",",$_POST["area"]),videoLink($_POST["video"]),intval($_POST["online_view"]), $stock_price, $Filters->buildTags($_POST["filter"]),intval($_POST["price_free"]),abs($_POST["available"]),intval($_POST["available_unlimitedly"]),intval($renewal),intval($_POST["booking"]),clear($_POST["measure"]),intval($ads_price_from), json_encode($booking_additional_services,JSON_UNESCAPED_UNICODE),$_POST["booking_prepayment_percent"],intval($_POST["booking_max_guests"]),intval($_POST["booking_min_days"]),intval($_POST["booking_max_days"]),intval($_POST["booking_available"]),intval($_POST["booking_available_unlimitedly"]) ));
 
           if( $insert_id ){
 
@@ -1308,6 +1649,7 @@ if(isAjax() == true){
 
     $page = (int)$_POST["page"] ? (int)$_POST["page"] : 1;
     $query = clearSearchBack($_POST["search"]);
+    $output = $settings["catalog_out_content"];
 
     $param_search = $Elastic->paramAdSearch($query);
     $param_search["sort"]["ads_sorting"] = [ "order" => "desc" ];
@@ -1318,17 +1660,21 @@ if(isAjax() == true){
 
       $geoQuery = $geoQuery ? ' and ' . $geoQuery : '';
 
-      $results = $Ads->getAll( array( "query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() $geoQuery and " . $Filters->explodeSearch($query), "navigation"=>true, "page"=>$page, "param_search" => $param_search ) );
+      $results = $Ads->getAll( array( "query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() $geoQuery and " . $Filters->explodeSearch($query), "navigation"=>true, "output"=>$output, "page"=>$page, "param_search" => $param_search ) );
       
     }else{
 
-      $results = $Filters->queryFilter($_POST, ["navigation"=>true, "page"=>$page]);
+      $results = $Filters->queryFilter($_POST, ["navigation"=>true, "output"=>$output, "page"=>$page]);
 
     }
 
+    unset($_SESSION['current_load']['total']);
+
     if($results["count"]){
 
-      if($page <= getCountPage($results["count"],$settings["catalog_out_content"])){
+      $_SESSION['current_load']['total'] = $results["count"];
+
+      if($page <= getCountPage($results["count"],$output)){
 
         if($_SESSION["catalog_ad_view"] == "grid" || !$_SESSION["catalog_ad_view"]){
           foreach ($results["all"] as $key => $value) {
@@ -1352,7 +1698,7 @@ if(isAjax() == true){
 
       $getCityDistance = $Ads->getCityDistance( $_POST, $ad_not_city_distance );
 
-      if($page + 1 <= getCountPage($results["count"],$settings["catalog_out_content"])){
+      if($page + 1 <= getCountPage($results["count"],$output)){
 
         $found = true;
         
@@ -1421,23 +1767,7 @@ if(isAjax() == true){
            <div class="col-lg-12" >
            <div class="catalog-no-results" >
               <div class="catalog-no-results-box" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="160" height="104" viewBox="0 0 160 104">
-                        <g fill="none" fill-rule="evenodd">
-                            <path d="M0 0H772V1024H0z" transform="translate(-306 -320)"/>
-                            <g transform="translate(-306 -320) translate(306 320)">
-                                <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                <g transform="translate(88)">
-                                    <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                    <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                </g>
-                                <g fill="#858585">
-                                    <path d="M20 0c11.046 0 20 8.954 20 20s-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0zm0 6C12.268 6 6 12.268 6 20s6.268 14 14 14 14-6.268 14-14S27.732 6 20 6z" transform="translate(53 26)"/>
-                                    <path d="M28.257 32.5L32.5 28.257 49.471 45.228 45.228 49.471z" transform="translate(53 26)"/>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
+                  <img src="'.$settings["path_tpl_image"].'/person-shrugging_1f937.png" />
                   <h5>'.$ULang->t("Ничего не найдено").'</h5>
                   <p>'.$ULang->t("Увы, мы не нашли то, что вы искали. Смягчите условия поиска и попробуйте еще раз.").'</p>
               </div>
@@ -1561,23 +1891,7 @@ if(isAjax() == true){
            <div class="col-lg-12" >
            <div class="catalog-no-results" >
               <div class="catalog-no-results-box" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="160" height="104" viewBox="0 0 160 104">
-                        <g fill="none" fill-rule="evenodd">
-                            <path d="M0 0H772V1024H0z" transform="translate(-306 -320)"/>
-                            <g transform="translate(-306 -320) translate(306 320)">
-                                <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                <g transform="translate(88)">
-                                    <rect width="72" height="104" fill="#FFF" rx="4"/>
-                                    <path fill="#EBEBEB" d="M4 0h64c2.21 0 4 1.79 4 4v68H0V4c0-2.21 1.79-4 4-4zM8 80H64V86H8zM8 88H38V94H8z"/>
-                                </g>
-                                <g fill="#858585">
-                                    <path d="M20 0c11.046 0 20 8.954 20 20s-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0zm0 6C12.268 6 6 12.268 6 20s6.268 14 14 14 14-6.268 14-14S27.732 6 20 6z" transform="translate(53 26)"/>
-                                    <path d="M28.257 32.5L32.5 28.257 49.471 45.228 45.228 49.471z" transform="translate(53 26)"/>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
+                  <img src="'.$settings["path_tpl_image"].'/person-shrugging_1f937.png" />
                   <h5>'.$ULang->t("Объявлений нет").'</h5>
               </div>
            </div>           
@@ -1934,7 +2248,7 @@ if(isAjax() == true){
           update('delete from uni_clients_orders where clients_orders_id=?', [$id]);
       }
 
-      echo json_encode(['link'=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/orders" )]);;
+      echo json_encode(['link'=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/orders" )]);
 
   }
 
@@ -2178,6 +2492,7 @@ if(isAjax() == true){
        }
 
        $query = str_replace('-', ' ', $query);
+       $queryNotDeleteWord = str_replace('-', ' ', $query);
 
        foreach ($delete_words as $value) {
            $query = preg_replace('/\b'.$value.'\b/u','',$query);
@@ -2186,8 +2501,15 @@ if(isAjax() == true){
        $getCategories = $CategoryBoard->getCategories("where category_board_visible=1");
 
        $split = preg_split("/( )+/", $query);
+       $splitNotDeleteWord = preg_split("/( )+/", $queryNotDeleteWord);
 
        if($page != 'shops'){
+
+            if(count($splitNotDeleteWord) > 1 && $page != 'shop'){
+                $endWord = $splitNotDeleteWord[ count($splitNotDeleteWord) - 1 ];
+                $penultimateWord = $splitNotDeleteWord[ count($splitNotDeleteWord) - 2 ];
+                if(mb_strlen($endWord, 'UTF-8') >= 3) $searchCity = getOne("select * from uni_city where city_name LIKE '".$endWord."' or city_declination LIKE '".$penultimateWord.' '.$endWord."'", []);
+            }
 
            if($getShop["clients_shops_id_theme_category"]){
                 $shop_get_category_ids = idsBuildJoin($CategoryBoard->idsBuild($getShop["clients_shops_id_theme_category"], $getCategories), $getShop["clients_shops_id_theme_category"]);
@@ -2235,7 +2557,7 @@ if(isAjax() == true){
 
               foreach ($results as $value) {
                 $get_main_id = $CategoryBoard->reverseMainId($getCategories,$value['ads_keywords_id_cat']);
-                $main_id_categories[$get_main_id] = $get_main_id;
+                if($get_main_id) $main_id_categories[$get_main_id] = $get_main_id;
               }
 
            }
@@ -2255,12 +2577,12 @@ if(isAjax() == true){
                     if($getShop){
                         $link = $Shop->linkShop($getShop['clients_shops_id_hash']).'/'.$getCategories["category_board_id"][$value["ads_keywords_id_cat"]]["category_board_chain"].'?'.implode('&',$params);
                     }else{
-                        $link = $CategoryBoard->alias($getCategories["category_board_id"][$value["ads_keywords_id_cat"]]["category_board_chain"]).'?'.implode('&',$params);
+                        $link = $CategoryBoard->alias($getCategories["category_board_id"][$value["ads_keywords_id_cat"]]["category_board_chain"], $searchCity['city_alias']).'?'.implode('&',$params);
                     }
-
-                    ?>
+                    
+                    ?> 
                       <a href="<?php echo $link; ?>" > 
-                          <span class="main-search-results-name" ><?php echo $value["ads_keywords_tag"]; ?></span>
+                          <span class="main-search-results-name" ><?php echo $value["ads_keywords_tag"]; ?> <span class="main-search-results-city" ><?php if($page != 'shop'){ echo $Geo->outGeoDeclination($searchCity['city_declination']); } ?></span> </span>
                           <?php if(!$value['ads_keywords_params']){ ?>
                           <span class="main-search-results-category" ><?php echo $getCategories["category_board_id"][$value["ads_keywords_id_cat"]]["category_board_name"]; ?></span>
                           <?php } ?>
@@ -2389,14 +2711,9 @@ if(isAjax() == true){
 
            $_SESSION['count_display_ads'][$value['ads_id']] = $value['ads_id_user'];
            
-           $service = $Ads->adServices($value["ads_id"]);
-           $highlight = $service[2] || $service[3] ? "ads-highlight" : "";
-           
-           $offers .= '<div class="map-search-offer '.$highlight.'">';
            ob_start();
            include $config["template_path"] . "/include/map_ad_grid.php";
            $offers .= ob_get_clean();
-           $offers .= '</div>';
 
         }
 
@@ -2410,7 +2727,7 @@ if(isAjax() == true){
             </div>
         ';
 
-        echo json_encode( [ "offers" => $offers . $navigation, "count" => $result["count"], "status" => true, "countHtml" => $result["count"] . " " . ending($result["count"],$ULang->t("объявление"),$ULang->t("объявления"),$ULang->t("объявлений") ) . $info ] );
+        echo json_encode( [ "offers" => '<div class="row no-gutters">' . $offers . '</div>' . $navigation, "count" => $result["count"], "status" => true, "countHtml" => $result["count"] . " " . ending($result["count"],$ULang->t("объявление"),$ULang->t("объявления"),$ULang->t("объявлений") ) . $info ] );
 
       }else{
 
@@ -2426,6 +2743,58 @@ if(isAjax() == true){
 
       }
  
+  }
+
+  if($_POST["action"] == "load_offer_map"){
+
+      $id = (int)$_POST["id"];
+
+      if(!$id) exit;
+
+      $getAd = $Ads->get('ads_id=?', [$id]);
+
+      if($getAd){
+
+        $images = $Ads->getImages($getAd["ads_images"]);
+        $service = $Ads->adServices($getAd["ads_id"]);
+        $getShop = $Shop->getUserShop($getAd["ads_id_user"]);
+
+        ?>
+          <div class="item-grid <?php echo $service[2] || $service[3] ? "ads-highlight" : ""; ?>" title="<?php echo $getAd["ads_title"]; ?>" >
+             <div class="item-grid-img" >
+             <a href="<?php echo $Ads->alias($getAd); ?>" target="_blank" title="<?php echo $getAd["ads_title"]; ?>" >
+
+               <div class="item-labels" >
+                  <?php echo $Ads->outStatus($service, $getAd); ?>
+               </div>
+
+               <?php echo $Ads->CatalogOutAdGallery($images, $getAd); ?>
+
+             </a>
+             <?php echo $Ads->adActionFavorite($getAd, "catalog", "item-grid-favorite"); ?>
+             </div>
+             <div class="item-grid-info" >
+
+                <div class="item-grid-price" >
+                 <?php
+                       echo $Ads->outPrice( [ "data"=>$getAd,"class_price"=>"item-grid-price-now","class_price_old"=>"item-grid-price-old", "shop"=>$getShop, "abbreviation_million" => true ] );
+                 ?>        
+                </div>
+                <a href="<?php echo $Ads->alias($value); ?>" target="_blank" ><?php echo custom_substr($getAd["ads_title"], 35, "..."); ?></a>
+
+                <span class="item-grid-city" >
+                 <?php 
+                     echo $Ads->outAdAddressArea($getAd);
+                 ?>
+                </span>
+                <span class="item-grid-date" ><?php echo datetime_format($getAd["ads_datetime_add"], false); ?></span>
+
+             </div>
+          </div>
+        <?php
+
+      }
+
   }
 
   if($_POST["action"] == "modal_ads_subscriptions_add"){
@@ -2673,17 +3042,11 @@ if(isAjax() == true){
 
       if( $getCategories["category_board_id"][ $id ]["category_board_display_price"] ){
 
-      if( $getCategories["category_board_id"][ $id ]["category_board_variant_price"] == 1 ){
-        $name_p = $ULang->t('Зарплата'); 
-      }else{ 
-        $name_p = $ULang->t('Цена'); 
-      }
-
       $filters_list = '
           <div class="row" >
              <div class="col-lg-4" >
                <label>
-                  '.$name_p.'                             
+                  '.$Main->nameInputPrice($getCategories["category_board_id"][ $id ]["category_board_variant_price_id"]).'                             
                </label>
              </div>
              <div class="col-lg-5" >
@@ -2744,6 +3107,30 @@ if(isAjax() == true){
           </div>
       ';
 
+      if( $getCategories["category_board_id"][ $id ]["category_board_booking"] ){
+
+        if( $getCategories["category_board_id"][ $id ]["category_board_booking_variant"] == 0 ){
+
+            $filters_list .= '
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="filter[booking]" id="booking_variant" value="1" >
+                <label class="custom-control-label" for="booking_variant">'.$ULang->t("Онлайн-бронирование").'</label>
+            </div>
+            ';           
+
+        }elseif( $getCategories["category_board_id"][ $id ]["category_board_booking_variant"] == 1 ){
+
+            $filters_list .= '
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="filter[booking]" id="booking_variant" value="1" >
+                <label class="custom-control-label" for="booking_variant">'.$ULang->t("Онлайн-аренда").'</label>
+            </div>
+            ';
+
+        }
+
+      }
+
       $filters_list .= '</div></div></div>'; 
 
       $filters_list .= $Filters->load_filters_catalog( $id , "", "filters_modal" );
@@ -2760,7 +3147,772 @@ if(isAjax() == true){
 
   }
 
+  if($_POST["action"] == "load_booking"){
 
+     $id_ad = (int)$_POST['id_ad'];
+     $booking_guests = (int)$_POST['booking_guests'] ?: 1;
+     $additional_services_total_price = 0;
+     $booking_hour_count = (int)$_POST['booking_hour_count'] ?: 1;
+     $booking_hour_start = clear($_POST['booking_hour_start']) ?: '12:00';
+
+     $getAd = $Ads->get("ads_id=?",[$id_ad]);
+
+     if(!$getAd) exit();
+
+     $booking_date_start = $_POST['booking_date_start'] ? date('d.m.Y', strtotime($_POST['booking_date_start'])) : date('d.m.Y');
+
+     if($_POST['booking_date_end']){
+        $booking_date_end = date('d.m.Y', strtotime($_POST['booking_date_end']));
+     }else{
+        if($getAd["ads_booking_min_days"]){ 
+            $booking_date_end = date('d.m.Y', strtotime('+'.$getAd["ads_booking_min_days"].' days')); 
+        }else{ 
+            $booking_date_end = date('d.m.Y', strtotime('+1 days')); 
+        }
+     }
+
+     $difference_days = difference_days($booking_date_end,$booking_date_start) ?: 1;
+
+     $booking_additional_services = json_decode($getAd["ads_booking_additional_services"], true);
+
+     if($_POST['booking_additional_services'] && $getAd["ads_booking_additional_services"]){
+        foreach ($_POST['booking_additional_services'] as $key => $value) {
+            if($booking_additional_services[$key]){
+                $additional_services_total_price += $booking_additional_services[$key]['price'];
+            }
+        }
+     }
+
+     if($getAd['ads_price_measure'] == 'hour'){
+        $total = ($booking_hour_count * $getAd["ads_price"]) + $additional_services_total_price;
+        $prepayment = calcPercent($booking_hour_count * $getAd["ads_price"], $getAd["ads_booking_prepayment_percent"]);
+     }else{
+        $total = ($difference_days * $getAd["ads_price"]) + $additional_services_total_price;
+        $prepayment = calcPercent($difference_days * $getAd["ads_price"], $getAd["ads_booking_prepayment_percent"]);
+     }
+
+     if($getAd["category_board_booking_variant"] == 0){
+
+     ?>
+
+        <h4> <strong><?php echo $ULang->t("Бронирование"); ?></strong> </h4>
+
+        <div class="modal-booking-errors" ></div>
+
+        <div class="booking-change-date-box mt15 mb10" >
+            <div class="row" >
+                <div class="col-lg-6" >
+                    <p><strong><?php echo $ULang->t('Заселение'); ?></strong></p>
+                    <input type="text" class="form-control" name="booking_date_start" value="<?php echo $booking_date_start; ?>" >                    
+                </div>
+                <div class="col-lg-6" >
+                    <p><strong><?php echo $ULang->t('Выезд'); ?></strong></p>
+                    <input type="text" class="form-control" name="booking_date_end" value="<?php echo $booking_date_end; ?>" >
+                </div>                        
+            </div>
+        </div>
+
+        <?php if($getAd["ads_booking_max_guests"]){ ?>
+        <p class="mt25 mb10" ><strong><?php echo $ULang->t('Количество гостей'); ?></strong></p>
+
+        <div class="booking-max-guests-box" >
+            <div class="row" >
+                <div class="col-lg-6" >
+                    <input type="number" class="form-control" name="booking_guests" placeholder="Максимум <?php echo $getAd["ads_booking_max_guests"]; ?>" value="<?php echo $booking_guests; ?>" >
+                </div>                        
+            </div>
+        </div>
+        <?php } ?>
+
+    <?php }else{ ?>
+
+        <h4> <strong><?php echo $ULang->t("Аренда"); ?></strong> </h4>
+
+        <div class="modal-booking-errors" ></div>
+
+        <?php if($getAd['ads_price_measure'] == 'hour'){ ?>
+        <div class="booking-change-date-box mt15 mb10" >
+            <div class="row" >
+                <div class="col-lg-6" >
+                    <p><strong><?php echo $ULang->t('Дата начала'); ?></strong></p>
+                    <input type="text" class="form-control" name="booking_date_start" value="<?php echo $booking_date_start; ?>" >                    
+                </div>
+                <div class="col-lg-6" >
+                    <p><strong><?php echo $ULang->t('Время начала'); ?></strong></p>
+                    <input type="time" class="form-control" name="booking_hour_start" value="<?php echo $booking_hour_start; ?>" >
+                </div>                        
+            </div>
+        </div>
+
+        <div class="booking-change-time-box mt15 mb10" >
+            <div class="row" >
+                <div class="col-lg-6" >
+                    <p><strong><?php echo $ULang->t('Количество часов'); ?></strong></p>
+                    <select class="form-control" name="booking_hour_count" >
+                        <option value="1" <?php if($booking_hour_count == 1){ echo 'selected=""'; } ?> >1</option>
+                        <option value="2" <?php if($booking_hour_count == 2){ echo 'selected=""'; } ?> >2</option>
+                        <option value="3" <?php if($booking_hour_count == 3){ echo 'selected=""'; } ?> >3</option>
+                        <option value="4" <?php if($booking_hour_count == 4){ echo 'selected=""'; } ?> >4</option>
+                        <option value="5" <?php if($booking_hour_count == 5){ echo 'selected=""'; } ?> >5</option>
+                        <option value="6" <?php if($booking_hour_count == 6){ echo 'selected=""'; } ?> >6</option>
+                        <option value="7" <?php if($booking_hour_count == 7){ echo 'selected=""'; } ?> >7</option>
+                        <option value="8" <?php if($booking_hour_count == 8){ echo 'selected=""'; } ?> >8</option>
+                        <option value="9" <?php if($booking_hour_count == 9){ echo 'selected=""'; } ?> >9</option>
+                        <option value="10" <?php if($booking_hour_count == 10){ echo 'selected=""'; } ?> >10</option>
+                        <option value="11" <?php if($booking_hour_count == 11){ echo 'selected=""'; } ?> >11</option>
+                        <option value="12" <?php if($booking_hour_count == 12){ echo 'selected=""'; } ?> >12</option>
+                        <option value="13" <?php if($booking_hour_count == 13){ echo 'selected=""'; } ?> >13</option>
+                        <option value="14" <?php if($booking_hour_count == 14){ echo 'selected=""'; } ?> >14</option>
+                        <option value="15" <?php if($booking_hour_count == 15){ echo 'selected=""'; } ?> >15</option>
+                        <option value="16" <?php if($booking_hour_count == 16){ echo 'selected=""'; } ?> >16</option>
+                        <option value="17" <?php if($booking_hour_count == 17){ echo 'selected=""'; } ?> >17</option>
+                        <option value="18" <?php if($booking_hour_count == 18){ echo 'selected=""'; } ?> >18</option>
+                        <option value="19" <?php if($booking_hour_count == 19){ echo 'selected=""'; } ?> >19</option>
+                        <option value="20" <?php if($booking_hour_count == 20){ echo 'selected=""'; } ?> >20</option>
+                        <option value="21" <?php if($booking_hour_count == 21){ echo 'selected=""'; } ?> >21</option>
+                        <option value="22" <?php if($booking_hour_count == 22){ echo 'selected=""'; } ?> >22</option>
+                        <option value="23" <?php if($booking_hour_count == 23){ echo 'selected=""'; } ?> >23</option>
+                        <option value="24" <?php if($booking_hour_count == 24){ echo 'selected=""'; } ?> >24</option>
+                    </select>                    
+                </div>                        
+            </div>
+        </div>        
+        <?php }else{ ?>
+        <div class="booking-change-date-box mt15 mb10" >
+            <div class="row" >
+                <div class="col-lg-6" >
+                    <p><strong><?php echo $ULang->t('Дата начала'); ?></strong></p>
+                    <input type="text" class="form-control" name="booking_date_start" value="<?php echo $booking_date_start; ?>" >                    
+                </div>
+                <div class="col-lg-6" >
+                    <p><strong><?php echo $ULang->t('Дата окончания'); ?></strong></p>
+                    <input type="text" class="form-control" name="booking_date_end" value="<?php echo $booking_date_end; ?>" >
+                </div>                        
+            </div>
+        </div>            
+        <?php } ?>
+
+    <?php } ?>
+
+    <?php if($booking_additional_services){ ?>
+        <p class="mt25 mb10" ><strong><?php echo $ULang->t('Дополнительные услуги'); ?></strong></p>
+
+        <div class="booking-additional-services-box" >
+            <?php
+              foreach ($booking_additional_services as $key => $value) {
+
+                  $checked = '';
+
+                  if($_POST['booking_additional_services']){ 
+                     if($_POST['booking_additional_services'][$key]){
+                        $checked = 'checked=""';
+                     }
+                  }
+
+                  ?>
+                  <div class="booking-additional-services-box-item" >
+                      <div class="row" >
+                          <div class="col-lg-8" >
+                              <label class="checkbox">
+                                <input type="checkbox" <?php echo $checked; ?> name="booking_additional_services[<?php echo $key; ?>]" value="1" >
+                                <span></span>
+                                <?php echo $value['name']; ?>
+                              </label>                                          
+                          </div>
+                          <div class="col-lg-4 text-right" >
+                              <strong><?php echo $Main->price($value['price']); ?></strong>
+                          </div>
+                      </div>                                  
+                  </div>
+                  <?php
+
+              }
+            
+            ?>
+        </div>
+    <?php } ?>
+
+    <hr>
+
+    <div class="modal-booking-box-total" >
+
+        <?php if($getAd["category_board_booking_variant"] == 0){ ?>
+            <span class="modal-booking-box-total-title1" ><?php echo $Main->price($getAd["ads_price"]); ?> × <?php echo $difference_days; ?> <?php echo ending($difference_days, $ULang->t('день'), $ULang->t('дня'), $ULang->t('дней')); ?></span>
+        <?php }else{ ?>
+
+            <?php if($getAd['ads_price_measure'] == 'hour'){ ?>
+            <span class="modal-booking-box-total-title1" ><?php echo $Main->price($getAd["ads_price"]); ?> × <?php echo $booking_hour_count; ?> <?php echo ending($booking_hour_count, $ULang->t('час'), $ULang->t('часа'), $ULang->t('часов')); ?></span>
+            <?php }else{ ?>
+            <span class="modal-booking-box-total-title1" ><?php echo $Main->price($getAd["ads_price"]); ?> × <?php echo $difference_days; ?> <?php echo ending($difference_days, $ULang->t('день'), $ULang->t('дня'), $ULang->t('дней')); ?></span>
+            <?php } ?>
+
+        <?php } ?>
+
+       <?php if($getAd["ads_booking_prepayment_percent"]){ ?>
+            <span class="modal-booking-box-total-title1" >Предоплата <?php echo $Main->price($prepayment); ?></span>  
+       <?php } ?>  
+
+        <span class="modal-booking-box-total-title2" >Итого: <span class="modal-booking-box-total-price" ><?php echo $Main->price($total); ?></span></span>
+
+    </div>
+
+    <div class="mt25" >
+
+        <button class="button-style-custom color-green mb5 modal-booking-add-order" ><?php echo $ULang->t('Оформить заказ'); ?></button>
+
+    </div>
+
+    <?php
+   
+  }
+
+  if($_POST["action"] == "add_order_booking"){
+
+         $errors = [];
+
+         $id_ad = (int)$_POST['id_ad'];
+         $booking_guests = (int)$_POST['booking_guests'];
+         $busy_dates = [];
+         $additional_services = [];
+         $additional_services_total_price = 0;
+         $booking_hour_count = (int)$_POST['booking_hour_count'] ?: 1;
+         $booking_hour_start = clear($_POST['booking_hour_start']) ?: '12:00';
+
+         $getAd = $Ads->get("ads_id=?",[$id_ad]);
+
+         if(!$getAd) exit();
+
+         $booking_date_start = $_POST['booking_date_start'] ? date('Y-m-d', strtotime($_POST['booking_date_start'])) : date('Y-m-d');
+
+         if($_POST['booking_date_end']){
+            $booking_date_end = date('Y-m-d', strtotime($_POST['booking_date_end']));
+         }else{
+            if($getAd["ads_booking_min_days"]){ 
+                $booking_date_end = date('Y-m-d', strtotime('+'.$getAd["ads_booking_min_days"].' days')); 
+            }else{ 
+                $booking_date_end = date('Y-m-d', strtotime('+1 days')); 
+            }
+         }
+
+         $difference_days = difference_days($booking_date_end,$booking_date_start) ?: 1;
+
+         $booking_additional_services = json_decode($getAd["ads_booking_additional_services"], true);
+
+         if($_POST['booking_additional_services'] && $getAd["ads_booking_additional_services"]){
+            foreach ($_POST['booking_additional_services'] as $key => $value) {
+                if($booking_additional_services[$key]){
+                    $additional_services[$booking_additional_services[$key]['name']] = $booking_additional_services[$key]['price'];
+                    $additional_services_total_price += $booking_additional_services[$key]['price'];
+                }
+            }
+         }
+
+         if($booking_date_start < date('Y-m-d')){
+            $errors[] = $ULang->t('Выбранная дата недоступна!');
+         }
+
+         if($getAd["category_board_booking_variant"] == 0){
+
+             $total = ($difference_days * $getAd["ads_price"]) + $additional_services_total_price;
+
+             $x=0;
+             $dates[] = date('Y-m-d', strtotime($booking_date_start));
+             while ($x++<$difference_days){
+               $dates[] = date('Y-m-d', strtotime("+".$x." day", strtotime($booking_date_start)));
+             }
+
+            if($getAd['ads_booking_min_days'] && $getAd['ads_booking_max_days']){
+                if($difference_days < $getAd['ads_booking_min_days'] || $difference_days > $getAd['ads_booking_max_days']){
+                    $errors[] = $ULang->t('Бронирование доступно от').' '.$getAd['ads_booking_min_days'].' '.$ULang->t('до').' '.$getAd['ads_booking_max_days'].' '.ending($getAd['ads_booking_max_days'], $ULang->t('день'), $ULang->t('дня'), $ULang->t('дней'));
+                }                
+            }elseif($getAd['ads_booking_min_days']){
+                if($difference_days < $getAd['ads_booking_min_days']){
+                    $errors[] = $ULang->t('Срок бронирования минимум').' '.$getAd['ads_booking_min_days'].' '.ending($getAd['ads_booking_min_days'], $ULang->t('день'), $ULang->t('дня'), $ULang->t('дней'));
+                }
+            }elseif($getAd['ads_booking_max_days']){
+                if($difference_days > $getAd['ads_booking_max_days']){
+                    $errors[] = $ULang->t('Срок бронирования максимум').' '.$getAd['ads_booking_max_days'].' '.ending($getAd['ads_booking_max_days'], $ULang->t('день'), $ULang->t('дня'), $ULang->t('дней'));
+                }
+            }
+
+            if($getAd["ads_booking_max_guests"]){
+                if($booking_guests > $getAd["ads_booking_max_guests"]){
+                    $errors[] = $ULang->t('Максимум гостей').' '.$getAd["ads_booking_max_guests"];
+                }
+            }
+
+            foreach ($dates as $date) {
+               if(findOne('uni_ads_booking_dates', 'ads_booking_dates_date=? and ads_booking_dates_id_ad=?', [$date,$id_ad])){
+                   $busy_dates[] = datetime_format(strtotime($date), false);
+               }
+            }
+
+            if(count($busy_dates)){
+                $errors[] = $ULang->t('По выбранным датам бронирование недоступно!');
+            }
+
+            if($booking_date_start > $booking_date_end){
+                $errors[] = $ULang->t('Начальная дата не может быть больше конечной!');
+            }
+
+        }else{
+
+            if($Ads->adCountActiveRent($id_ad) >= $getAd["ads_booking_available"]){
+                $errors[] = $ULang->t('Аренда для данного объявления не доступна!');
+            }
+
+            if($getAd['ads_price_measure'] == 'hour'){
+
+                $total = ($booking_hour_count * $getAd["ads_price"]) + $additional_services_total_price;
+
+                $booking_date_end = date('Y-m-d', strtotime('+'.$booking_hour_count.' days'));
+
+            }else{
+
+                $total = ($difference_days * $getAd["ads_price"]) + $additional_services_total_price;
+
+                $x=0;
+                $dates[] = date('Y-m-d', strtotime($booking_date_start));
+                while ($x++<$difference_days){
+                   $dates[] = date('Y-m-d', strtotime("+".$x." day", strtotime($booking_date_start)));
+                }
+
+                foreach ($dates as $date) {
+                   if(findOne('uni_ads_booking_dates', 'ads_booking_dates_date=? and ads_booking_dates_id_ad=?', [$date,$id_ad])){
+                       $busy_dates[] = datetime_format(strtotime($date), false);
+                   }
+                }
+
+                if(count($busy_dates)){
+                    $errors[] = $ULang->t('По выбранным датам аренда недоступна!');
+                }
+
+                if($booking_date_start > $booking_date_end){
+                    $errors[] = $ULang->t('Начальная дата не может быть больше конечной!');
+                }
+
+            }
+
+        }
+
+        if(!count($errors)){
+
+            $orderId = generateOrderId();
+
+            $insert_id = insert("INSERT INTO uni_ads_booking(ads_booking_id_ad,ads_booking_id_user_from,ads_booking_id_user_to,ads_booking_date_start,ads_booking_date_end,ads_booking_guests,ads_booking_number_days,ads_booking_date_add,ads_booking_additional_services,ads_booking_id_order,ads_booking_total_price,ads_booking_variant,ads_booking_hour_start,ads_booking_hour_count,ads_booking_measure)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [$id_ad,$_SESSION['profile']['id'],$getAd['ads_id_user'],$booking_date_start,$booking_date_end,$booking_guests,$difference_days,date("Y-m-d H:i:s"),json_encode($additional_services,JSON_UNESCAPED_UNICODE),$orderId,$total,$getAd["category_board_booking_variant"],$booking_hour_start,$booking_hour_count,$getAd['ads_price_measure']]); 
+
+            if($insert_id){
+
+                if($getAd["category_board_booking_variant"] == 0){
+                    foreach ($dates as $date) {
+                       insert("INSERT INTO uni_ads_booking_dates(ads_booking_dates_date,ads_booking_dates_id_ad,ads_booking_dates_id_order)VALUES(?,?,?)", [$date,$id_ad,$insert_id]);
+                    }
+                }
+
+                echo json_encode(['status'=>true, 'link'=>_link('booking/'.$orderId)]);
+
+            }
+
+        }else{
+            echo json_encode(['status'=>false, 'answer'=>implode('<br>', $errors)]);
+        }
+
+
+  }
+
+  if($_POST["action"] == "load_dates_booking"){
+       
+       $id_ad = (int)$_POST['id_ad'];
+
+       $dates = [];
+
+       $getDates = getAll('select * from uni_ads_booking_dates where ads_booking_dates_id_ad=?', [$id_ad]);
+
+       if(count($getDates)){
+            foreach ($getDates as $value) {
+                $dates[] = date('Y-m-d', strtotime($value['ads_booking_dates_date']));
+            }
+       }
+
+       echo json_encode($dates);
+
+  }
+
+  if($_POST["action"] == "order_delete_booking"){
+       
+      $id = (int)$_POST['id'];
+
+      $getOrder = findOne("uni_ads_booking", "ads_booking_id=? and (ads_booking_id_user_from=? or ads_booking_id_user_to=?)", [ $id, $_SESSION['profile']['id'], $_SESSION['profile']['id'] ]);
+
+      if($getOrder){
+          update('delete from uni_ads_booking where ads_booking_id=?', [$id]);
+          update('delete from uni_ads_booking_dates where ads_booking_dates_id_order=?', [$id]);
+      }
+
+      echo json_encode(['link'=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/booking" )]);
+
+  }
+
+  if($_POST["action"] == "order_cancel_booking"){
+       
+      $id = (int)$_POST['id'];
+      $reason = clear($_POST['reason']);
+
+      if($reason){
+
+          $getOrder = findOne("uni_ads_booking", "ads_booking_id=? and (ads_booking_id_user_from=? or ads_booking_id_user_to=?)", [ $id, $_SESSION['profile']['id'], $_SESSION['profile']['id'] ]);
+
+          if($getOrder){
+
+              update('update uni_ads_booking set ads_booking_status=?,ads_booking_reason_cancel=? where ads_booking_id=?', [2,$reason,$id]);
+              update('delete from uni_ads_booking_dates where ads_booking_dates_id_order=?', [$id]);
+
+              if($getOrder["ads_booking_id_user_from"] == $_SESSION['profile']['id']){
+                  $getUser = findOne("uni_clients", "clients_id=?", [$getOrder["ads_booking_id_user_to"]]);
+              }else{
+                  $getUser = findOne("uni_clients", "clients_id=?", [$getOrder["ads_booking_id_user_from"]]);
+              }
+              
+              $getAd = $Ads->get("ads_id=?", [$getOrder["ads_booking_id_ad"]]);
+
+              $data      = array("{USER_NAME}"=>$getUser["clients_name"],
+                                 "{USER_EMAIL}"=>$getUser["clients_email"],
+                                 "{ADS_TITLE}"=>$getAd["ads_title"],
+                                 "{ADS_LINK}"=>$Ads->alias($getAd),
+                                 "{REASON_TEXT}"=>$reason,
+                                 "{PROFILE_LINK_ORDER}"=>_link('booking/'.$getOrder['ads_booking_id_order']),
+                                 "{UNSUBCRIBE}"=>"",
+                                 "{EMAIL_TO}"=>$getUser["clients_email"]);
+
+              email_notification( array( "variable" => $data, "code" => "USER_CANCEL_ORDER_BOOKING" ) );
+
+          }
+
+          echo json_encode(['status'=>true]);
+
+      }else{
+         echo json_encode(['status'=>false, 'answer'=>$ULang->t('Пожалуйста, укажите причину отмены заказа.')]);
+      }
+
+  }
+
+  if($_POST["action"] == "order_prepayment_booking"){
+       
+      $id = (int)$_POST['id'];
+
+      $getOrder = findOne("uni_ads_booking", "ads_booking_id=? and (ads_booking_id_user_from=? or ads_booking_id_user_to=?)", [ $id, $_SESSION['profile']['id'], $_SESSION['profile']['id'] ]);
+
+      if($getOrder){
+
+          $getAd = $Ads->get("ads_id=?", [$getOrder['ads_booking_id_ad']]);
+
+          if($getOrder["ads_booking_measure"] == 'hour'){
+             $prepayment = calcPercent($getOrder['ads_booking_hour_count'] * $getAd["ads_price"], $getAd["ads_booking_prepayment_percent"]);
+          }else{
+             $prepayment = calcPercent($getOrder['ads_booking_number_days'] * $getAd["ads_price"], $getAd["ads_booking_prepayment_percent"]);
+          }
+
+          $result = $Profile->payMethod( $settings["booking_payment_service_name"] , array("amount" => $prepayment, "id_order" => $getOrder['ads_booking_id_order'], "id_ad" => $getOrder['ads_booking_id_ad'], "from_user_id" => $getOrder['ads_booking_id_user_from'], "to_user_id" => $getOrder['ads_booking_id_user_to'], "action" => "booking", "title" => $static_msg["57"]." №".$getOrder['ads_booking_id_order'], 'link_order' => _link('booking/'.$getOrder['ads_booking_id_order'])) );
+
+          if($result['form']){
+              echo json_encode(['status'=>true, 'form'=>$result['form']]);
+          }else{
+              echo json_encode(['status'=>true, 'link'=>$result['link']]);
+          }
+
+      }
+
+  }
+
+  if($_POST["action"] == "order_confirm_booking"){
+
+      $id = (int)$_POST['id'];
+
+      $getOrder = findOne("uni_ads_booking", "ads_booking_id=? and ads_booking_id_user_to=?", [ $id, $_SESSION['profile']['id'] ]);
+
+      if($getOrder){
+
+         update('update uni_ads_booking set ads_booking_status=? where ads_booking_id=?', [1, $id]);
+
+         $getUser = findOne("uni_clients", "clients_id=?", [$getOrder["ads_booking_id_user_from"]]);
+
+         $getAd = $Ads->get("ads_id=?", [$getOrder["ads_booking_id_ad"]]);
+
+         $data      = array("{USER_NAME}"=>$getUser["clients_name"],
+                             "{USER_EMAIL}"=>$getUser["clients_email"],
+                             "{ADS_TITLE}"=>$getAd["ads_title"],
+                             "{ADS_LINK}"=>$Ads->alias($getAd),
+                             "{PROFILE_LINK_ORDER}"=>_link('booking/'.$getOrder['ads_booking_id_order']),
+                             "{UNSUBCRIBE}"=>"",
+                             "{EMAIL_TO}"=>$getUser["clients_email"]);
+
+         if($getOrder['ads_booking_variant'] == 0){
+            email_notification( array( "variable" => $data, "code" => "USER_CONFIRM_ORDER_BOOKING" ) );
+         }else{
+            email_notification( array( "variable" => $data, "code" => "USER_CONFIRM_ORDER_RENT" ) );
+         }
+
+         echo true;
+
+      }
+
+  }
+
+  if($_POST["action"] == "catalog_load_categories_header"){
+
+      $getCategoryBoard = (new CategoryBoard())->getCategories("where category_board_visible=1");
+
+      ?>
+
+          <div class="container" >
+          <div class="row no-gutters" >
+             <div class="col-lg-4" >
+                 <div class="header-big-category-menu-left" >
+                 <?php
+
+                    if(count($getCategoryBoard["category_board_id_parent"][0])){
+                          foreach ($getCategoryBoard["category_board_id_parent"][0] as $key => $value) {
+
+                            ?>
+                             <div data-id="<?php echo $value["category_board_id"]; ?>" >
+
+                                <a href="<?php echo $CategoryBoard->alias($value["category_board_chain"]); ?>" <?php echo $active; ?> >
+                                <?php if( $value["category_board_image"] ){ ?>
+                                <div class="category-menu-left-image" >
+                                  <img src="<?php echo Exists($config["media"]["other"],$value["category_board_image"],$config["media"]["no_image"]); ?>" >
+                                </div>
+                                <?php } ?>
+                                <div class="category-menu-left-name" ><?php echo $ULang->t( $value["category_board_name"], [ "table" => "uni_category_board", "field" => "category_board_name" ] ); ?><span class="header-big-category-count" ><?php echo $CategoryBoard->getCountAd( $value["category_board_id"] ); ?></span></div>
+                                <div class="clr" ></div>
+                                </a>
+
+                             </div>
+                            <?php
+
+                          }
+                    }
+
+                 ?>
+                 </div>
+             </div>
+             <div class="col-lg-8" >
+                 <div class="header-big-category-menu-right" >
+
+                 <?php
+
+                    $count_key = 0;
+
+                    if(count($getCategoryBoard["category_board_id_parent"][0])){
+                          foreach ($getCategoryBoard["category_board_id_parent"][0] as $key => $value) {
+
+                               if( $getCategoryBoard["category_board_id_parent"][ $value["category_board_id"] ] ){
+                                    
+                                    $show = '';
+
+                                    if( $count_key == 0 ){
+                                        $show = ' style="display: block;" ';
+                                    }
+
+                                    $count_key++;
+
+                                    echo '
+                                      <div class="header-big-subcategory-menu-list" '.$show.' data-id-parent="'.$value["category_board_id"].'" >
+                                      <h4>'.$Seo->replace($ULang->t( $value["category_board_title"], [ "table" => "uni_category_board", "field" => "category_board_title" ] )).'</h4>
+                                      <div class="row no-gutters" >
+                                    ';
+
+                                    foreach ($getCategoryBoard["category_board_id_parent"][ $value["category_board_id"] ] as $subvalue1) {
+
+                                        echo '
+                                           <div class="col-lg-6" >
+                                           <div data-id="'.$subvalue1["category_board_id"].'" >
+                                             <a href="'.$CategoryBoard->alias($subvalue1["category_board_chain"]).'">'.$ULang->t( $subvalue1["category_board_name"], [ "table" => "uni_category_board", "field" => "category_board_name" ] ).'<span class="header-big-category-count" >'.$CategoryBoard->getCountAd( $subvalue1["category_board_id"] ).'</span></a>
+                                           </div>
+                                           </div>
+                                        ';
+
+                                    }
+
+                                    echo '
+                                      </div>
+                                      </div>
+                                    ';
+
+                               }
+
+                          }
+                    }
+
+                 ?>
+
+                 </div>
+             </div>
+          </div>
+          </div>
+
+      <?php
+
+  }
+
+  if($_POST["action"] == "load_content_index"){
+
+        $getCategoryBoard = $CategoryBoard->getCategories("where category_board_visible=1");
+
+        $geo = $Ads->queryGeo() ? " and " . $Ads->queryGeo() : "";
+
+        $param_search = $Elastic->paramAdquery();
+        $param_search["query"]["bool"]["filter"][]["term"] = $Ads->arrayGeo();
+        $param_search["query"]["bool"]["filter"][]["term"]["ads_vip"] = 1;
+
+        if($settings["index_out_content_method"] == 0){
+          $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_vip='1' order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
+        }else{
+          $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_vip='1' $geo order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
+        }
+
+        if($settings["index_out_count_shops"] && $settings["user_shop_status"]){
+          $data["shops"] = getAll( "select * from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and clients_status IN(0,1) order by rand() limit " . $settings["index_out_count_shops"] );
+        }
+
+        $data["slider_ad_category"] = $Main->outSlideAdCategory(16);
+
+        if($_SESSION["geo"]["alias"]){
+          $data["vip_link"] = _link($_SESSION["geo"]["alias"]."/vip");
+        }else{
+          $data["vip_link"] = _link($settings["country_default"]."/vip"); 
+        }
+
+        $data["h1"] = $Seo->out(array("page" => "index", "field" => "h1"));
+
+        $data["sliders"] = getAll("select * from uni_sliders where sliders_visible=? order by sliders_sort asc", [1]);
+
+        if( count($data["sliders"]) ){
+             ?>
+
+                <div class="load-sliders-wide" >
+                <div class="sliders-wide" data-show-slider="<?php echo $settings["media_slider_count_show"]; ?>" data-autoplay="<?php echo $settings["media_slider_autoplay"]; ?>" data-arrows="<?php echo $settings["media_slider_arrows"]; ?>" >
+                   
+                   <?php
+                   foreach ($data["sliders"] as $key => $value) {
+                       ?>
+                         <div class="sliders-wide-item" data-id="<?php echo $value["sliders_id"]; ?>" >
+
+                              <a title="<?php echo $ULang->t( $value["sliders_title1"] , [ "table"=>"uni_sliders", "field"=>"sliders_title1" ] ); ?>. <?php echo $ULang->t( $value["sliders_title2"] , [ "table"=>"uni_sliders", "field"=>"sliders_title2" ] ); ?>" style="
+                                <?php if($value["sliders_image"]){ ?>
+                                background: url(<?php echo Exists($config["media"]["other"],$value["sliders_image"],$config["media"]["no_image"]); ?>);
+                                background-position: right;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                <?php } ?>
+                                background-color: <?php echo $value["sliders_color_bg"]; ?>;
+                                display: block;
+                                border-radius: 10px;
+                                height: <?php echo $settings["media_slider_height"]; ?>px;
+                                " target="_blank"  href="<?php echo $Main->sliderLink( $value["sliders_link"] ); ?>">
+                                
+                                <span class="sliders-wide-title">
+                                  <span class="sliders-wide-title1"><?php echo $ULang->t( $value["sliders_title1"] , [ "table"=>"uni_sliders", "field"=>"sliders_title1" ] ); ?></span>
+                                  <span class="sliders-wide-title2"><?php echo $ULang->t( $value["sliders_title2"] , [ "table"=>"uni_sliders", "field"=>"sliders_title2" ] ); ?></span>
+                                </span>
+
+                              </a>
+
+                        </div>               
+                       <?php
+                   }
+                   ?>
+
+                </div>
+                </div>
+
+             <?php
+        }
+
+        echo $Banners->out( ["position_name"=>"index_top"] );
+        
+        ?>
+
+        <div class="row mt30" >
+          
+          <div class="col-lg-12" >           
+            <?php if( $data["vip"]["count"] ){ ?>
+            <div class="vip-block" >
+              <h4 class="mb25 title-and-link" > <strong><?php echo $ULang->t( "VIP объявления" ); ?></strong> <a href="<?php echo $data["vip_link"]; ?>" ><?php echo $ULang->t( "Больше объявлений" ); ?> <i class="las la-arrow-right"></i></a> </h4>
+              <div class="slider-item-grid init-slider-grid" >
+                  <?php 
+                  
+                     foreach ( $data["vip"]["all"] as $key => $value) {
+                         include $config["template_path"] . "/include/slider_ad_grid.php";
+                     }
+                  
+                  ?>
+              </div>
+            </div>
+            <?php
+            } 
+            ?>
+
+          <?php if( count($data["shops"]) ){ ?>
+            <h3 class="mt30 mb25 title-and-link" > <strong><?php echo $ULang->t( "Магазины" ); ?></strong> <a href="<?php echo $Shop->linkShops(); ?>"><?php echo $ULang->t( "Все магазины" ); ?> <i class="las la-arrow-right"></i> </a> </h3>
+              <div class="row no-gutters gutters10 mb25" >
+                  <?php 
+                  
+                     foreach ($data["shops"] as $key => $value) {
+                         include $config["template_path"] . "/include/shop_grid.php";
+                     }
+                  
+                  ?>
+              </div>
+            <?php
+            } 
+            ?>
+
+            <?php
+            if( count($data["slider_ad_category"]) ){
+                foreach ($data["slider_ad_category"] as $id_category => $nested) {
+                    ?>
+
+                      <h3 class="mt20 mb25 title-and-link" > <strong><?php echo $ULang->t( $getCategoryBoard["category_board_id"][$id_category]["category_board_name"], [ "table" => "uni_category_board", "field" => "category_board_name" ] ); ?></strong> 
+                      <a href="<?php echo $CategoryBoard->alias($getCategoryBoard["category_board_id"][$id_category]["category_board_chain"]); ?>" >
+                            <?php echo $ULang->t( "Больше объявлений" ); ?> <i class="las la-arrow-right"></i>
+                      </a>                            
+                      </h3>
+                      <div class="slider-item-grid init-slider-grid mb25" >
+                          <?php 
+                          
+                            foreach ($nested as $key => $value) {
+                                include $config["template_path"] . "/include/slider_ad_grid.php";
+                            }
+                          
+                          ?>
+                      </div>
+
+                    <?php
+
+                }
+            }
+            ?>
+
+            <h1 style="font-size: 1.75rem;" class="mb25" > <strong><?php echo $data["h1"]; ?></strong> </h1>
+
+            <div class="catalog-results" >
+            
+                <div class="preload" >
+
+                    <div class="spinner-grow mt80 preload-spinner" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+        <?php
+  }
 
 
 

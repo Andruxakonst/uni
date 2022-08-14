@@ -18,6 +18,13 @@ $Banners = new Banners();
 $ULang = new ULang();
 $Shop = new Shop();
 
+if($_SESSION['map_change_geo_alias'] != $_SESSION["geo"]["alias"]){
+	unset($_GET['filter']['area']);
+	unset($_GET['filter']['metro']);
+}
+
+$_SESSION['map_change_geo_alias'] = $alias_city;
+
 if($_SESSION["geo"]["action"] == "modal"){
     
 	if($alias_city != $_SESSION["geo"]["alias"]){
@@ -38,36 +45,46 @@ if($_SESSION["geo"]["action"] == "modal"){
 
 }
 
+$data["city_areas"] = getAll("select * from uni_city_area where city_area_id_city=? order by city_area_name asc", [ intval($_SESSION["geo"]["data"]["city_id"]) ]);
+$data["city_metro"] = getAll("select * from uni_metro where city_id=? and parent_id!=0 Order by name ASC", [ intval($_SESSION["geo"]["data"]["city_id"]) ]);
+
+if(!$data["city_areas"]){
+	unset($_GET['filter']['area']);
+}
+
+if(!$data["city_metro"]){
+	unset($_GET['filter']['metro']);
+}
+
 $getCategoryBoard = $CategoryBoard->getCategories("where category_board_visible=1");
 
 $data["category"] = $getCategoryBoard["category_board_id"][ $_GET["id_c"] ];
 $data["param_filter"] = $_GET;
 
-$result = $Filters->queryFilter($_GET, ["navigation"=>false, "map"=>true]);
+if($_GET['search']){
+
+	$page = (int)$_GET["page"] ? (int)$_GET["page"] : 1;
+	$query = clearSearchBack($_GET["search"]);
+    $geoQuery = $Ads->queryGeo();
+    $geoQuery = $geoQuery ? ' and ' . $geoQuery : '';
+
+    $result = $Ads->getAll(array("query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() $geoQuery and " . $Filters->explodeSearch($query), "navigation"=>true, "page"=>$page));
+
+}else{
+
+	$result = $Filters->queryFilter($_GET, ["navigation"=>false, "map"=>true]);
+
+}
 
 if($result["count"]){
 	foreach ($result["all"] as $key => $value) {
-
-		$service = $Ads->adServices($value["ads_id"]);
-	    
-	    ob_start();
-	    include $config["template_path"] . "/include/map_ad_grid.php";
-	    $offers = ob_get_clean();
 
 	    if($settings["map_vendor"] == "yandex"){
 
 			$data["balloonContentBody"][] = '
 
 			  {
-			    id: "'.$value["ads_id"].'",
-			    link: "'.$Ads->alias($value).'",
-			    balloonContentHeader: `'.str_replace("\\", "-", $value["ads_title"]).'`,
-			    hintContent: `'.str_replace("\\", "-", $value["ads_title"]).'`,
-                balloonContentBody: `
-                  <div class="ballon-point">
-                     '.addslashes($offers).'
-                  </div>
-                `			    
+			    id: "'.$value["ads_id"].'"		    
 			  }
 
 			';
@@ -81,10 +98,7 @@ if($result["count"]){
 	            new google.maps.Marker({
 	                position: new google.maps.LatLng('.$value["ads_latitude"].','.$value["ads_longitude"].'),
 	                map: map,
-	                title: `'.$value["ads_title"].'`,
-	                link: "'.$Ads->alias($value).'",
 	                id: "'.$value["ads_id"].'",
-	                content: `'.addslashes($offers).'`
 	            })
 
 	        ';
@@ -92,7 +106,7 @@ if($result["count"]){
 	    }elseif($settings["map_vendor"] == "openstreetmap"){
 
 			$data["balloonContentBody"][] = '
-			    ['.$value["ads_longitude"].','.$value["ads_latitude"].',`'.addslashes($offers).'`, '.$value["ads_id"].']
+			    ['.$value["ads_longitude"].','.$value["ads_latitude"].', '.$value["ads_id"].']
 	        ';
 
 	    }

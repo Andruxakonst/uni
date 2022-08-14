@@ -95,8 +95,8 @@ if($data["filter"]){
 
 	$_GET["search"] = clearSearch($_GET["search"]);
 
-	$data["meta_title"] = $static_msg["50"] . ' "'.$_GET["search"].'"';
-	$data["h1"] = $static_msg["50"] . ' "'.$_GET["search"].'"';
+	$data["meta_title"] = $static_msg["50"] . ' "'.$_GET["search"].'" ' . $Geo->outGeoDeclination();
+	$data["h1"] = $static_msg["50"] . ' "'.$_GET["search"].'" ' . $Geo->outGeoDeclination();
 	$data["meta_desc"] = "";
 	$data["param_filter"]["search"] = $_GET["search"];
 

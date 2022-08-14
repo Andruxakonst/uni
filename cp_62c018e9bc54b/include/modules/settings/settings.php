@@ -63,6 +63,9 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
                 <?php if($settings["functionality"]["secure"]){ ?>
                 <a class="dropdown-item" data-route="?route=settings&tab=secure" id="just-tab-14" data-toggle="tab" href="#j-tab-14" role="tab" aria-controls="j-tab-14" aria-selected="false">Безопасная сделка</a>
                 <?php } ?>
+                <?php if($settings["functionality"]["booking"]){ ?>
+                <a class="dropdown-item" data-route="?route=settings&tab=booking" id="just-tab-15" data-toggle="tab" href="#j-tab-15" role="tab" aria-controls="j-tab-15" aria-selected="false">Бронирование/Аренда</a>
+                <?php } ?>                
                 <a class="dropdown-item" data-route="?route=settings&tab=sitemap" id="just-tab-11" data-toggle="tab" href="#j-tab-11" role="tab" aria-controls="j-tab-11" aria-selected="false">Sitemap</a>
                 <a class="dropdown-item" data-route="?route=settings&tab=robots" id="just-tab-12" data-toggle="tab" href="#j-tab-12" role="tab" aria-controls="j-tab-12" aria-selected="false">Robots.txt</a>
 
@@ -193,6 +196,16 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
                 <div class="col-lg-9">
                     <label>
                       <input class="toggle-checkbox-sm" type="checkbox" name="assets_vendors" value="1" <?php if($settings["assets_vendors"] == 1){ echo ' checked=""'; } ?> >
+                      <span><span></span></span>
+                    </label>
+                </div>
+             </div>
+
+             <div class="form-group row d-flex align-items-center mb-5">
+                <label class="col-lg-3 form-control-label">Отображать разметку баннеров</label>
+                <div class="col-lg-9">
+                    <label>
+                      <input class="toggle-checkbox-sm" type="checkbox" name="banner_markup" value="1" <?php if($settings["banner_markup"] == 1){ echo ' checked=""'; } ?> >
                       <span><span></span></span>
                     </label>
                 </div>
@@ -645,6 +658,7 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
                       else $authorization_social_list = [];
                       ?>
                       
+                      <option value="yandex"  <?php if( in_array( "yandex" , $authorization_social_list ) ){ echo ' selected=""'; } ?> >Yandex</option>
                       <option value="vk"  <?php if( in_array( "vk" , $authorization_social_list ) ){ echo ' selected=""'; } ?> >VKontakte</option>
                       <option value="google"  <?php if( in_array( "google" , $authorization_social_list ) ){ echo ' selected=""'; } ?> >Google</option>
                       <option value="fb"  <?php if( in_array( "fb" , $authorization_social_list ) ){ echo ' selected=""'; } ?> >FaceBook</option>
@@ -1188,6 +1202,22 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
                          <?php
                             if($settings["notification_method_new_buy"]){
                                 $notification_method = explode(",",$settings["notification_method_new_buy"]);
+                            }else{
+                                $notification_method = array();
+                            }
+                         ?>
+                         <option value="email" <?php if(in_array("email", $notification_method)){ echo ' selected=""'; } ?> >По e-mail</option>
+                         <option value="telegram" <?php if(in_array("telegram", $notification_method)){ echo ' selected=""'; } ?> >По telergam</option>
+                     </select>
+                </div>
+             </div>
+             <div class="form-group row d-flex align-items-center mb-5">
+                <label class="col-lg-3 form-control-label">Уведомлять о сообщениях в чате</label>
+                <div class="col-lg-9">
+                     <select class="selectpicker" title="Нет" name="notification_method_new_chat_message[]" multiple="" >
+                         <?php
+                            if($settings["notification_method_new_chat_message"]){
+                                $notification_method = explode(",",$settings["notification_method_new_chat_message"]);
                             }else{
                                 $notification_method = array();
                             }
@@ -1858,6 +1888,41 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
                 <label class="col-lg-3 form-control-label"></label>
                 <div class="col-lg-5">
 
+                     <h4> <strong>Yandex</strong> </h4>
+
+                </div>
+              </div>
+
+              <div class="form-group row d-flex align-items-center mb-5">
+                <label class="col-lg-3 form-control-label">ID приложения</label>
+                <div class="col-lg-5">
+
+                     <input type="text" class="form-control mt5" value="<?php echo $social_auth_params["yandex"]["id_app"]; ?>"  name="social_auth_params[yandex][id_app]" >  
+
+                </div>
+              </div>
+
+              <div class="form-group row d-flex align-items-center mb-5">
+                <label class="col-lg-3 form-control-label">Секретный ключ</label>
+                <div class="col-lg-5">
+
+                     <input type="text" class="form-control mt5" value="<?php echo $social_auth_params["yandex"]["key"]; ?>"  name="social_auth_params[yandex][key]" >                
+                </div>
+              </div>
+
+              <div class="form-group row d-flex align-items-center mb-5">
+                <label class="col-lg-3 form-control-label">URL перенаправления</label>
+                <div class="col-lg-5">
+
+                     <?php echo $config["urlPath"] . "/systems/ajax/oauth.php?network=yandex"; ?>  
+
+                </div>
+              </div>
+
+              <div class="form-group row d-flex align-items-center">
+                <label class="col-lg-3 form-control-label"></label>
+                <div class="col-lg-5">
+
                      <h4> <strong>ВКонтакте</strong> </h4>
 
                 </div>
@@ -1890,7 +1955,7 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
               </div>
 
               <div class="form-group row d-flex align-items-center mb-5">
-                <label class="col-lg-3 form-control-label">Идентификатор клиента</label>
+                <label class="col-lg-3 form-control-label">ID клиента</label>
                 <div class="col-lg-5">
 
                      <input type="text" class="form-control mt5" value="<?php echo $social_auth_params["google"]["id_client"] ?>"  name="social_auth_params[google][id_client]" >  
@@ -1907,7 +1972,7 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
               </div>
 
               <div class="form-group row d-flex align-items-center mb-5">
-                <label class="col-lg-3 form-control-label">Обработчик</label>
+                <label class="col-lg-3 form-control-label">URL перенаправления</label>
                 <div class="col-lg-5">
 
                      <?php echo $config["urlPath"] . "/systems/ajax/oauth.php?network=google"; ?>
@@ -2110,6 +2175,16 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
                 <div class="col-lg-9">
                     <label>
                       <input class="toggle-checkbox-sm" type="checkbox" name="sitemap_shops" value="1" <?php if($settings["sitemap_shops"] == 1){ echo ' checked=""'; } ?> >
+                      <span><span></span></span>
+                    </label>
+                </div>
+             </div>
+
+             <div class="form-group row d-flex align-items-center mb-5">
+                <label class="col-lg-3 form-control-label">Выводить объявления</label>
+                <div class="col-lg-9">
+                    <label>
+                      <input class="toggle-checkbox-sm" type="checkbox" name="sitemap_ads" value="1" <?php if($settings["sitemap_ads"] == 1){ echo ' checked=""'; } ?> >
                       <span><span></span></span>
                     </label>
                 </div>
@@ -2380,6 +2455,64 @@ $social_auth_params = json_decode(decrypt($settings["social_auth_params"]), true
 
            </div>
 
+
+         </div>
+
+         <div class="tab-pane fade <?php if($_GET["tab"] == "booking"){ echo 'active show'; } ?>" id="j-tab-15" role="tabpanel" aria-labelledby="just-tab-15">
+
+           <br>
+
+           <div class="form-group row d-flex align-items-center mb-5" >
+              <label class="col-lg-3 form-control-label">Платежная система</label>
+              <div class="col-lg-2">
+
+                  <select class="selectpicker" name="booking_payment_service_name" title="Не выбрано" >
+                      <?php
+                        $getPayments = getAll("select * from uni_payments", []);
+                        if (count($getPayments)) {
+                            foreach ($getPayments as $key => $value) {
+                                ?>
+                                <option <?php if( $settings["booking_payment_service_name"] == $value["code"] ){ echo 'selected=""'; } ?> value="<?php echo $value["code"]; ?>" ><?php echo $value["name"]; ?></option>
+                                <?php
+                            }
+                        }
+                      ?>
+                  </select>
+
+              </div>
+           </div>
+
+           <div class="form-group row d-flex align-items-center mb-5">
+              <label class="col-lg-3 form-control-label"></label>
+              <div class="col-lg-9">
+
+                  <small>Выберите платежную систему с помощью которой будут оплачивать бронирование/аренду.</small>
+
+              </div>
+           </div>
+
+           <div class="form-group row d-flex align-items-center" style="margin-bottom: 0px;" >
+              <label class="col-lg-3 form-control-label">Процент комиссии</label>
+              <div class="col-lg-2">
+
+                  <div class="input-group mb-2">
+                     <input type="text" class="form-control" name="booking_prepayment_percent_service" value="<?php echo $settings["booking_prepayment_percent_service"]; ?>" >
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">%</div>
+                     </div>                       
+                  </div>
+
+              </div>
+           </div>
+
+           <div class="form-group row d-flex align-items-center mb-5">
+              <label class="col-lg-3 form-control-label"></label>
+              <div class="col-lg-9">
+
+                  <small>Укажите процент который вы будете получать от оплаты бронирования/аренды</small>
+
+              </div>
+           </div>           
 
          </div>
 

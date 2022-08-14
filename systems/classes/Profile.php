@@ -788,6 +788,7 @@ class Profile{
             
             "statistics"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/statistics" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => $ULang->t("Статистика")],
             "scheduler"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/scheduler" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => $ULang->t("Планировщик задач")],
+            "import"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/import" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => ("Импорт объявлений")],
 
         ]];
      }else{

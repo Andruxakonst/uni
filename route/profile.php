@@ -20,7 +20,7 @@ $Shop = new Shop();
 
 $getCategoryBoard = $CategoryBoard->getCategories("where category_board_visible=1");
 
-$array_tabs = array("ad", "sold", "archive" , "orders", "favorites", "settings", "balance", "history", "reviews", "subscriptions", $settings['user_shop_alias_url_page'], "tariff", "statistics", "scheduler", "booking");
+$array_tabs = array("ad", "sold", "archive" , "orders", "favorites", "settings", "balance", "history", "reviews", "subscriptions", $settings['user_shop_alias_url_page'], "tariff", "statistics", "scheduler", "booking", "import");
 
 $user = $Profile->oneUser(" where clients_id_hash=?" , array( clear($id_user) ) );
 
@@ -112,6 +112,6 @@ $data["ad_list_reviews_seller"] = $Ads->getAll( [ "navigation" => false, "page" 
 
 $data["ad_list_reviews_buyer"] = $Ads->getAll( [ "navigation" => false, "page" => $_GET["page"], "query" => "ads_id_user='".$_SESSION['profile']['id']."' and ads_status!='0' and ads_status!='8' ", "sort" => "order by ads_id desc" ] );
 
-echo $Main->tpl("profile.tpl", compact( 'Seo','Geo','Main','visible_footer','Ads','route_name','list_services','data','Profile','languages_content','user','list_chat_users','action','list_complaints','settings','getCategoryBoard','CategoryBoard','Banners','ULang','Shop' ) );
+echo $Main->tpl("profile.tpl", compact( 'Seo','Geo','Main','visible_footer','Ads','route_name','list_services','data','Profile','languages_content','user','list_chat_users','action','list_complaints','settings','getCategoryBoard','CategoryBoard','Banners','ULang','Shop') );
 
 ?>

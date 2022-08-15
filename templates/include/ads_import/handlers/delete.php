@@ -3,14 +3,14 @@
 define('unisitecms', true);
 session_start();
 
-$config = require "../../../../../config.php";
+$config = require "../../../../config.php";
 include_once( $config["basePath"] . "/systems/classes/UniSite.php");
-include_once( $config["basePath"] . "/" . $config["folder_admin"] . "/lang/" . $settings["lang_admin_default"].".php" );
+//include_once( $config["basePath"] . "/" . $config["folder_admin"] . "/lang/" . $settings["lang_admin_default"].".php" );
 
-if( !(new Admin())->accessAdmin($_SESSION['cp_control_board']) ){
-   $_SESSION["CheckMessage"]["warning"] = "Ограничение прав доступа!";
-   exit;
-}
+// if( !(new Admin())->accessAdmin($_SESSION['cp_control_board']) ){
+//    $_SESSION["CheckMessage"]["warning"] = "Ограничение прав доступа!";
+//    exit;
+// }
 
 if(isAjax() == true){
   

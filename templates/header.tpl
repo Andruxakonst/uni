@@ -33,7 +33,7 @@
                     <?php } ?>
                     
                </div>-->
-               <div class="col-lg-6 col-6 text-left" >
+               <div class="col-lg-6 col-6 text-left my-auto" >
 
                   <div class="header-wow-top-list <?php if( $_SESSION['cp_auth'][ $config["private_hash"] ] && $_SESSION["cp_control_tpl"] ){ echo 'header-wow-top-list-admin'; } ?>" >
 
@@ -62,8 +62,8 @@
                     <div class="toolbar-link toolbar-link-favorites mr8" >
 
                         <a class="toolbar-link-title-icon" href="<?php echo _link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/favorites" ); ?>" >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.026 4.133C4.398 4.578 3 6.147 3 8.537c0 3.51 2.228 6.371 4.648 8.432A23.633 23.633 0 0012 19.885a23.63 23.63 0 004.352-2.916C18.772 14.909 21 12.046 21 8.537c0-2.39-1.398-3.959-3.026-4.404-1.594-.436-3.657.148-5.11 2.642a1 1 0 01-1.728 0C9.683 4.281 7.62 3.697 6.026 4.133zM12 21l-.416.91-.003-.002-.008-.004-.027-.012a15.504 15.504 0 01-.433-.214 25.638 25.638 0 01-4.762-3.187C3.773 16.297 1 12.927 1 8.538 1 5.297 2.952 2.9 5.499 2.204c2.208-.604 4.677.114 6.501 2.32 1.824-2.206 4.293-2.924 6.501-2.32C21.048 2.9 23 5.297 23 8.537c0 4.39-2.772 7.758-5.352 9.955a25.642 25.642 0 01-4.762 3.186 15.504 15.504 0 01-.432.214l-.027.012-.008.004-.003.001L12 21zm0 0l.416.91c-.264.12-.568.12-.832 0L12 21z" fill="currentColor"></path></svg>
-                            <span class="toolbar-link-title-icon-name" ><?php echo $ULang->t("Избранное"); ?></span>
+                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M10.918 5.085a5.256 5.256 0 0 1 7.524 0c2.077 2.114 2.077 5.541 0 7.655l-7.405 7.534a.75.75 0 0 1-1.074 0L2.558 12.74c-2.077-2.114-2.077-5.54 0-7.655a5.256 5.256 0 0 1 7.524 0c.15.152.289.312.418.479.13-.167.269-.327.418-.479z" fill="#CCC" fill-rule="nonzero"></path></svg>
+                            <!--<span class="toolbar-link-title-icon-name" ><?php echo $ULang->t("Избранное"); ?></span>-->
                         </a>
 
                     </div>
@@ -73,9 +73,9 @@
                         <span class="toolbar-link-title-icon open-modal" data-id-modal="modal-chat-user" >
                             <div class="toolbar-link-title-icon-box" >
                                 <span class="label-count-message chat-message-counter BadgePulse" style="display: none;" ></span>    
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.324 4.388C5.104 2.758 7.918 2 12 2s6.897.757 8.676 2.388C22.483 6.045 23 8.394 23 11c0 2.38-.43 4.548-1.89 6.174-1.463 1.628-3.782 2.515-7.098 2.757-.929.068-1.267.096-1.473.143a2.527 2.527 0 00-.583.2c-.194.09-.407.228-1.014.633l-4.387 2.925A1 1 0 015 23v-4.254c-1.407-.697-2.402-1.683-3.045-2.934C1.237 14.415 1 12.769 1 11c0-2.606.517-4.955 2.324-6.612zm1.352 1.474C3.483 6.955 3 8.606 3 11c0 1.619.222 2.902.734 3.898.495.962 1.3 1.734 2.64 2.273a1 1 0 01.626.927v3.034l2.903-1.936c.51-.34.86-.573 1.213-.737.347-.16.6-.247.972-.333.38-.088.89-.125 1.66-.181l.118-.009c3.075-.224 4.787-1.02 5.756-2.099C20.595 14.754 21 13.189 21 11c0-2.394-.483-4.045-1.676-5.138C18.104 4.742 15.918 4 12 4c-3.918 0-6.103.743-7.324 1.862z" fill="currentColor"></path></svg>
+                                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g fill="#CCC" fill-rule="evenodd"><path d="M8.827 3.28A19.839 19.839 0 0 1 12 3c.97 0 2.027.093 3.173.28A8.135 8.135 0 0 1 22 11.309c0 3.804-2.84 7.01-6.617 7.468A28.26 28.26 0 0 1 12 19c-1.028 0-2.156-.074-3.383-.223A7.523 7.523 0 0 1 2 11.309 8.135 8.135 0 0 1 8.827 3.28z"></path><path d="M4.5 15l-1.773 4.963a.8.8 0 0 0 1.15.964L9 18l-4.5-3z"></path></g></svg>
                             </div>
-                            <span class="toolbar-link-title-icon-name" ><?php echo $ULang->t("Сообщения"); ?></span>
+                            <!--<span class="toolbar-link-title-icon-name" ><?php echo $ULang->t("Сообщения"); ?></span>-->
                         </span>
 
                     </div>
@@ -343,18 +343,18 @@
                               <div class="sticky-search-control-geo-name sticky-search-control-geo-change" ><i class="las la-map-marker-alt"></i> <?php if($_SESSION["geo"]["data"]){ echo $ULang->t($Geo->change()["name"], [ "table"=>"geo", "field"=>"geo_name" ] ); }else{ echo $ULang->t('Выберите город'); } ?></div>
                               
                               <?php if($data["city_areas"] || $data["city_metro"]){ ?>
-                                <div class="input-separator" ></div>
+                                <!--<div class="input-separator" ></div>-->
                               <?php } ?>
 
                               <?php } ?>
                               <div class="sticky-search-control-geo-area-change" >
                                   <?php 
                                       if($data["city_areas"] && $data["city_metro"]){
-                                             echo $ULang->t("Метро / Районы");
+                                        echo $ULang->t("Метро / Районы");
                                       }elseif($data["city_areas"]){
-                                             echo $ULang->t("Районы");
+                                            echo $ULang->t("Районы");
                                       }elseif($data["city_metro"]){
-                                             echo $ULang->t("Метро");
+                                            echo $ULang->t("Метро");
                                       } 
 
                                       if((new Ads)->getCountChangeOptionsCity( $data )){ echo '<span class="city-option-count" >'.(new Ads)->getCountChangeOptionsCity( $data ).'</span>'; }
@@ -538,7 +538,7 @@
                             <span <?php echo $Main->modalAuth( ["attr"=>'class="toolbar-link-title-icon toggle-favorite-ad" data-id="'.$data["ad"]["ads_id"].'"', "class"=>"toolbar-link-title-icon"] ); ?> >
                                 <div class="toolbar-link-title-icon-box favorite-ad-icon-box" >
                                     <?php if( !isset($_SESSION['profile']["favorite"][$data["ad"]["ads_id"]]) ){ ?>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.026 4.133C4.398 4.578 3 6.147 3 8.537c0 3.51 2.228 6.371 4.648 8.432A23.633 23.633 0 0012 19.885a23.63 23.63 0 004.352-2.916C18.772 14.909 21 12.046 21 8.537c0-2.39-1.398-3.959-3.026-4.404-1.594-.436-3.657.148-5.11 2.642a1 1 0 01-1.728 0C9.683 4.281 7.62 3.697 6.026 4.133zM12 21l-.416.91-.003-.002-.008-.004-.027-.012a15.504 15.504 0 01-.433-.214 25.638 25.638 0 01-4.762-3.187C3.773 16.297 1 12.927 1 8.538 1 5.297 2.952 2.9 5.499 2.204c2.208-.604 4.677.114 6.501 2.32 1.824-2.206 4.293-2.924 6.501-2.32C21.048 2.9 23 5.297 23 8.537c0 4.39-2.772 7.758-5.352 9.955a25.642 25.642 0 01-4.762 3.186 15.504 15.504 0 01-.432.214l-.027.012-.008.004-.003.001L12 21zm0 0l.416.91c-.264.12-.568.12-.832 0L12 21z" fill="currentColor"></path></svg>
+                                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M10.918 5.085a5.256 5.256 0 0 1 7.524 0c2.077 2.114 2.077 5.541 0 7.655l-7.405 7.534a.75.75 0 0 1-1.074 0L2.558 12.74c-2.077-2.114-2.077-5.54 0-7.655a5.256 5.256 0 0 1 7.524 0c.15.152.289.312.418.479.13-.167.269-.327.418-.479z" fill="#CCC" fill-rule="nonzero"></path></svg>
                                 <?php }else{ ?>
                                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="favorite-icon-active" ><path d="M12.39 20.87a.696.696 0 01-.78 0C9.764 19.637 2 14.15 2 8.973c0-6.68 7.85-7.75 10-3.25 2.15-4.5 10-3.43 10 3.25 0 5.178-7.764 10.664-9.61 11.895z" fill="currentColor"></path></svg>
                                 <?php } ?>

@@ -1,33 +1,3 @@
-<?php 
-if( !defined('unisitecms') ) exit;
-
-if( $settings["demo_view"] || $settings["demo_installment"] ){
-   ?>
-     <div class="alert alert-warning" role="alert">
-       При рассрочке и тест драйве модуль импорта недоступен!
-     </div>             
-   <?php 
-}else{
-   if(!$settings["functionality"]["import"]){
-      ?>
-        <div class="alert alert-warning" role="alert">
-          Модуль недоступен. Подключить его можно в разделе <a href="?route=modules" ><strong>модули</strong></a> 
-        </div>             
-      <?php
-   }
-}
-
-?>
-
-
-<div class="row">
-   <div class="page-header">
-      <div class="d-flex align-items-center">
-         <h2 class="page-header-title">Импорт объявлений</h2>
-      </div>
-   </div>
-</div>  
-
 <div class="form-group">
 <a  href="#" data-toggle="modal" data-target="#modal-import" class="btn btn-gradient-04 mr-1 mb-2">Создать импорт</a>
 </div>
@@ -106,8 +76,6 @@ if( $settings["demo_view"] || $settings["demo_installment"] ){
                                   <?php } ?>
                                  </td>                          
                              </tr> 
-                     
-                           
                              <?php                                         
                             } 
 
@@ -135,7 +103,7 @@ if( $settings["demo_view"] || $settings["demo_installment"] ){
    </div>
 </div>
 
-<script type="text/javascript" src="include/modules/ads_import/script.js"></script>     
+<script type="text/javascript" src="/script.js"></script>     
 
 <div id="modal-import" class="modal fade">
    <div class="modal-dialog" style="max-width: 600px;" >

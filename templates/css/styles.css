@@ -1972,7 +1972,7 @@ span.badge-pulse-red-small {
     display: inline-flex; align-items: center; justify-content: center; width: 44px; overflow: hidden; border-radius: 50%; height: 44px;
 }
 .mini-avatar-img img{
-    height: 44px;
+    height: 30px;
 }
 .mini-avatar .label-count{
     position: absolute; top: -6px; right: 1px;
@@ -4745,7 +4745,7 @@ figure table{
     position: relative; z-index: 50;
 }
 .header-wow-top{
-    padding: 15px 0; background-color: transparent; position: relative; border-bottom: 1px solid #f2f2f2;
+    padding: 5px 0; background-color: #292929; position: relative; border-bottom: 1px solid #f2f2f2;
 }
 .header-wow-sticky-mobile{
     background-color: white; z-index: 50; position: relative;
@@ -4766,18 +4766,26 @@ figure table{
     height: 48px;
     padding-left: 50px;
     padding-right: 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #f7f8fa;
     width: 100%;
     background-color: #f7f8fa;
     outline: none;
 }
 .sticky-search-control-geo, .sticky-search-control-geo-area{
-    position: absolute; top: 1px; right: 1px; bottom: 1px; padding-right: 15px; display: inline-flex; align-items: center;
+    position: absolute; top: 1px; right: 1px; bottom: 1px; padding-right: 2px; display: inline-flex; align-items: center;
     background-color: #f7f8fa; border-bottom-right-radius: 10px; border-top-right-radius: 10px; padding-left: 15px;
 }
 .sticky-search-control-geo > div{
     display: inline-block;
+    color: #ffffff;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: #5eaff8;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 2px;
 }
 .input-separator{
     width: 1px; background-color: #00000029; height: 20px; margin: 0 7px;
@@ -4793,7 +4801,13 @@ figure table{
     font-size: 22px;
 }
 .sticky-search-control-geo-name{
-    color: #0066f5; font-weight: 500; cursor: pointer; font-size: 15px;
+    color: #0066f5;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 .sticky-search-control-geo-area-change, .sticky-search-control-geo-cancel, .sticky-search-control-geo-area-cancel{
     color: #0066f5; font-weight: 500; cursor: pointer; font-size: 15px; position: relative;
@@ -4826,7 +4840,7 @@ figure table{
 }
 .header-wow-top-list a{
     display: inline-block;
-    color: black;
+    color: white;
     margin-right: 30px;
     font-weight: 500;
     height: 100%;
@@ -4847,7 +4861,7 @@ figure table{
     color: black;
 }
 .header-wow-sticky-add{
-     border-radius: 10px; padding: 0 15px;
+     border-radius: 5px; padding: 0 15px;
      display: inline-flex; height: 100%; align-items: center; justify-content: center;
      /* background: linear-gradient(94.43deg, #02AAEC 5.35%, #43E9E4 121.08%); color: white; */
      background-color: #5eaff8;
@@ -4857,10 +4871,10 @@ figure table{
      border-radius: 10px; padding: 0 15px;
      display: inline-flex; height: 100%; align-items: center; justify-content: center;
      /* background: #f7f8fa;  */
-     color: black;
+     color:white;
 }
 .header-wow-top-list a:hover{
-    color: black;
+    color: #ff0000;
 }
 .header-wow-sticky-list > div{
     margin-right: 15px;
@@ -4878,7 +4892,7 @@ figure table{
   text-decoration: none;  opacity: 0.9; color: white;
 }
 .header-wow-sticky-auth:hover{
-  text-decoration: none;  opacity: 0.9;
+  text-decoration: none;  opacity: 0.9;color: white;
 }
 .site-color-dark{
     background-color: white; color: #212228;
@@ -5013,8 +5027,15 @@ figure table{
 .toolbar-link-title-icon-name{
     display: block; font-size: 13px; margin-top: 3px;
 }
+
 .toolbar-link-title-icon:hover, .toolbar-link-title-icon-box i:hover{
     color: #f95146!important; text-decoration: none;
+
+}
+path
+.toolbar-link-title-icon svg g:hover, .toolbar-link-title-icon svg path:hover, toolbar-link-title-icon-box i  svg g:hover{
+    fill: #f95146!important; text-decoration: none;
+    
 }
 .mr15{
     margin-right: 15px;
@@ -5363,6 +5384,7 @@ figure table{
 }
 .toolbar-link-profile .toolbar-dropdown-box{
     top: 55px;
+    z-index: 10;
 }
 .header-wow-top-lang .toolbar-dropdown-box{
     top: 25px; z-index: 1;
@@ -5813,13 +5835,16 @@ figure table{
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
+    background-color: #5eaff8;
+    padding: 2px;
+    border-radius: 5px;
 }
 .header-flex-box-1{
     margin-left: 15px;
   
 }
 .header-flex-box-2{
-    margin-left: 15px;
+    /* margin-left: 15px; */
     flex-grow: 1;
 }
 .header-flex-box-3{

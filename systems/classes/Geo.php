@@ -60,94 +60,94 @@ class Geo{
 
 
    function cityDefault( $country_alias = "", $limit = 30, $list_country_status = true ){
-    global $settings;
-
-    $ULang = new ULang();
-    $Cache = new Cache();
-
-    if( !$country_alias ) $country_alias = $settings["country_default"];
-
-      if( !$Cache->get( [ "table" => "cityDefault", "key" => $country_alias ] ) ){
-
-          if(!$settings["region_id"]){
-            $get = getAll("SELECT * FROM uni_city INNER JOIN `uni_country` ON `uni_country`.country_id = `uni_city`.country_id WHERE `uni_city`.city_default = '1' and `uni_country`.country_status = '1' and `uni_country`.country_alias='".$country_alias."' order by city_count_view desc limit $limit");
-            if(!count($get)){
-               $get = getAll("SELECT * FROM uni_city INNER JOIN `uni_country` ON `uni_country`.country_id = `uni_city`.country_id WHERE `uni_country`.country_status = '1' and `uni_country`.country_alias='".$country_alias."' order by city_count_view desc limit $limit");
+      global $settings;
+  
+      $ULang = new ULang();
+      $Cache = new Cache();
+  
+      if( !$country_alias ) $country_alias = $settings["country_default"];
+  
+        if( !$Cache->get( [ "table" => "cityDefault", "key" => $country_alias ] ) ){
+  
+            if(!$settings["region_id"]){
+              $get = getAll("SELECT * FROM uni_city INNER JOIN `uni_country` ON `uni_country`.country_id = `uni_city`.country_id WHERE `uni_city`.city_default = '1' and `uni_country`.country_status = '1' and `uni_country`.country_alias='".$country_alias."' order by city_count_view desc limit $limit");
+              if(!count($get)){
+                 $get = getAll("SELECT * FROM uni_city INNER JOIN `uni_country` ON `uni_country`.country_id = `uni_city`.country_id WHERE `uni_country`.country_status = '1' and `uni_country`.country_alias='".$country_alias."' order by city_count_view desc limit $limit");
+              }
+            }else{
+              $get = getAll("SELECT * FROM uni_city WHERE region_id='{$settings["region_id"]}' order by city_count_view desc limit $limit");
             }
-          }else{
-            $get = getAll("SELECT * FROM uni_city WHERE region_id='{$settings["region_id"]}' order by city_count_view desc limit $limit");
-          }
-
-          $Cache->set( [ "table" => "cityDefault", "key" => $country_alias, "data" => $get ] );
-
-      }else{
-         $get = $Cache->get( [ "table" => "cityDefault", "key" => $country_alias ] );
-      }
-
-      $getCountry = getAll("SELECT * FROM `uni_country` WHERE country_status = '1' order by country_name asc");
-
-      if( count($getCountry) && $list_country_status ){
-
-         if( count($getCountry) > 1 ){
-
-             foreach ($getCountry as $key => $value) {
-                $list_country .= '<div class="col-lg-4 col-md-6 col-sm-6 col-12" ><span class="item-city-country item-country-hover" id-city="0" id-region="0" id-country="'.$value["country_id"].'" data-alias="'.$value["country_alias"].'" >'.$ULang->t( $value["country_name"] , [ "table"=>"geo", "field"=>"geo_name" ] ).'</span></div>';
-             }
-
-         }
-
-      }
-
-      $findCountry = findOne("uni_country", "country_alias=?", [$country_alias]);
-
-      if( $settings["region_id"] ){
-         $findRegion = findOne("uni_region", "region_id=?", [$settings["region_id"]]);
-         $list[] = '<span class="item-city" id-city="0" id-region="'.$settings["region_id"].'" id-country="0" data-alias="'.$findRegion["region_alias"].'" >'.$ULang->t("Все города").'</span>';
-      }else{
-         $list[] = '<span class="item-city" id-city="0" id-region="0" id-country="'.$findCountry["country_id"].'" data-alias="'.$findCountry["country_alias"].'" >'.$ULang->t("Все города").'</span>';
-      }
-
-      if( count($get) > 0 ){
-         
-           foreach ( $get  as $key => $value) {
-
-              $list[] = '<span class="item-city" id-city="'.$value["city_id"].'" id-region="0" id-country="0" >'.$ULang->t( $value["city_name"] , [ "table"=>"geo", "field"=>"geo_name" ] ).'</span>';
-
-           }
- 
-      }
-     
-      if( count($list) > 0 ){
-         
-         $part = ceil($limit / 3);
-         $array_chunk = array_chunk($list, $part, true);
-
-         foreach ( $array_chunk  as $key => $nested) {
-
-           foreach ( $nested  as $key => $value) {
-
-              $span .= $value;
-
-           }
- 
-           $return .= $span;
-           $span = "";
-
-         }
-
-      }
-
-     if($list_country_status){
-        if($list_country){
-           return $list_country. $return;
+  
+            $Cache->set( [ "table" => "cityDefault", "key" => $country_alias, "data" => $get ] );
+  
         }else{
-           return $return;
+           $get = $Cache->get( [ "table" => "cityDefault", "key" => $country_alias ] );
         }
-     }else{
-        return $return;
-     }
-
-   } 
+  
+        $getCountry = getAll("SELECT * FROM `uni_country` WHERE country_status = '1' order by country_name asc");
+  
+        if( count($getCountry) && $list_country_status ){
+  
+           if( count($getCountry) > 1 ){
+  
+               foreach ($getCountry as $key => $value) {
+                  $list_country .= '<div class="col-lg-4 col-md-6 col-sm-6 col-12" ><span class="item-city-country item-country-hover" id-city="0" id-region="0" id-country="'.$value["country_id"].'" data-alias="'.$value["country_alias"].'" >'.$ULang->t( $value["country_name"] , [ "table"=>"geo", "field"=>"geo_name" ] ).'</span></div>';
+               }
+  
+           }
+  
+        }
+  
+        $findCountry = findOne("uni_country", "country_alias=?", [$country_alias]);
+  
+        if( $settings["region_id"] ){
+           $findRegion = findOne("uni_region", "region_id=?", [$settings["region_id"]]);
+           $list[] = '<span class="item-city" id-city="0" id-region="'.$settings["region_id"].'" id-country="0" data-alias="'.$findRegion["region_alias"].'" >'.$ULang->t("Все города").'</span>';
+        }else{
+           $list[] = '<span class="item-city" id-city="0" id-region="0" id-country="'.$findCountry["country_id"].'" data-alias="'.$findCountry["country_alias"].'" >'.$ULang->t("Все города").'</span>';
+        }
+  
+        if( count($get) > 0 ){
+           
+             foreach ( $get  as $key => $value) {
+  
+                $list[] = '<span class="item-city" id-city="'.$value["city_id"].'" id-region="0" id-country="0" >'.$ULang->t( $value["city_name"] , [ "table"=>"geo", "field"=>"geo_name" ] ).'</span>';
+  
+             }
+   
+        }
+       
+        if( count($list) > 0 ){
+           
+           $part = ceil($limit / 3);
+           $array_chunk = array_chunk($list, $part, true);
+  
+           foreach ( $array_chunk  as $key => $nested) {
+  
+             foreach ( $nested  as $key => $value) {
+  
+                $span .= $value;
+  
+             }
+   
+             $return .= '<div class="col-lg-4 col-md-6 col-sm-6 col-12" >'.$span.'</div>';
+             $span = "";
+  
+           }
+  
+        }
+  
+       if($list_country_status){
+          if($list_country){
+             return '<div class="row" >'.$list_country.'</div> <hr> <div class="row modal-country-container" >' . $return . '</div>';
+          }else{
+             return '<div class="row modal-country-container" >' . $return . '</div>';
+          }
+       }else{
+          return $return;
+       }
+  
+     } 
 
    function cityDefaultFooter( $country_alias = "" ){
     global $settings;

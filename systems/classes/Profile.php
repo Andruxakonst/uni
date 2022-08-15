@@ -788,7 +788,7 @@ class Profile{
             
             "statistics"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/statistics" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => $ULang->t("Статистика")],
             "scheduler"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/scheduler" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => $ULang->t("Планировщик задач")],
-            "import"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/import" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => ("Импорт объявлений")],
+            "import"=>["link"=>_link( "user/" . $_SESSION["profile"]["data"]["clients_id_hash"] . "/import" ),"icon" => '<svg width="24" height="24" ></svg>', "name" => $ULang->t("Импорт объявлений")],
 
         ]];
      }else{
@@ -860,6 +860,8 @@ class Profile{
         return $ULang->t("Планировщик задач");
       }elseif($action == "tariff"){
         return $ULang->t("Тариф");
+      }elseif($action == "import"){
+        return $ULang->t("Импорт объявлений");
       }elseif($action == "booking"){
         return $ULang->t("Бронирования");
       }else{

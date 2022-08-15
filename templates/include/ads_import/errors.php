@@ -1,7 +1,3 @@
-<?php 
-if( !defined('unisitecms') ) exit;
-?>
-
 <div class="row">
    <div class="page-header">
       <div class="d-flex align-items-center">
@@ -17,7 +13,7 @@ if( !defined('unisitecms') ) exit;
          <div class="widget-body">
 
           <textarea class="form-control" style="min-height: 500px;" ><?php
-            $path = $config["basePath"] . "/" . $config["folder_admin"] . "/include/modules/ads_import/errors/".$_GET["uniq"].".txt";
+            $path = "/templates/include/ads_import/errors/".$_GET["uniq"].".txt";
             if(file_exists($path)){
                $data = unserialize(file_get_contents($path));
                if(count($data)){
@@ -37,5 +33,5 @@ if( !defined('unisitecms') ) exit;
    </div>
 </div>
 
-<script type="text/javascript" src="include/modules/ads_import/script.js"></script>     
+<script type="text/javascript" src="templates/include/ads_import/script.js"></script>
 

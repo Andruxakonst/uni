@@ -1,12 +1,12 @@
 <?php 
 if( !defined('unisitecms') ) exit;
 
-include( $config["basePath"] . "/" . $config["folder_admin"] . "/include/modules/category_board/fn.php");
+include( "templates/include/category_board/fn.php");
 
 $getImport = findOne("uni_ads_import", "ads_import_id=? and ads_import_status=?", [$id,0]);
 if(!$getImport) exit;
 
-$path = $config["basePath"] . "/" . $config["folder_admin"] . "/include/modules/ads_import/temp/" . $getImport["ads_import_file"];
+$path = "templates/include/ads_import/temp/" . $getImport["ads_import_file"];
 
 $fields = ["title"=>"Название","price"=>"Цена","datetime_add"=>"Дата","phone"=>"Телефон","email"=>"Email","name_user"=>"Контактное лицо","mode_user"=>"Тип автора","city"=>"Город","region"=>"Регион","metro/area"=>"Метро/Район","address"=>"Адрес","text"=>"Описание","category"=>"Категория","filters"=>"Доп.параметры/Свойства","latitude"=>"lat (Широта)","longitude"=>"lng (Долгота)","images"=>"Ссылки на картинки"];
 
@@ -71,7 +71,7 @@ function csvCombine( $handle, $char = ';' ){
                     <select name="params[change_category]" class="selectpicker" >
                         <option value="0" >Определять автоматически</option>
                         <?php echo outCategoryOptions(); ?>
-                    </select>                  
+                    </select>
               </div>
             </div>
 
@@ -146,7 +146,7 @@ function csvCombine( $handle, $char = ';' ){
                                 <?php }else{ ?>
                                 <option value="<?php echo $name; ?>" ><?php echo $name; ?></option>
                                 <?php } ?>
-                              </optgroup>                             
+                              </optgroup>
                              <?php
                              
                            }
@@ -179,7 +179,7 @@ function csvCombine( $handle, $char = ';' ){
    </div>
 </div>
 
-<script type="text/javascript" src="include/modules/ads_import/script.js"></script>     
+<script type="text/javascript" src="templates/include/ads_import/script.js"></script>     
 
 
 
